@@ -22,6 +22,13 @@ dependencies:
   google_fonts: ^2.3.1
   form_field_validator: ^1.1.0
 
+
+  firebase_core: ^1.13.1
+  firebase_auth: ^3.3.11
+  cloud_firestore: ^3.1.10
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

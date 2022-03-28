@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353265714008",
+    "project_id": "fuse-app-f9791",
+    "storage_bucket": "fuse-app-f9791.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353265714008:android:817d805da029d846ef1b2d",
+        "android_client_info": {
+          "package_name": "com.brmjha.fuseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353265714008-cipcgmqhev8ta2jfrle9r5a5biinkbpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353265714008-cipcgmqhev8ta2jfrle9r5a5biinkbpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
