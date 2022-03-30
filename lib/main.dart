@@ -1,15 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/screens/home_page.dart';
+import 'package:fuseapp/theme/theme_constants.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const FuseApp());
 }
 
-class MyApp extends StatelessWidget {
+class FuseApp extends StatelessWidget {
+  const FuseApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("test"),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: appTheme,
+      home: const HomePage(),
     );
   }
 }
