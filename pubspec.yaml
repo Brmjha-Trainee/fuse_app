@@ -21,8 +21,6 @@ dependencies:
     sdk: flutter
   google_fonts: ^2.3.1
   form_field_validator: ^1.1.0
-
-
   firebase_core: ^1.13.1
   firebase_auth: ^3.3.11
   cloud_firestore: ^3.1.10
@@ -46,9 +44,14 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+   - assets/img/logo.png
+   - assets/img/pic1.png
+   - assets/img/pic2.png
+   - assets/img/pic3.png
+   - assets/img/pic4.png
+   - assets/img/pic5.png
+   - assets/img/pic6.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

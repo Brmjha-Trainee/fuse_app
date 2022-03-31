@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fuseapp/screens/home_page.dart';
+import 'package:fuseapp/views/sign_options.dart';
+import 'package:fuseapp/views/home_page.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class FuseApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      home: const HomePage(),
+      home: const SignOption(),
     );
   }
 }
