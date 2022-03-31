@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/theme/pallete.dart';
 
 const COLOR_PRIMARY = Color(0xFF9E457E);
 const BLACK = Color(0xFF414141);
@@ -18,7 +20,11 @@ const YELLOW = Color(0XFFF1E87F);
 // They should be reserved for short and important texts such as:
 //      titles
 //      numerals
-
+const h1 = TextStyle(
+  color: COLOR_PRIMARY,
+  fontWeight: FontWeight.w500,
+  fontSize: 28,
+);
 const h2 = TextStyle(
   color: Colors.black,
   fontWeight: FontWeight.normal,
@@ -40,6 +46,12 @@ const h5 = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 14,
 );
+const h6 = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.normal,
+  fontSize: 13,
+  decoration: TextDecoration.none,
+);
 
 const subtitle = TextStyle(color: DARKER_GREY);
 // There are 2 body types (bodyText1 and bodyText2).
@@ -56,8 +68,154 @@ const bodyText2 = TextStyle(
   fontWeight: FontWeight.normal,
   fontSize: 12,
 );
+const darkBtnText = TextStyle(
+  color: WHITE,
+  fontWeight: FontWeight.w600,
+  fontSize: 19,
+);
+const lightBtnText = TextStyle(
+  color: DARKER_GREY,
+  fontWeight: FontWeight.w600,
+  fontSize: 19,
+);
+TextSpan linkText({label, required BuildContext context, pageName, fontSize}) {
+  return TextSpan(
+    text: label,
+    style: TextStyle(
+      decoration: TextDecoration.underline,
+      fontSize: fontSize,
+    ),
+    recognizer: TapGestureRecognizer()
+      ..onTap = () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => pageName,
+          ),
+        );
+      },
+  );
+}
+
+RichText richText({label_1, label_2, required BuildContext context, pageName}) {
+  return RichText(
+    text: TextSpan(
+        text: label_1,
+        style: TextStyle(
+          decoration: TextDecoration.underline,
+          fontSize: 18,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+            text: label_2,
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              color: COLOR_PRIMARY,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => pageName,
+                  ),
+                );
+              },
+          )
+        ]),
+  );
+}
+
+// we will be creating a widget for text field
+Widget inputText({
+  label,
+  obscureText = false,
+  hintText,
+  IconButton? iconButton,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        label,
+        style: h3,
+      ),
+      SizedBox(
+        height: 5,
+      ),
+      TextFormField(
+        obscureText: obscureText,
+        decoration: InputDecoration(
+            suffixIcon: iconButton,
+            hintText: hintText,
+            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: LIGHT_GREY,
+              ),
+            ),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(
+              color: LIGHT_GREY,
+            ))),
+      ),
+      SizedBox(
+        height: 10,
+      )
+    ],
+  );
+}
+
+MaterialButton darkBtn({label, required BuildContext context, pageName}) {
+  return MaterialButton(
+    color: COLOR_PRIMARY,
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => pageName,
+        ),
+      );
+    },
+    minWidth: double.infinity,
+    height: 60,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50),
+    ),
+    child: Text(
+      label,
+      style: darkBtnText,
+    ),
+  );
+}
+
+MaterialButton lightBtn({label, required BuildContext context, pageName}) {
+  return MaterialButton(
+    color: WHITE,
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => pageName,
+        ),
+      );
+    },
+    minWidth: double.infinity,
+    height: 60,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+        side: BorderSide(color: COLOR_PRIMARY)),
+    child: Text(
+      label,
+      style: lightBtnText,
+    ),
+  );
+}
 
 ThemeData appTheme = ThemeData(
+  primarySwatch: Palette.kToDark,
   scaffoldBackgroundColor: WHITE,
   cardTheme: CardTheme(
     shape: RoundedRectangleBorder(

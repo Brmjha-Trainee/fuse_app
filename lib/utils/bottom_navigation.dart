@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //import '../screens/cart.dart';
-import '../screens/home_page.dart';
+import '../views/home_page.dart';
 //import '../screens/profile.dart';
 //import '../screens/favourite.sdart';
 
