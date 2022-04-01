@@ -21,9 +21,16 @@ dependencies:
     sdk: flutter
   google_fonts: ^2.3.1
   form_field_validator: ^1.1.0
+  flutter_native_splash: ^2.1.2+1
   firebase_core: ^1.13.1
   firebase_auth: ^3.3.11
   cloud_firestore: ^3.1.10
+
+flutter_native_splash:
+  color: '#ffffff'
+  image: assets/img/logo-large.png
+  ios: true
+  android: true
 
 
 
@@ -46,6 +53,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/img/logo.png
+   - assets/img/logo-large.png
    - assets/img/pic1.png
    - assets/img/pic2.png
    - assets/img/pic3.png

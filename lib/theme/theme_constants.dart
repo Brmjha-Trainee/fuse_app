@@ -104,6 +104,7 @@ RichText richText({label_1, label_2, required BuildContext context, pageName}) {
         style: TextStyle(
           decoration: TextDecoration.underline,
           fontSize: 18,
+          color: DARKER_GREY,
         ),
         children: <TextSpan>[
           TextSpan(

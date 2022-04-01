@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/views/login.dart';
-import 'package:fuseapp/views/sign_up.dart';
+import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 
 class SignOption extends StatelessWidget {
@@ -34,13 +34,13 @@ class SignOption extends StatelessWidget {
                 //while mediQuery make it big as per the screen
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.symmetric(vertical: 50, horizontal: 30),
+                padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height / 3,
+                      height: MediaQuery.of(context).size.height / 5,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/img/logo.png'),

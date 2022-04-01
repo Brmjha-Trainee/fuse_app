@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuseapp/views/sign_up.dart';
+import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,87 +23,70 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              //double infinity make it big as parents allows
-              //while mediQuery make it big as per the screen
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height,
-              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 30),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+        child: Container(
+          //double infinity make it big as parents allows
+          //while mediQuery make it big as per the screen
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height / 5,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/img/logo.png'),
+                  ),
+                ),
+              ),
+              Column(
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height / 4,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/img/logo.png'),
-                      ),
+                  Form(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        inputText(
+                          label: 'Email',
+                          hintText: 'example@gmail.com',
+                        ),
+                        inputText(
+                          label: 'Password',
+                          hintText: '*******',
+                          obscureText: _obscureText,
+                          iconButton: IconButton(
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            onPressed: _togglePasswordStatus,
+                          ),
+                        ),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Forgot Password?',
+                              style: h3.copyWith(fontSize: 14),
+                            )),
+                      ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      Form(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            inputText(
-                              label: 'Email',
-                              hintText: 'example@gmail.com',
-                            ),
-                            inputText(
-                              label: 'Password',
-                              hintText: '*******',
-                              obscureText: _obscureText,
-                              iconButton: IconButton(
-                                icon: Icon(
-                                  _obscureText
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
-                                onPressed: _togglePasswordStatus,
-                              ),
-                            ),
-                            TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Forgot Password?',
-                                  style: h3.copyWith(fontSize: 14),
-                                )),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      MaterialButton(
-                        color: COLOR_PRIMARY,
-                        onPressed: () {},
-                        minWidth: double.infinity,
-                        height: 60,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Text(
-                          'Login',
-                          style: darkBtnText,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    height: 20,
                   ),
-                  richText(
-                    context: this.context,
-                    label_1: 'New Member',
-                    label_2: ' create new account',
-                    pageName: SignupPage(),
-                  )
+                  darkBtn(context: context, label: 'Login')
                 ],
               ),
-            ),
-          ],
+              richText(
+                context: this.context,
+                label_1: 'New Member',
+                label_2: ' create new account',
+                pageName: SignupPage(),
+              )
+            ],
+          ),
         ),
       ),
     );
