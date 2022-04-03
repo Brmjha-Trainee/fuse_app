@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:fuseapp/view_model/auth_services.dart';
+>>>>>>> Stashed changes
 import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -21,6 +26,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -38,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   image: DecorationImage(
                     image: AssetImage('assets/img/logo.png'),
                   ),
+<<<<<<< Updated upstream
                 ),
               ),
               Column(
@@ -50,6 +60,54 @@ class _LoginScreenState extends State<LoginScreen> {
                         inputText(
                           label: 'Email',
                           hintText: 'example@gmail.com',
+=======
+                  Column(
+                    children: [
+                      Form(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            inputText(
+                              label: 'Email',
+                              hintText: 'example@gmail.com',
+                            ),
+                            inputText(
+                              label: 'Password',
+                              hintText: '*******',
+                              obscureText: _obscureText,
+                              iconButton: IconButton(
+                                icon: Icon(
+                                  _obscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                ),
+                                onPressed: _togglePasswordStatus,
+                              ),
+                            ),
+                            TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Forgot Password?',
+                                  style: h3.copyWith(fontSize: 14),
+                                )),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      MaterialButton(
+                        color: COLOR_PRIMARY,
+                        onPressed: () {
+                          authService.signInWithEmaliandpassward(
+                              emailController.text, passwordController.text);
+                        },
+                        minWidth: double.infinity,
+                        height: 60,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+>>>>>>> Stashed changes
                         ),
                         inputText(
                           label: 'Password',
