@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'dart:async';
+import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:provider/provider.dart';
 
 class Signup3 extends StatefulWidget {
   @override
@@ -36,6 +38,10 @@ class _Signup3State extends State<Signup3> {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -133,7 +139,9 @@ class _Signup3State extends State<Signup3> {
                     ),
                     darkBtn(
                       label: 'Create Account',
-                      onPressed: () {
+                      onPressed: () async {
+                        await authService.createuserWithEmaliandpassward(
+                            emailController.text, passwordController.text);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
