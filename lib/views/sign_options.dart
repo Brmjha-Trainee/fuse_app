@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/views/login.dart';
-<<<<<<< Updated upstream
-=======
-import 'package:fuseapp/views/sign_up1.dart';
->>>>>>> Stashed changes
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/sign_up1.dart';
 

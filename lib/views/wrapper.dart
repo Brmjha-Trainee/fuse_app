@@ -1,10 +1,7 @@
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
-import 'package:fuseapp/views/home_page.dart';
+import 'package:fuseapp/views/home.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:provider/provider.dart';
 
