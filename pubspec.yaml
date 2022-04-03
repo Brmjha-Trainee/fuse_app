@@ -25,26 +25,24 @@ dependencies:
   firebase_core: ^1.13.1
   firebase_auth: ^3.3.11
   cloud_firestore: ^3.1.10
+  intl_phone_number_input: ^0.7.0+2
+  libphonenumber_web: ^0.2.0+1
 
 flutter_native_splash:
-  color: '#ffffff'
+  color: "#ffffff"
   image: assets/img/logo-large.png
   ios: true
   android: true
 
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -52,14 +50,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/img/logo.png
-   - assets/img/logo-large.png
-   - assets/img/pic1.png
-   - assets/img/pic2.png
-   - assets/img/pic3.png
-   - assets/img/pic4.png
-   - assets/img/pic5.png
-   - assets/img/pic6.png
+    - assets/img/logo.png
+    - assets/img/logo-large.png
+    - assets/img/pic1.png
+    - assets/img/pic2.png
+    - assets/img/pic3.png
+    - assets/img/pic4.png
+    - assets/img/pic5.png
+    - assets/img/pic6.png
+    - assets/img/saudi-arabia-flag-icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

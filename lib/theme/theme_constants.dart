@@ -78,6 +78,18 @@ const lightBtnText = TextStyle(
   fontWeight: FontWeight.w600,
   fontSize: 19,
 );
+const nonUnderlineText = TextStyle(
+  decoration: TextDecoration.none,
+  color: COLOR_PRIMARY,
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+);
+const underlineText = TextStyle(
+  decoration: TextDecoration.underline,
+  fontSize: 18,
+  color: DARKER_GREY,
+);
+
 TextSpan linkText({label, required BuildContext context, pageName, fontSize}) {
   return TextSpan(
     text: label,
@@ -99,33 +111,21 @@ TextSpan linkText({label, required BuildContext context, pageName, fontSize}) {
 
 RichText richText({label_1, label_2, required BuildContext context, pageName}) {
   return RichText(
-    text: TextSpan(
-        text: label_1,
-        style: TextStyle(
-          decoration: TextDecoration.underline,
-          fontSize: 18,
-          color: DARKER_GREY,
-        ),
-        children: <TextSpan>[
-          TextSpan(
-            text: label_2,
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              color: COLOR_PRIMARY,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => pageName,
-                  ),
-                );
-              },
-          )
-        ]),
+    text: TextSpan(text: label_1, style: underlineText, children: <TextSpan>[
+      TextSpan(
+        text: label_2,
+        style: nonUnderlineText,
+        recognizer: TapGestureRecognizer()
+          ..onTap = () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => pageName,
+              ),
+            );
+          },
+      )
+    ]),
   );
 }
 
@@ -169,17 +169,14 @@ Widget inputText({
   );
 }
 
-MaterialButton darkBtn({label, required BuildContext context, pageName}) {
+//const darkBtnStyle = ButtonStyle(backgroundColor: COLOR_PRIMARY,);
+MaterialButton darkBtn({
+  label,
+  Function()? onPressed,
+}) {
   return MaterialButton(
     color: COLOR_PRIMARY,
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => pageName,
-        ),
-      );
-    },
+    onPressed: onPressed,
     minWidth: double.infinity,
     height: 60,
     shape: RoundedRectangleBorder(
@@ -192,22 +189,19 @@ MaterialButton darkBtn({label, required BuildContext context, pageName}) {
   );
 }
 
-MaterialButton lightBtn({label, required BuildContext context, pageName}) {
+MaterialButton lightBtn({
+  label,
+  Function()? onPressed,
+}) {
   return MaterialButton(
     color: WHITE,
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => pageName,
-        ),
-      );
-    },
+    onPressed: onPressed,
     minWidth: double.infinity,
     height: 60,
     shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50),
-        side: BorderSide(color: COLOR_PRIMARY)),
+      borderRadius: BorderRadius.circular(50),
+      side: BorderSide(color: COLOR_PRIMARY),
+    ),
     child: Text(
       label,
       style: lightBtnText,

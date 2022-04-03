@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  darkBtn(context: context, label: 'Login')
+                  darkBtn( label: 'Login')
                 ],
               ),
               richText(

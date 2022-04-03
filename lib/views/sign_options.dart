@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/views/login.dart';
-import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/views/sign_up1.dart';
 
 class SignOption extends StatelessWidget {
   const SignOption({Key? key}) : super(key: key);
@@ -50,17 +50,29 @@ class SignOption extends StatelessWidget {
                     Column(
                       children: [
                         darkBtn(
-                          context: context,
                           label: 'Sign Up with Email ID',
-                          pageName: SignupPage(),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignupPage(),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         lightBtn(
                           label: 'Sign up with google',
-                          context: context,
-                          pageName: LoginScreen(),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
