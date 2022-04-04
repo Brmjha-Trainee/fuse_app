@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 
-import 'Sign_up1.dart';
-import 'home_page.dart';
+import forget_password1_vm.dart;
+//import 'home_page.dart';
 
 class ResetPasswordPage2 extends StatefulWidget {
    const  ResetPasswordPage2({
@@ -71,8 +71,9 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
            SizedBox(
                 height: 28,
               ),
-  ElevatedButton(onPressed: () { Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );}, child: Text('Reset password')),
+   ElevatedButton(onPressed: () { //Navigator.push(
+//               context,
+//               MaterialPageRoute(builder: (context) => const HomePage()),
+             //);
+   }, child: Text('Reset password')),
           ],),),);}}
