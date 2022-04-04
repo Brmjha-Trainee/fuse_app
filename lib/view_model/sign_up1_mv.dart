@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:countdown_flutter/countdown_flutter.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-import 'Sign_up1.dart';
-import 'home_page.dart';
+
 
 
 
@@ -116,11 +115,11 @@ Widget build(BuildContext context) {
                     InkWell(
                       splashColor:LIGHT_GREY,
                       onTap: () {
-                        Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-;
+//                         Navigator.push(
+//               context,
+//               MaterialPageRoute(builder: (context) => const HomePage()),
+//             );
+// ;
                       },
                       child: Text(
                         ' Login',
