@@ -31,10 +31,6 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          // adding spaces
-             SizedBox(
-                height: 28,
-              ),
               Align(
               alignment: Alignment.centerLeft,
               child :Text('New password' , style: Theme.of(context).textTheme.bodyText1,textAlign:TextAlign.left,),),
