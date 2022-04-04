@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:countdown_flutter/countdown_flutter.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-
-import 'forget_password1_vm.dart';
+import 'dart:async';
+import 'forget_password1.dart';
 
 
 class CreateAccount extends StatefulWidget {
