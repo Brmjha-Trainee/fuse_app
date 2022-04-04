@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 //import 'package:countdown_flutter/countdown_flutter.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 
+import 'forget_password1_vm.dart';
+
 
 
 
@@ -74,13 +76,13 @@ Widget build(BuildContext context) {
                     ),
                     InkWell(
                       splashColor:LIGHT_GREY,
-                      onTap: () {
-                        Navigator.push(
-              context,
-              //made transfer to the home to insure that my code works
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-;
+//                       onTap: () {
+//                         Navigator.push(
+//               context,
+//               //made transfer to the home to insure that my code works
+//               MaterialPageRoute(builder: (context) => const HomePage()),
+//             );
+// ;
                       },
                       child: Text(
                         ' send again',
@@ -176,3 +178,4 @@ Widget _textFieldOTP({required bool first, last}) {
       ),
     );
   }
+}
