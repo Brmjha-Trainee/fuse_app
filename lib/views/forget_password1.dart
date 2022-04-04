@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'forget_password2_vm.dart';
+import 'forget_password2.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 
 class ResetPasswordPage extends StatefulWidget {
