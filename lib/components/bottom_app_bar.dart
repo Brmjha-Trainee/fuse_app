@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-//import '../screens/cart.dart';
+import '../view_model/cart.dart';
 import '../views/home.dart';
 //import '../screens/profile.dart';
 //import '../screens/favourite.sdart';
 
-class BottomN extends StatefulWidget {
-  const BottomN({Key? key}) : super(key: key);
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({Key? key}) : super(key: key);
 
   @override
-  _BottomNState createState() => _BottomNState();
+  _BottomNavigationState createState() => _BottomNavigationState();
 }
 
-class _BottomNState extends State<BottomN> {
+class _BottomNavigationState extends State<BottomNavigation> {
   int currentIndex = 0;
   final screens = [
     const HomePage(),
