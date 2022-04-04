@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-//import '../screens/cart.dart';
-import '../views/home.dart';
-//import '../screens/profile.dart';
-//import '../screens/favourite.sdart';
+import 'package:fuseapp/views/home.dart';
+import '../view_model/cart_vm.dart';
+import '../view_model/home_vm.dart';
+import '../view_model/favoriate_vm.dart';
+import '../view_model/profile_vm.dart';
 
-class BottomN extends StatefulWidget {
-  const BottomN({Key? key}) : super(key: key);
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({Key? key}) : super(key: key);
 
   @override
-  _BottomNState createState() => _BottomNState();
+  _BottomNavigationState createState() => _BottomNavigationState();
 }
 
-class _BottomNState extends State<BottomN> {
+class _BottomNavigationState extends State<BottomNavigation> {
   int currentIndex = 0;
   final screens = [
     const HomePage(),
-   // const Cart(),
-//const profile (),
-//const favourite() ,
+   const cart(),
+ const profile (),
+const favourite() ,
   ];
 
   @override

@@ -11,6 +11,7 @@ class Signup3 extends StatefulWidget {
 }
 
 class _Signup3State extends State<Signup3> {
+  //FixMe ASMAA use provider + pass controller to textfields + add validation +form key
   //checkBoxes
   bool value = false;
   // Initially password is obscure
@@ -40,15 +41,14 @@ class _Signup3State extends State<Signup3> {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-
+//FixMe ASMAA already done "for you to learn " there was rendring issue fixed
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          height: MediaQuery.of(context).size.height - 50,
-          width: double.infinity,
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,107 +59,105 @@ class _Signup3State extends State<Signup3> {
                   style: h1,
                 ),
               ),
-              Expanded(
+              Form(
+                // key: _formKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Form(
-                      // key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          inputText(label: "Name", hintText: 'Your name'),
-                          inputText(
-                              label: "Email", hintText: 'example@gmail.com'),
-                          inputText(
-                              label: "Birthday",
-                              hintText: '10-May-2022',
-                              iconButton: IconButton(
-                                  onPressed: () {
-                                    _selectDate(context);
-                                  },
-                                  icon: Icon(Icons.date_range_outlined))),
-                          inputText(
-                            label: 'Password',
-                            hintText: '*******',
-                            obscureText: _obscureText,
-                            iconButton: IconButton(
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                              ),
-                              onPressed: _togglePasswordStatus,
-                            ),
-                          ),
-                          inputText(
-                            label: 'Confirm Password',
-                            hintText: '*******',
-                            obscureText: _obscureText,
-                            iconButton: IconButton(
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                              ),
-                              onPressed: _togglePasswordStatus,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: value,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    this.value = value!;
-                                  });
-                                },
-                              ),
-                              Expanded(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: 'I agree to Its',
-                                      style: h6,
-                                      children: <TextSpan>[
-                                        linkText(
-                                            label: ' privacy policy',
-                                            pageName: LoginScreen(),
-                                            context: this.context),
-                                        TextSpan(text: ' and', style: h6),
-                                        linkText(
-                                            label: ' terms of use',
-                                            pageName: LoginScreen(),
-                                            context: this.context),
-                                      ]),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
+                    inputText(label: "Name", hintText: 'Your name'),
+                    inputText(label: "Email", hintText: 'example@gmail.com'),
+                    //FixMe ASMAA not showing the picked date please use on change" + field should be read only
+                    inputText(
+                        label: "Birthday",
+                        hintText: '10-May-2022',
+                        iconButton: IconButton(
+                            onPressed: () {
+                              _selectDate(context);
+                            },
+                            icon: Icon(Icons.date_range_outlined))),
+                    inputText(
+                      label: 'Password',
+                      hintText: '*******',
+                      obscureText: _obscureText,
+                      iconButton: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: _togglePasswordStatus,
                       ),
                     ),
-                    darkBtn(
-                      label: 'Create Account',
-                      onPressed: () async {
-                        await authService.createuserWithEmaliandpassward(
-                            emailController.text, passwordController.text);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                    Flexible(
-                      child: richText(
-                        context: this.context,
-                        label_1: 'Already have an account',
-                        label_2: ' Login',
-                        pageName: LoginScreen(),
+                    inputText(
+                      label: 'Confirm Password',
+                      hintText: '*******',
+                      obscureText: _obscureText,
+                      iconButton: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: _togglePasswordStatus,
                       ),
                     ),
+                    //FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: value,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value = value!;
+                            });
+                          },
+                        ),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                                text: 'I agree to Its',
+                                style: h6,
+                                children: <TextSpan>[
+                                  linkText(
+                                      label: ' privacy policy',
+                                      pageName: LoginScreen(),
+                                      context: this.context),
+                                  TextSpan(text: ' and', style: h6),
+                                  linkText(
+                                      label: ' terms of use',
+                                      pageName: LoginScreen(),
+                                      context: this.context),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
+              ),
+              darkBtn(
+                label: 'Create Account',
+                onPressed: () async {
+                  //FixMe Haneen  Check validation first
+                  await authService.createuserWithEmaliandpassward(
+                      emailController.text, passwordController.text);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  richText(
+                    context: this.context,
+                    label_1: 'Already have an account',
+                    label_2: ' Login',
+                    pageName: LoginScreen(),
+                  ),
+                ],
               ),
             ],
           ),
