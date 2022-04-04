@@ -5,16 +5,12 @@ import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const FuseApp());
-}
-
-/* Future <void> main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const FuseApp());
 }
- */
+
 class FuseApp extends StatelessWidget {
   const FuseApp({Key? key}) : super(key: key);
 

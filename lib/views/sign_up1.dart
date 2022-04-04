@@ -26,6 +26,7 @@ class _SignupPageState extends State<SignupPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //FixME ASMAA top padding very small
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0, top: 30),
                 child: Text(
@@ -41,6 +42,7 @@ class _SignupPageState extends State<SignupPage> {
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
+                          //FixMe ASMAA add validation, lable + please fix the desighn to match figma one "Country Number and divider inside the border"+remove print after finishing
                           InternationalPhoneNumberInput(
                             onInputChanged: (PhoneNumber number) {
                               print(number.phoneNumber);

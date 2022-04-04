@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:fuseapp/view_model/user_vm.dart';
 
@@ -10,7 +8,7 @@ class AuthService {
     if (user == null) {
       return null;
     }
-    return User(user.uid, user.email);
+    // return User(user.uid, user.email);
   }
 
   Stream<User?>? get user {

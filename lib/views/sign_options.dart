@@ -63,6 +63,7 @@ class SignOption extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
+                        //FixMe ASMAA add optional parameter for icon so you can add gmail icon
                         lightBtn(
                           label: 'Sign up with google',
                           onPressed: () {
