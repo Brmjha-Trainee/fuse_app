@@ -35,7 +35,9 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
              SizedBox(
                 height: 28,
               ),
-              Text('New password' , style: Theme.of(context).textTheme.bodyText1,),
+              Align(
+              alignment: Alignment.centerLeft,
+              child :Text('New password' , style: Theme.of(context).textTheme.bodyText1,textAlign:TextAlign.left,),),
                SizedBox(
                 height: 10,
               ),
@@ -53,7 +55,9 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
             SizedBox(
                 height: 18,
               ),
-              Text('Confirm password' , style: Theme.of(context).textTheme.bodyText1,),
+              Align(
+              alignment: Alignment.centerLeft,
+              child :Text('Confirm password' , style: Theme.of(context).textTheme.bodyText1,),),
                SizedBox(
                 height: 10,
               ),
