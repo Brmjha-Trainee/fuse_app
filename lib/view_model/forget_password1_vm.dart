@@ -37,11 +37,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 SizedBox(
                 height: 28,
               ),
-               Text(
-                  'Email ' ,
-                  style: Theme.of(context).textTheme.bodyText1,
-                   textDirection: TextDirection.rtl,
-                ),
+              Align(
+              alignment: Alignment.centerLeft,
+              child :Text('Email' , style: Theme.of(context).textTheme.bodyText1,textAlign:TextAlign.left,),),
+                SizedBox(
+                height: 10,
+              ),
                 TextField(
                   decoration: InputDecoration(
                       labelText: 'Enter your email'
