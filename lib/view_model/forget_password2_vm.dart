@@ -21,17 +21,18 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reset Password'),
-           iconTheme: IconThemeData(
-    color: Colors.black, //change your color here
-  ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
+   title: Text('Reset Password'),
+         iconTheme: IconThemeData(
+   color: Colors.black, //change your color here
+   ),
+       ),
+      body: 
+          Container(
+        padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-              Align(
+            Align(
               alignment: Alignment.centerLeft,
               child :Text('New password' , style: Theme.of(context).textTheme.bodyText1,textAlign:TextAlign.left,),),
                SizedBox(
@@ -41,7 +42,6 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
               obscureText: showPassword,
               decoration: InputDecoration(
                 hintText: 'Enter password',
-                // this item enable the user to hide and show his password
                 suffixIcon: IconButton(
                   icon: Icon(Icons.remove_red_eye),
                   onPressed: () => setState(() => showPassword = !showPassword),
@@ -51,7 +51,7 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
             SizedBox(
                 height: 18,
               ),
-              Align(
+               Align(
               alignment: Alignment.centerLeft,
               child :Text('Confirm password' , style: Theme.of(context).textTheme.bodyText1,),),
                SizedBox(
