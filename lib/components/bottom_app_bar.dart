@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/views/home.dart';
-import '../view_model/cart_vm.dart';
-import '../view_model/home_vm.dart';
-import '../view_model/favoriate_vm.dart';
-import '../view_model/profile_vm.dart';
+import '../views/cart.dart';
+import '../views/home.dart';
+import '../views/favoriates.dart';
+import '../views/profiles.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
