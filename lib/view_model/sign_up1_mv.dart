@@ -113,6 +113,9 @@ Widget build(BuildContext context) {
                   children: <Widget>[
                     Text(
                       "Already Register?",
+                      style: TextStyle(
+            decoration: TextDecoration.underline,
+          )
                     ),
                     InkWell(
                       splashColor:LIGHT_GREY,
