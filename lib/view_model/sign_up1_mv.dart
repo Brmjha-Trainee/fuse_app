@@ -76,7 +76,7 @@ Widget build(BuildContext context) {
                     ),
                     InkWell(
                       splashColor:LIGHT_GREY,
-//                       onTap: () {
+ onTap: () {
 //                         Navigator.push(
 //               context,
 //               //made transfer to the home to insure that my code works
