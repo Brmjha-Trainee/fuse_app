@@ -135,6 +135,10 @@ Widget inputText({
   obscureText = false,
   hintText,
   IconButton? iconButton,
+  validation,
+  controller,
+  onChanged,
+  readOnly=false,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,6 +151,10 @@ Widget inputText({
         height: 5,
       ),
       TextFormField(
+        readOnly: readOnly,
+        controller: controller,
+        validator: validation,
+        onChanged: onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(
             suffixIcon: iconButton,

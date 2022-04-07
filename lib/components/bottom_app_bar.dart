@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/views/favoriate.dart';
 import 'package:fuseapp/views/home.dart';
+import 'package:fuseapp/views/profile.dart';
 import '../views/cart.dart';
 import '../views/home.dart';
-import '../views/favoriates.dart';
-import '../views/profiles.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -16,9 +16,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int currentIndex = 0;
   final screens = [
     const HomePage(),
-   const cart(),
- const profile (),
-const favourite() ,
+    const Cart(),
+    const Profile(),
+    const Favourite(),
   ];
 
   @override
@@ -29,7 +29,7 @@ const favourite() ,
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
-          onTap: (index) => setState(() => currentIndex = index),        
+          onTap: (index) => setState(() => currentIndex = index),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -39,11 +39,11 @@ const favourite() ,
               icon: Icon(Icons.person),
               label: "Profile",
             ),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: "Cart",
             ),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: "Favorites",
             ),
