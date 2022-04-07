@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'dart:async';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class Signup3 extends StatefulWidget {
   @override
@@ -11,7 +13,14 @@ class Signup3 extends StatefulWidget {
 }
 
 class _Signup3State extends State<Signup3> {
-  //FixMe ASMAA use provider + pass controller to textfields + add validation +form key
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  //FixMe ASMAA use provider
   //checkBoxes
   bool value = false;
   // Initially password is obscure
@@ -22,6 +31,23 @@ class _Signup3State extends State<Signup3> {
       _obscureText = !_obscureText;
     });
   }
+
+// Initially password is obscure
+  bool _obscureText2 = true;
+  // Toggles the password show status
+  void _togglePasswordStatus2() {
+    setState(() {
+      _obscureText2 = !_obscureText2;
+    });
+  }
+
+  @override
+  void initState() {
+    dateController.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
+  final format = DateFormat("yyyy-MM-dd");
 
   DateTime selectedDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
@@ -39,9 +65,6 @@ class _Signup3State extends State<Signup3> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-//FixMe ASMAA already done "for you to learn " there was rendring issue fixed
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: Container(
@@ -51,6 +74,7 @@ class _Signup3State extends State<Signup3> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0, top: 80),
@@ -60,23 +84,59 @@ class _Signup3State extends State<Signup3> {
                 ),
               ),
               Form(
-                // key: _formKey,
+                key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    inputText(label: "Name", hintText: 'Your name'),
-                    inputText(label: "Email", hintText: 'example@gmail.com'),
-                    //FixMe ASMAA not showing the picked date please use on change" + field should be read only
                     inputText(
-                        label: "Birthday",
-                        hintText: '10-May-2022',
+                        label: "Name",
+                        hintText: 'Your name',
+                        controller: nameController,
+                        validation: (val) {
+                          return validateName(nameController.text);
+                        }),
+                    inputText(
+                      label: "Email",
+                      hintText: 'example@gmail.com',
+                      controller: emailController,
+                      validation: (val) {
+                        return validateEmail(emailController.text);
+                      },
+                    ),
+                    inputText(
+                        label: 'Birth Date',
+                        hintText: '22-04-2022',
+                        readOnly: true,
+                        controller: dateController,
+                        validation: (val) {
+                          return requiredField(dateController.text);
+                        },
                         iconButton: IconButton(
-                            onPressed: () {
-                              _selectDate(context);
-                            },
-                            icon: Icon(Icons.date_range_outlined))),
+                          onPressed: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(
+                                    2000), //DateTime.now() - not to allow to choose before today.
+                                lastDate: DateTime(2101));
+
+                            if (pickedDate != null) {
+                              String formattedDate =
+                                  DateFormat('dd-MM-yyyy').format(pickedDate);
+                              setState(() {
+                                dateController.text =
+                                    formattedDate; //set output date to TextField value.
+                              });
+                            }
+                          },
+                          icon: Icon(Icons.date_range),
+                        )),
                     inputText(
                       label: 'Password',
                       hintText: '*******',
+                      controller: passController,
+                      validation: (val) {
+                        return validatePass(passController.text);
+                      },
                       obscureText: _obscureText,
                       iconButton: IconButton(
                         icon: Icon(
@@ -90,14 +150,22 @@ class _Signup3State extends State<Signup3> {
                     inputText(
                       label: 'Confirm Password',
                       hintText: '*******',
-                      obscureText: _obscureText,
+                      obscureText: _obscureText2,
+                      controller: confirmPassController,
+                      validation: (dynamic val) {
+                        if (val.isEmpty) {
+                          return "This field is required";
+                        }
+                        return confirmPassValidation.validateMatch(
+                            val, passController.text);
+                      },
                       iconButton: IconButton(
                         icon: Icon(
-                          _obscureText
+                          _obscureText2
                               ? Icons.visibility_off
                               : Icons.visibility,
                         ),
-                        onPressed: _togglePasswordStatus,
+                        onPressed: _togglePasswordStatus2,
                       ),
                     ),
                     //FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen
@@ -137,15 +205,18 @@ class _Signup3State extends State<Signup3> {
               darkBtn(
                 label: 'Create Account',
                 onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    await authService.createuserWithEmaliandpassward(
+                        emailController.text, passController.text);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                    );
+                  }
                   //FixMe Haneen  Check validation first
-                  await authService.createuserWithEmaliandpassward(
-                      emailController.text, passwordController.text);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  );
                 },
               ),
               Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/sign_up3.dart';
@@ -11,7 +12,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   PhoneNumber number = PhoneNumber(isoCode: 'SA');
 
   @override
@@ -50,16 +51,18 @@ class _SignupPageState extends State<SignupPage> {
                             onInputValidated: (bool value) {
                               print(value);
                             },
-                            //validator: ,
+                            validator: (val) {
+                              return validatePhone(phoneController.text);
+                            },
                             selectorConfig: SelectorConfig(
                               selectorType: PhoneInputSelectorType.DIALOG,
                             ),
                             ignoreBlank: false,
                             autoValidateMode: AutovalidateMode.disabled,
-
                             initialValue: number,
-                            textFieldController: controller,
+                            textFieldController: phoneController,
                             formatInput: false,
+                            hintText: '5xxxxxxx',
                             inputDecoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -84,12 +87,15 @@ class _SignupPageState extends State<SignupPage> {
                           darkBtn(
                             label: 'Next',
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Signup3(),
-                                ),
-                              );
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Signup3(),
+                                  ),
+                                );
+                              }
                             },
                           ),
                         ],
