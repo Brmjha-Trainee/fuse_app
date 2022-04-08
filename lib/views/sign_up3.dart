@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-import 'dart:async';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -31,7 +30,6 @@ class _Signup3State extends State<Signup3> {
       _obscureText = !_obscureText;
     });
   }
-
 // Initially password is obscure
   bool _obscureText2 = true;
   // Toggles the password show status
@@ -45,22 +43,6 @@ class _Signup3State extends State<Signup3> {
   void initState() {
     dateController.text = ""; //set the initial value of text field
     super.initState();
-  }
-
-  final format = DateFormat("yyyy-MM-dd");
-
-  DateTime selectedDate = DateTime.now();
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
   }
 
   @override
@@ -87,87 +69,11 @@ class _Signup3State extends State<Signup3> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    inputText(
-                        label: "Name",
-                        hintText: 'Your name',
-                        controller: nameController,
-                        validation: (val) {
-                          return validateName(nameController.text);
-                        }),
-                    inputText(
-                      label: "Email",
-                      hintText: 'example@gmail.com',
-                      controller: emailController,
-                      validation: (val) {
-                        return validateEmail(emailController.text);
-                      },
-                    ),
-                    inputText(
-                        label: 'Birth Date',
-                        hintText: '22-04-2022',
-                        readOnly: true,
-                        controller: dateController,
-                        validation: (val) {
-                          return requiredField(dateController.text);
-                        },
-                        iconButton: IconButton(
-                          onPressed: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(
-                                    2000), //DateTime.now() - not to allow to choose before today.
-                                lastDate: DateTime(2101));
-
-                            if (pickedDate != null) {
-                              String formattedDate =
-                                  DateFormat('dd-MM-yyyy').format(pickedDate);
-                              setState(() {
-                                dateController.text =
-                                    formattedDate; //set output date to TextField value.
-                              });
-                            }
-                          },
-                          icon: Icon(Icons.date_range),
-                        )),
-                    inputText(
-                      label: 'Password',
-                      hintText: '*******',
-                      controller: passController,
-                      validation: (val) {
-                        return validatePass(passController.text);
-                      },
-                      obscureText: _obscureText,
-                      iconButton: IconButton(
-                        icon: Icon(
-                          _obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: _togglePasswordStatus,
-                      ),
-                    ),
-                    inputText(
-                      label: 'Confirm Password',
-                      hintText: '*******',
-                      obscureText: _obscureText2,
-                      controller: confirmPassController,
-                      validation: (dynamic val) {
-                        if (val.isEmpty) {
-                          return "This field is required";
-                        }
-                        return confirmPassValidation.validateMatch(
-                            val, passController.text);
-                      },
-                      iconButton: IconButton(
-                        icon: Icon(
-                          _obscureText2
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: _togglePasswordStatus2,
-                      ),
-                    ),
+                    nameField(),
+                    emailField(),
+                    birthField(),
+                    passField(),
+                    confirmPassField(),
                     //FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen
                     Row(
                       children: [
@@ -235,5 +141,96 @@ class _Signup3State extends State<Signup3> {
         ),
       ),
     );
+  }
+
+  Widget confirmPassField() {
+    return inputText(
+      label: 'Confirm Password',
+      hintText: '*******',
+      obscureText: _obscureText2,
+      controller: confirmPassController,
+      validation: (dynamic val) {
+        if (val.isEmpty) {
+          return "This field is required";
+        }
+        return confirmPassValidation.validateMatch(val, passController.text);
+      },
+      iconButton: IconButton(
+        icon: Icon(
+          _obscureText2 ? Icons.visibility_off : Icons.visibility,
+        ),
+        onPressed: _togglePasswordStatus2,
+      ),
+    );
+  }
+
+  Widget passField() {
+    return inputText(
+      label: 'Password',
+      hintText: '*******',
+      controller: passController,
+      validation: (val) {
+        return validatePass(passController.text);
+      },
+      obscureText: _obscureText,
+      iconButton: IconButton(
+        icon: Icon(
+          _obscureText ? Icons.visibility_off : Icons.visibility,
+        ),
+        onPressed: _togglePasswordStatus,
+      ),
+    );
+  }
+
+  Widget birthField() {
+    return inputText(
+        label: 'Birth Date',
+        hintText: '22-04-2022',
+        readOnly: true,
+        controller: dateController,
+        validation: (val) {
+          return requiredField(dateController.text);
+        },
+        iconButton: IconButton(
+          onPressed: () async {
+            DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(
+                    2000), //DateTime.now() - not to allow to choose before today.
+                lastDate: DateTime(2101));
+
+            if (pickedDate != null) {
+              String formattedDate =
+                  DateFormat('dd-MM-yyyy').format(pickedDate);
+              setState(() {
+                dateController.text =
+                    formattedDate; //set output date to TextField value.
+              });
+            }
+          },
+          icon: Icon(Icons.date_range),
+        ));
+  }
+
+  Widget emailField() {
+    return inputText(
+      label: "Email",
+      hintText: 'example@gmail.com',
+      controller: emailController,
+      validation: (val) {
+        return validateEmail(emailController.text);
+      },
+    );
+  }
+
+  Widget nameField() {
+    return inputText(
+        label: "Name",
+        hintText: 'Your name',
+        controller: nameController,
+        validation: (val) {
+          return validateName(nameController.text);
+        });
   }
 }
