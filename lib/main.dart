@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/providers/show_hide_pass_provider.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
@@ -28,6 +29,7 @@ class FuseApp extends StatelessWidget {
         Provider<AuthService>(
           create: (_) => AuthService(),
         ),
+        ChangeNotifierProvider(create: (_) => ToggleText())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
