@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/sign_up3.dart';
@@ -11,7 +12,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   PhoneNumber number = PhoneNumber(isoCode: 'SA');
 
   @override
@@ -26,12 +27,18 @@ class _SignupPageState extends State<SignupPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //FixME ASMAA top padding very small
               Padding(
-                padding: const EdgeInsets.only(bottom: 30.0, top: 30),
+                padding: const EdgeInsets.only(bottom: 30.0, top: 50),
                 child: Text(
                   'Create new account',
                   style: h1,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(
+                  'Phone Number',
+                  style: h3,
                 ),
               ),
               Expanded(
@@ -42,55 +49,46 @@ class _SignupPageState extends State<SignupPage> {
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
-                          //FixMe ASMAA add validation, lable + please fix the desighn to match figma one "Country Number and divider inside the border"+remove print after finishing
-                          InternationalPhoneNumberInput(
-                            onInputChanged: (PhoneNumber number) {
-                              print(number.phoneNumber);
-                            },
-                            onInputValidated: (bool value) {
-                              print(value);
-                            },
-                            //validator: ,
-                            selectorConfig: SelectorConfig(
-                              selectorType: PhoneInputSelectorType.DIALOG,
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 15),
+                            decoration: BoxDecoration(
+                              color: WHITE,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: LIGHT_GREY),
                             ),
-                            ignoreBlank: false,
-                            autoValidateMode: AutovalidateMode.disabled,
-
-                            initialValue: number,
-                            textFieldController: controller,
-                            formatInput: false,
-                            inputDecoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: LIGHT_GREY,
-                                ),
-                              ),
+                            child: Stack(
+                              children: [
+                                phoneNumberField(),
+                                Positioned(
+                                  left: 90,
+                                  top: 8,
+                                  bottom: 8,
+                                  child: Container(
+                                    height: 40,
+                                    width: 1,
+                                    color: COLOR_PRIMARY,
+                                  ),
+                                )
+                              ],
                             ),
-                            keyboardType: TextInputType.numberWithOptions(
-                                signed: true, decimal: true),
-                            inputBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: LIGHT_GREY,
-                              ),
-                            ),
-                            onSaved: (PhoneNumber number) {
-                              print('On Saved: $number');
-                            },
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          darkBtn(
-                            label: 'Next',
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Signup3(),
-                                ),
-                              );
-                            },
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: darkBtn(
+                              label: 'Next',
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Signup3(),
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -108,6 +106,42 @@ class _SignupPageState extends State<SignupPage> {
           ),
         ),
       ),
+    );
+  }
+
+  InternationalPhoneNumberInput phoneNumberField() {
+    return InternationalPhoneNumberInput(
+      onInputChanged: (PhoneNumber number) {
+        print(number.phoneNumber);
+      },
+      validator: (val) {
+        return validatePhone(phoneController.text);
+      },
+      selectorConfig: SelectorConfig(
+        selectorType: PhoneInputSelectorType.DIALOG,
+      ),
+      ignoreBlank: false,
+      autoValidateMode: AutovalidateMode.disabled,
+      initialValue: number,
+      textFieldController: phoneController,
+      formatInput: false,
+      maxLength: 9,
+      keyboardType:
+          TextInputType.numberWithOptions(signed: true, decimal: true),
+      inputDecoration: InputDecoration(
+        contentPadding: EdgeInsets.only(bottom: 15, left: 0),
+        border: InputBorder.none,
+        hintText: '5xxxxxxx',
+        hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+      ),
+      inputBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: LIGHT_GREY,
+        ),
+      ),
+      onSaved: (PhoneNumber number) {
+        print('On Saved: $number');
+      },
     );
   }
 }

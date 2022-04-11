@@ -13,6 +13,7 @@ Future<void> main() async {
           apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
           messagingSenderId: '353265714008',
           projectId: 'fuse-app-f9791'));
+
   runApp(const FuseApp());
 }
 

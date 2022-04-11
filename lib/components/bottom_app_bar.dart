@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-//import '../screens/cart.dart';
+import 'package:fuseapp/views/favoriate.dart';
+import 'package:fuseapp/views/home.dart';
+import 'package:fuseapp/views/profile.dart';
+import '../views/cart.dart';
 import '../views/home.dart';
-//import '../screens/profile.dart';
-//import '../screens/favourite.sdart';
 
-class BottomN extends StatefulWidget {
-  const BottomN({Key? key}) : super(key: key);
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({Key? key}) : super(key: key);
 
   @override
-  _BottomNState createState() => _BottomNState();
+  _BottomNavigationState createState() => _BottomNavigationState();
 }
 
-class _BottomNState extends State<BottomN> {
+class _BottomNavigationState extends State<BottomNavigation> {
   int currentIndex = 0;
   final screens = [
     const HomePage(),
-   // const Cart(),
-//const profile (),
-//const favourite() ,
+    const Cart(),
+    const Profile(),
+    const Favourite(),
   ];
 
   @override
@@ -28,7 +29,7 @@ class _BottomNState extends State<BottomN> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
-          onTap: (index) => setState(() => currentIndex = index),        
+          onTap: (index) => setState(() => currentIndex = index),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -38,11 +39,11 @@ class _BottomNState extends State<BottomN> {
               icon: Icon(Icons.person),
               label: "Profile",
             ),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: "Cart",
             ),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: "Favorites",
             ),

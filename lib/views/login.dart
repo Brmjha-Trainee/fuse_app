@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
@@ -13,6 +14,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   //FixMe ASMAA use provider to build only the textfield not the whole screen
+
+  String _userEmail = '';
+  String _password = '';
   // Initially password is obscure
   bool _obscureText = true;
   // Toggles the password show status
@@ -25,11 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController passController = TextEditingController();
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
-        //FixMe ASMAA ; already fixed I mentiond you to notice the difference
         body: SingleChildScrollView(
       child: Container(
         //double infinity make it big as parents allows
@@ -50,21 +54,31 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Column(
               children: [
-                //FixMe ASMAA add form key + you need to pass the controller to the input text
                 Form(
+                  key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      //FixMe ASMAA add validation to the fields
                       inputText(
                         label: 'Email',
+                        obscureText: true,
                         hintText: 'example@gmail.com',
+                        controller: emailController,
+                        validation: (val) {
+                          return validateEmail(emailController.text);
+                        },
+                       onChanged: (value) => _userEmail = value,
                       ),
                       inputText(
                         label: 'Password',
                         hintText: '*******',
                         obscureText: _obscureText,
+                        controller: passController,
+                        validation: (value) {
+                          return validatePass(passController.text);
+                        },
+                         onChanged: (value) => _password = value,
                         iconButton: IconButton(
                           icon: Icon(
                             _obscureText
@@ -80,19 +94,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             'Forgot Password?',
                             style: h3.copyWith(fontSize: 14),
                           )),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //FixME Haneen check validation first
+                      darkBtn(
+                          label: 'Login',
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              authService.signInWithEmaliandpassward(
+                                  emailController.text, passController.text);
+                            }
+                          }),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                //FixME Haneen check validation first
-                darkBtn(
-                    label: 'Login',
-                    onPressed: () {
-                      authService.signInWithEmaliandpassward(
-                          emailController.text, passwordController.text);
-                    })
               ],
             ),
             richText(
