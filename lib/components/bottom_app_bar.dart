@@ -20,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const Profile(),
     const Favourite(),
   ];
-
+//todo rawabi insert icon for the unactive + change class name to root
   @override
   Widget build(BuildContext context) => Scaffold(
         body: IndexedStack(
@@ -36,7 +36,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.person_outline),
+              activeIcon: Icon(Icons.person),
               label: "Profile",
             ),
             BottomNavigationBarItem(

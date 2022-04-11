@@ -255,7 +255,7 @@ ThemeData appTheme = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: WHITE,
     selectedIconTheme: IconThemeData(color: COLOR_PRIMARY),
-    unselectedIconTheme: IconThemeData(color: LIGHT_GREY),
+    unselectedIconTheme: IconThemeData(color: COLOR_PRIMARY),
   ),
   dividerTheme: DividerThemeData(
     thickness: 0.5,

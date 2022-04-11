@@ -7,6 +7,8 @@ import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import 'package:provider/provider.dart';
 
+import 'components/bottom_app_bar.dart';
+
 //COMMENTS TODO: 1. when to use pushreplacement instead of put || 2. docmentation
 //COMMENTS TODO: Asmaa todo3 tasks done, some issues need to be solved
 //COMMENTS TODO: Rawabi didn't see the bottom nav bar, some issues need to be solved
@@ -39,7 +41,7 @@ class FuseApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        home: Wrapper(),
+        home: SignOption(),
       ),
     );
   }
