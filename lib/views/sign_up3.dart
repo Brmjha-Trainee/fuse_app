@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'dart:async';
@@ -63,8 +64,16 @@ class _Signup3State extends State<Signup3> {
                 // key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    inputText(label: "Name", hintText: 'Your name'),
-                    inputText(label: "Email", hintText: 'example@gmail.com'),
+                    inputText(
+                      label: "Name",
+                      hintText: 'Your name',
+                    ),
+                    inputText(
+                      label: "Email",
+                      hintText: 'example@gmail.com',
+                      validation: emailValidation,
+                      controller: emailController,
+                    ),
                     //FixMe ASMAA not showing the picked date please use on change" + field should be read only
                     inputText(
                         label: "Birthday",
@@ -76,6 +85,8 @@ class _Signup3State extends State<Signup3> {
                             icon: Icon(Icons.date_range_outlined))),
                     inputText(
                       label: 'Password',
+                      validation: passwordValidation,
+                      controller: passwordController,
                       hintText: '*******',
                       obscureText: _obscureText,
                       iconButton: IconButton(
