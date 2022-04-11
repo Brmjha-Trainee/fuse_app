@@ -15,8 +15,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //FixMe ASMAA use provider to build only the textfield not the whole screen
-
   String _userEmail = '';
   String _password = '';
 
@@ -57,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         inputText(
                           label: 'Email',
-                          obscureText: true,
+                          obscureText: false,
                           hintText: 'example@gmail.com',
                           controller: emailController,
                           validation: (val) {

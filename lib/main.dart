@@ -16,7 +16,6 @@ Future<void> main() async {
       projectId: 'fuse-app-f9791',
     ),
   );
- 
   runApp(const FuseApp());
 }
 
@@ -30,7 +29,7 @@ class FuseApp extends StatelessWidget {
         Provider<AuthService>(
           create: (_) => AuthService(),
         ),
-        ChangeNotifierProvider(create: (_)=>ToggleText())
+        ChangeNotifierProvider(create: (_) => ToggleText())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

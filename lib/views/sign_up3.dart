@@ -97,7 +97,6 @@ class _Signup3State extends State<Signup3> {
                       ),
                     ),
                     // FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen
-
                     Row(
                       children: [
                         Checkbox(
