@@ -6,14 +6,15 @@ import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          appId: '1:353265714008:android:817d805da029d846ef1b2d',
-          apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-          messagingSenderId: '353265714008',
-          projectId: 'fuse-app-f9791'));
-  /* WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); */
+    options: const FirebaseOptions(
+      appId: '1:353265714008:android:817d805da029d846ef1b2d',
+      apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+      messagingSenderId: '353265714008',
+      projectId: 'fuse-app-f9791',
+    ),
+  );
   runApp(const FuseApp());
 }
 

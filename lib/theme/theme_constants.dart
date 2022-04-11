@@ -137,6 +137,8 @@ Widget inputText({
   IconButton? iconButton,
   validation,
   controller,
+  onChanged,
+  readOnly = false,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,8 +151,10 @@ Widget inputText({
         height: 5,
       ),
       TextFormField(
+        readOnly: readOnly,
         controller: controller,
         validator: validation,
+        onChanged: onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(
             suffixIcon: iconButton,
@@ -196,6 +200,7 @@ MaterialButton darkBtn({
 MaterialButton lightBtn({
   label,
   Function()? onPressed,
+  img,
 }) {
   return MaterialButton(
     color: WHITE,
@@ -206,9 +211,22 @@ MaterialButton lightBtn({
       borderRadius: BorderRadius.circular(50),
       side: BorderSide(color: COLOR_PRIMARY),
     ),
-    child: Text(
-      label,
-      style: lightBtnText,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          img,
+          height: 20,
+          width: 20,
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          label,
+          style: lightBtnText,
+        ),
+      ],
     ),
   );
 }

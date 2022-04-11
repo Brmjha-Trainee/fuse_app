@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/sign_up1.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignOption extends StatelessWidget {
   const SignOption({Key? key}) : super(key: key);
@@ -63,16 +64,18 @@ class SignOption extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        //FixMe ASMAA add optional parameter for icon so you can add gmail icon
                         lightBtn(
                           label: 'Sign up with google',
+                          img: 'assets/img/gmail-icon.png',
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
-                              ),
-                            );
+                            GoogleSignIn().signIn();
+
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => LoginScreen(),
+                            //   ),
+                            // );
                           },
                         ),
                       ],
