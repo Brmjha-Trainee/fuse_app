@@ -1,3 +1,4 @@
+//UI Asmaa, BE Haneen
 import 'package:flutter/material.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
@@ -30,6 +31,7 @@ class _Signup3State extends State<Signup3> {
       _obscureText = !_obscureText;
     });
   }
+
 // Initially password is obscure
   bool _obscureText2 = true;
   // Toggles the password show status
@@ -85,6 +87,7 @@ class _Signup3State extends State<Signup3> {
                             });
                           },
                         ),
+                        //Todo Later on this is will be clickable
                         Expanded(
                           child: RichText(
                             text: TextSpan(
@@ -111,18 +114,11 @@ class _Signup3State extends State<Signup3> {
               darkBtn(
                 label: 'Create Account',
                 onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
+                  if (_formKey.currentState!.validate() && value == true) {
                     _formKey.currentState!.save();
-                    await authService.createuserWithEmaliandpassward(
-                        emailController.text, passController.text);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ),
-                    );
+                    await authService.createUserWithEmailAndPassword(
+                        emailController.text, passController.text, context);
                   }
-                  //FixMe Haneen  Check validation first
                 },
               ),
               Row(

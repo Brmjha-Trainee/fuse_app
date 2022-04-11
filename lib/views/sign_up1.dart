@@ -1,16 +1,17 @@
+//UI Asmaa BE Faizah
 import 'package:flutter/material.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-import 'package:fuseapp/views/sign_up3.dart';
+import 'package:fuseapp/views/sign_up2.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
-class SignupPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController phoneController = TextEditingController();
   PhoneNumber number = PhoneNumber(isoCode: 'SA');
@@ -80,10 +81,11 @@ class _SignupPageState extends State<SignupPage> {
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
+                                  //todo Faizah create the function to OTP leave it for the next week will work it togather
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Signup3(),
+                                      builder: (context) => CreateAccount(),
                                     ),
                                   );
                                 }

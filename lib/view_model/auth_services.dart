@@ -1,6 +1,11 @@
+//Haneen
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:flutter/material.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
 
+import '../views/login.dart';
+
+//todo haneen token & refresh token is missing
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
 
@@ -8,6 +13,7 @@ class AuthService {
     if (user == null) {
       return null;
     }
+    return null;
     // return User(user.uid, user.email);
   }
 
@@ -15,27 +21,39 @@ class AuthService {
     return _firebaseAuth.authStateChanges().map(_userfirebase);
   }
 
-  Future<User?> signInWithEmaliandpassward(
-    String email,
-    String password,
-  ) async {
-    final credential = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
-
-    return _userfirebase(credential.user);
+  Future<User?> signInWithEmailAndPassword(
+      String email, String password, BuildContext context) async {
+    try {
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+//todo haneen redirect to home page?
+      return _userfirebase(credential.user);
+    } catch (e) {
+      //todo haneen handel error
+      return null;
+    }
   }
 
-  Future<User?> createuserWithEmaliandpassward(
-    String email,
-    String password,
-  ) async {
-    final credential = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
-
-    return _userfirebase(credential.user);
+  Future<User?> createUserWithEmailAndPassword(
+      String email, String password, BuildContext context) async {
+    try {
+      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
+//fixme haneen write the code to save to DB
+      return _userfirebase(credential.user);
+    } catch (e) {
+      return null;
+      //todo haneen handel error
+    }
   }
 
-  Future<void> singout() async {
+  Future<void> signOut() async {
     return await _firebaseAuth.signOut();
   }
 }

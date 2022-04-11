@@ -1,3 +1,4 @@
+//UI Asmaa, BE haneen
 import 'package:flutter/material.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
@@ -12,11 +13,10 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+//Fixme asmaa can't write to textfield error is clear just focus :)
 class _LoginScreenState extends State<LoginScreen> {
   //FixMe ASMAA use provider to build only the textfield not the whole screen
 
-  String _userEmail = '';
-  String _password = '';
   // Initially password is obscure
   bool _obscureText = true;
   // Toggles the password show status
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final TextEditingController passController = TextEditingController();
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-    final authService = Provider.of<AuthService>(context);
+    final authService = Provider.of<AuthService>(context, listen: false);
     return Scaffold(
         body: SingleChildScrollView(
       child: Container(
@@ -62,13 +62,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       inputText(
                         label: 'Email',
-                        obscureText: true,
                         hintText: 'example@gmail.com',
                         controller: emailController,
                         validation: (val) {
                           return validateEmail(emailController.text);
                         },
-                       onChanged: (value) => _userEmail = value,
                       ),
                       inputText(
                         label: 'Password',
@@ -78,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         validation: (value) {
                           return validatePass(passController.text);
                         },
-                         onChanged: (value) => _password = value,
                         iconButton: IconButton(
                           icon: Icon(
                             _obscureText
@@ -89,7 +86,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            //todo rawabi redirect to forget password screen
+                          },
                           child: Text(
                             'Forgot Password?',
                             style: h3.copyWith(fontSize: 14),
@@ -97,14 +96,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 20,
                       ),
-                      //FixME Haneen check validation first
                       darkBtn(
                           label: 'Login',
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              authService.signInWithEmaliandpassward(
-                                  emailController.text, passController.text);
+                              authService.signInWithEmailAndPassword(
+                                  emailController.text,
+                                  passController.text,
+                                  context);
                             }
                           }),
                     ],
@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
               context: this.context,
               label_1: 'New Member',
               label_2: ' create new account',
-              pageName: SignupPage(),
+              pageName: SignUpPage(),
             )
           ],
         ),

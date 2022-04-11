@@ -1,19 +1,16 @@
+//UI Rawabi, BE Faizah (NOT YET DONE)
 import 'package:flutter/material.dart';
-//import 'package:countdown_flutter/countdown_flutter.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'dart:async';
 import 'forget_password1.dart';
 
-
 class CreateAccount extends StatefulWidget {
-
   const CreateAccount({
     Key? key,
   }) : super(key: key);
 
   @override
   _CreateAccountState createState() => _CreateAccountState();
-  
 }
 
 class _CreateAccountState extends State<CreateAccount> {
@@ -25,9 +22,7 @@ class _CreateAccountState extends State<CreateAccount> {
       oneSec,
       (Timer timer) {
         if (_start == 0) {
-          setState(() {
-            timer.cancel();
-          });
+          setState(() {});
         } else {
           setState(() {
             _start--;
@@ -36,15 +31,30 @@ class _CreateAccountState extends State<CreateAccount> {
       },
     );
   }
-Widget build(BuildContext context) {
+
+  @override
+  initState() {
+    startTimer();
+    super.initState();
+  }
+
+  @override
+  dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-       appBar: AppBar(
-       title: Text('Create Account',),
-          iconTheme: IconThemeData(
-    color: Colors.black, //change your color here
-  ),
-  ),
+      appBar: AppBar(
+        title: Text(
+          'Create Account',
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
@@ -53,6 +63,7 @@ Widget build(BuildContext context) {
               SizedBox(
                 height: 28,
               ),
+              //Fixme rawabi pass the phone number as argument from sign_up1 and show it here instead of 05xxxx
               Text(
                 "We send a code to 05XXXXXXXX. Enter the code below",
                 textAlign: TextAlign.right,
@@ -60,112 +71,91 @@ Widget build(BuildContext context) {
               SizedBox(
                 height: 28,
               ),
-              Container(
-                padding: EdgeInsets.all(28),
-                // decoration: BoxDecoration(
-                //   color: Colors.white,
-                //   borderRadius: BorderRadius.circular(12),
-  
-                // ),
-       
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _textFieldOTP(first: true, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: true),
-                      ],
-                      
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                         
-                    Text(
-                       
-                   "Resend after 00:"+_start.toString(),
-                   style: TextStyle(
-                     fontSize: 14,
-                   ),),
-                    SizedBox(
-                      height: 22,
-                    ),
-                
-                 //Text ((  Timer( (Duration(seconds: 60))))),
-                    Container(
-                margin: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Didn't recieve ?",
-                    ),
-                    InkWell(
-                      splashColor:LIGHT_GREY,
-            onTap: () {
-              startTimer();
-            //             Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const HomePage()),
-            // );
-;
-                      },
-                      child: Text(
-                        ' send again',
-                        style: TextStyle(
-                            color: COLOR_PRIMARY,
-                            fontWeight: FontWeight.bold),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(28),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _textFieldOTP(first: true, last: false),
+                          _textFieldOTP(first: false, last: false),
+                          _textFieldOTP(first: false, last: false),
+                          _textFieldOTP(first: false, last: true),
+                        ],
                       ),
-                    )
-                  ],
-                ))                 
-          , SizedBox(
-                      height: 22,
-                    ),
-                    ElevatedButton( onPressed: () { Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ResetPasswordPage()),
-            );}, child: Text('Next')),
-                  ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("Code will Expire after  $_start"),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Didn't recieve ?",
+                              ),
+                              InkWell(
+                                splashColor: LIGHT_GREY,
+                                onTap: () {
+                                  setState(() {
+                                    _start = 60;
+                                  });
+                                },
+                                child: Text(
+                                  ' send again',
+                                  style: TextStyle(
+                                      color: COLOR_PRIMARY,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          )),
+                      darkBtn(
+                        label: 'Next',
+                        onPressed: () {
+                          //Fixme rawabi redirect to signup3
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const ResetPasswordPage()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
-                height:50,
-              ), 
-               Container(
-                margin: EdgeInsets.only(top: 16.0, bottom: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Already Register?",
-                      style: TextStyle(
-            decoration: TextDecoration.underline,
-          )
-                    ),
-                    InkWell(
-                      splashColor:LIGHT_GREY,
-                 onTap: () {
-            //             Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const HomePage()),
-            // );
-;
 
-                    },
-                      child: Text(
-                        ' Login',
-                        style: TextStyle(
-                            color: COLOR_PRIMARY,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ],
-                ))                 
-          ,
+              Container(
+                  margin: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Already Register?",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                          )),
+                      InkWell(
+                        splashColor: LIGHT_GREY,
+                        onTap: () {
+                          //fixme rawabi redirect to login page
+                        },
+                        child: Text(
+                          ' Login',
+                          style: TextStyle(
+                              color: COLOR_PRIMARY,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  )),
             ],
           ),
         ),
@@ -174,35 +164,31 @@ Widget build(BuildContext context) {
   }
 
   Widget _textFieldOTP({required bool first, last}) {
-    return Container (
-     
-      
+    return Container(
       height: 50,
-      width: 50 ,
-  
+      width: 50,
       child: Material(
-        elevation: 10,shadowColor:Colors.black,
+        elevation: 10,
+        shadowColor: Colors.black,
+        borderRadius: BorderRadius.circular(8),
         child: TextField(
-          // autofocus: true,
-          //  onChanged: (value) {
-          //    if (value.length == 1 && last == false) {
-          //      FocusScope.of(context).nextFocus();
-                
-          //    }
-          //    if (value.length == 0 && first == false) {
-          //      FocusScope.of(context).previousFocus();
-               
-          //    }
-          //  },
-           showCursor: false,
-           readOnly: false,
-           textAlign: TextAlign.center,
-           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-           keyboardType: TextInputType.number,
-         ),
+          autofocus: true,
+          onChanged: (value) {
+            if (value.length == 1 && last == false) {
+              FocusScope.of(context).nextFocus();
+            }
+            if (value.length == 0 && first == false) {
+              FocusScope.of(context).previousFocus();
+            }
+          },
+          showCursor: false,
+          readOnly: false,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(border: InputBorder.none),
+        ),
       ),
     );
   }
-
-
-} 
+}

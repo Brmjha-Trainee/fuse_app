@@ -244,6 +244,7 @@ ThemeData appTheme = ThemeData(
     ),
   ),
   appBarTheme: AppBarTheme(
+    elevation: 0,
     backgroundColor: WHITE,
     titleTextStyle: TextStyle(
       color: COLOR_PRIMARY,

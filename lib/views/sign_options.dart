@@ -1,3 +1,4 @@
+//UI Asmaa, BE Faizah
 import 'package:flutter/material.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
@@ -18,7 +19,9 @@ class SignOption extends StatelessWidget {
               child: Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    //Todo Haneen after doing the hone page this will navigate to there
+                  },
                   child: Text(
                     'Skip',
                     style: TextStyle(
@@ -32,7 +35,7 @@ class SignOption extends StatelessWidget {
             Expanded(
               child: Container(
                 //double infinity make it big as parents allows
-                //while mediQuery make it big as per the screen
+                //while mediaQuery make it big as per the screen
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height,
                 padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
@@ -56,7 +59,7 @@ class SignOption extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignupPage(),
+                                builder: (context) => SignUpPage(),
                               ),
                             );
                           },
@@ -68,14 +71,8 @@ class SignOption extends StatelessWidget {
                           label: 'Sign up with google',
                           img: 'assets/img/gmail-icon.png',
                           onPressed: () {
+                            //Fixme Faizah dosen't redirect me to home page on success
                             GoogleSignIn().signIn();
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => LoginScreen(),
-                            //   ),
-                            // );
                           },
                         ),
                       ],

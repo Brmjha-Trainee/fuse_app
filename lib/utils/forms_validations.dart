@@ -24,7 +24,7 @@ String? validatePass(String value) {
     return 'This field is required.';
   } else {
     if (!regex.hasMatch(value)) {
-      return 'Enter valid password';
+      return 'Enter valid password ex Ab12345&';
     } else {
       return null;
     }
