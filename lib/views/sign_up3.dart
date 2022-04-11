@@ -1,5 +1,6 @@
 //UI Asmaa, BE Haneen
 import 'package:flutter/material.dart';
+import 'package:fuseapp/providers/show_hide_pass_provider.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
@@ -51,45 +52,85 @@ class _Signup3State extends State<Signup3> {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        height: MediaQuery.of(context).size.height,
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30.0, top: 80),
-                child: Text(
-                  'Create new account',
-                  style: h1,
-                ),
+        body: Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      height: MediaQuery.of(context).size.height,
+      width: double.infinity,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30.0, top: 80),
+              child: Text(
+                'Create new account',
+                style: h1,
               ),
-              Form(
+            ),
+            Form(
                 key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    nameField(),
-                    emailField(),
-                    birthField(),
-                    passField(),
-                    confirmPassField(),
-                    //FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: value,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.value = value!;
-                            });
+                child: Consumer<ToggleText>(builder: (context, toggle, _) {
+                  return Column(
+                    children: <Widget>[
+                      nameField(),
+                      emailField(),
+                      birthField(),
+                      inputText(
+                        label: 'Password',
+                        hintText: '*******',
+                        controller: passController,
+                        validation: (val) {
+                          return validatePass(passController.text);
+                        },
+                        obscureText: toggle.obscureText1,
+                        iconButton: IconButton(
+                          icon: Icon(
+                            toggle.obscureText1
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            toggle.togglePasswordStat1();
                           },
                         ),
-                        //Todo Later on this is will be clickable
-                        Expanded(
-                          child: RichText(
+                      ),
+                      inputText(
+                        label: 'Confirm Password',
+                        hintText: '*******',
+                        obscureText: toggle.obscureText2,
+                        controller: confirmPassController,
+                        validation: (dynamic val) {
+                          if (val.isEmpty) {
+                            return "This field is required";
+                          }
+                          return confirmPassValidation.validateMatch(
+                              val, passController.text);
+                        },
+                        iconButton: IconButton(
+                          icon: Icon(
+                            toggle.obscureText2
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            toggle.togglePasswordStat2();
+                          },
+                        ),
+                      ),
+                      // FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: value,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value = value!;
+                              });
+                            },
+                          ),
+                          //Todo Later on this is will be clickable
+                          RichText(
                             text: TextSpan(
                                 text: 'I agree to Its',
                                 style: h6,
@@ -105,23 +146,30 @@ class _Signup3State extends State<Signup3> {
                                       context: this.context),
                                 ]),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              darkBtn(
-                label: 'Create Account',
-                onPressed: () async {
-                  if (_formKey.currentState!.validate() && value == true) {
-                    _formKey.currentState!.save();
-                    await authService.createUserWithEmailAndPassword(
-                        emailController.text, passController.text, context);
-                  }
-                },
-              ),
-              Row(
+                        ],
+                      )
+                    ],
+                  );
+                })),
+            darkBtn(
+              label: 'Create Account',
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  await authService.createUserWithEmailAndPassword(
+                      emailController.text, passController.text, context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                }
+                //FixMe Haneen  Check validation first
+              },
+            ),
+            Expanded(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   richText(
@@ -132,11 +180,11 @@ class _Signup3State extends State<Signup3> {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
+    ));
   }
 
   Widget confirmPassField() {
@@ -185,7 +233,7 @@ class _Signup3State extends State<Signup3> {
         readOnly: true,
         controller: dateController,
         validation: (val) {
-          return requiredField(dateController.text);
+          return validateRequiredField(dateController.text);
         },
         iconButton: IconButton(
           onPressed: () async {

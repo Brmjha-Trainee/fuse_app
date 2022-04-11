@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/providers/show_hide_pass_provider.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/views/wrapper.dart';
 import 'package:provider/provider.dart';
 
 //COMMENTS TODO: 1. when to use pushreplacement instead of put || 2. docmentation
@@ -32,11 +34,12 @@ class FuseApp extends StatelessWidget {
         Provider<AuthService>(
           create: (_) => AuthService(),
         ),
+        ChangeNotifierProvider(create: (_) => ToggleText())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        home: const SignOption(),
+        home: Wrapper(),
       ),
     );
   }

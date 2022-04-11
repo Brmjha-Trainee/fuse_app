@@ -64,7 +64,6 @@ flutter:
     - assets/img/pic4.png
     - assets/img/pic5.png
     - assets/img/pic6.png
-    - assets/img/saudi-arabia-flag-icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
