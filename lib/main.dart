@@ -4,6 +4,7 @@ import 'package:fuseapp/providers/show_hide_pass_provider.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/views/wrapper.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -34,7 +35,7 @@ class FuseApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        home: const SignOption(),
+        home: Wrapper(),
       ),
     );
   }

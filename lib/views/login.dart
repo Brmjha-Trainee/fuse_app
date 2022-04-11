@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:fuseapp/views/home.dart';
 import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
@@ -95,11 +96,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         //FixME Haneen check validation first
                         darkBtn(
                             label: 'Login',
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                authService.signInWithEmaliandpassward(
+                                await authService.signInWithEmaliandpassward(
                                     emailController.text, passController.text);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
                               }
                             }),
                       ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,6 +12,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     return Scaffold(
       body: Center(
           child: Column(
@@ -22,7 +26,11 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(onPressed: () {}, child: Text('data')),
-              OutlinedButton(onPressed: () {}, child: Text('data')),
+              OutlinedButton(
+                  onPressed: () async {
+                    await authService.singout();
+                  },
+                  child: Text('data')),
             ],
           )
         ],
