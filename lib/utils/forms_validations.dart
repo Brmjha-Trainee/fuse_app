@@ -1,7 +1,7 @@
 import 'package:form_field_validator/form_field_validator.dart';
 
 //////////////////////////validations USED FOR FORMS///////////////////////////
-String? requiredField(String value) {
+String? validateRequiredField(String value) {
   if (value.isEmpty) {
     return 'This field is required';
   }
@@ -31,11 +31,19 @@ String? validatePass(String value) {
   }
 }
 
-bool validateStructure(String value) {
-  String pattern =
-      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-  RegExp regExp = new RegExp(pattern);
-  return regExp.hasMatch(value);
+final confirmPassValidation = MatchValidator(
+    errorText: 'The password and its confirmation does not match');
+String? validatePhone(dynamic value) {
+  RegExp regex = RegExp(r'^(?:\+?0*?966)?0?(5[0-9]{8})$');
+  if (value.isEmpty) {
+    return 'This field is required.';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Please enter valid phone number';
+    } else {
+      return null;
+    }
+  }
 }
 
 String? validateEmail(dynamic value) {
@@ -46,21 +54,6 @@ String? validateEmail(dynamic value) {
   } else {
     if (!regex.hasMatch(value)) {
       return 'Please enter your email address in format:\nyourname@example.com';
-    } else {
-      return null;
-    }
-  }
-}
-
-final confirmPassValidation = MatchValidator(
-    errorText: 'The password and its confirmation does not match');
-String? validatePhone(dynamic value) {
-  RegExp regex = RegExp(r'^(?:\+?0*?966)?0?(5[0-9]{8})$');
-  if (value.isEmpty) {
-    return 'This field is required.';
-  } else {
-    if (!regex.hasMatch(value)) {
-      return 'Please enter valid phone number';
     } else {
       return null;
     }

@@ -69,13 +69,6 @@ class SignOption extends StatelessWidget {
                           img: 'assets/img/gmail-icon.png',
                           onPressed: () {
                             GoogleSignIn().signIn();
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => LoginScreen(),
-                            //   ),
-                            // );
                           },
                         ),
                       ],
