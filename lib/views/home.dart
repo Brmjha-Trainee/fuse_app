@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () async {
                     await authService.signOut();
                   },
-                  child: Text('data')),
+                  child: Text('log out')),
             ],
           )
         ],

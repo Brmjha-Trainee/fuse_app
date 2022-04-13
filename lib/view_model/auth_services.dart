@@ -2,10 +2,10 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
-
+import 'package:fuseapp/components/snack_bar.dart';
 import '../views/login.dart';
 
-//todo haneen token & refresh token is missing
+//todo haneen token & refresh token is missing (Done)
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
 
@@ -25,11 +25,10 @@ class AuthService {
     try {
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-//todo haneen redirect to home page?
+//todo haneen redirect to home page? (Done)
       return _userfirebase(credential.user);
-    } catch (e) {
-      //todo haneen handel error
-      return null;
+    } on auth.FirebaseAuthException catch (e) {
+      Utils.showSnackBar(e.message);
     }
   }
 
@@ -44,11 +43,11 @@ class AuthService {
           builder: (context) => LoginScreen(),
         ),
       );
-//fixme haneen write the code to save to DB
+//fixme haneen write the code to save to DB (Done)
       return _userfirebase(credential.user);
-    } catch (e) {
-      return null;
-      //todo haneen handel error
+    } on auth.FirebaseAuthException catch (e) {
+      Utils.showSnackBar(e.message);
+      //todo haneen handel error (Done)
     }
   }
 

@@ -1,5 +1,7 @@
 //UI Asmaa, BE Haneen
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/components/snack_bar.dart';
 import 'package:fuseapp/providers/show_hide_pass_provider.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
@@ -20,6 +22,7 @@ class _Signup3State extends State<Signup3> {
   final TextEditingController confirmPassController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   //FixMe ASMAA use provider
   //checkBoxes
@@ -51,6 +54,8 @@ class _Signup3State extends State<Signup3> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    ScaffoldMessengerKey:
+    Utils.messsengerKey;
     return Scaffold(
         body: Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -156,8 +161,17 @@ class _Signup3State extends State<Signup3> {
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-                  await authService.createUserWithEmailAndPassword(
-                      emailController.text, passController.text, context);
+                  await authService
+                      .createUserWithEmailAndPassword(
+                          emailController.text, passController.text, context)
+                      .then((value) => FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(value?.uid)
+                              .set({
+                            "name": nameController.text,
+                            "email": emailController.text,
+                            "date": dateController.text,
+                          }));
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -165,7 +179,7 @@ class _Signup3State extends State<Signup3> {
                     ),
                   );
                 }
-                //FixMe Haneen  Check validation first
+                //FixMe Haneen  Check validation first (Done)
               },
             ),
             Expanded(

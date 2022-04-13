@@ -41,7 +41,7 @@ class FuseApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        home: SignOption(),
+        home: Wrapper(),
       ),
     );
   }
