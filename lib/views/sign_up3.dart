@@ -1,12 +1,15 @@
 //UI Asmaa, BE Haneen
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fuseapp/providers/toggle_text.dart';
+import 'package:fuseapp/components/snack_bar.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+
+import '../providers/toggle_text.dart';
 
 class Signup3 extends StatefulWidget {
   @override
@@ -20,6 +23,9 @@ class _Signup3State extends State<Signup3> {
   final TextEditingController confirmPassController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  //FixMe ASMAA use provider DONE
 
   @override
   void initState() {
@@ -30,133 +36,147 @@ class _Signup3State extends State<Signup3> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    ScaffoldMessengerKey:
+    Utils.messsengerKey;
     return Scaffold(
         body: Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       height: MediaQuery.of(context).size.height,
       width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 30.0, top: 80),
-            child: Text(
-              'Create new account',
-              style: h1,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30.0, top: 80),
+              child: Text(
+                'Create new account',
+                style: h1,
+              ),
             ),
-          ),
-          Form(
-              key: _formKey,
-              child: Consumer<ToggleText>(builder: (context, toggle, _) {
-                return Column(
-                  children: <Widget>[
-                    nameField(),
-                    emailField(),
-                    birthField(),
-                    inputText(
-                      label: 'Password',
-                      hintText: '*******',
-                      controller: passController,
-                      validation: (val) {
-                        return validatePass(passController.text);
-                      },
-                      obscureText: toggle.obscureText1,
-                      iconButton: IconButton(
-                        icon: Icon(
-                          toggle.obscureText1
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          toggle.togglePasswordStat1();
+            Form(
+                key: _formKey,
+                child: Consumer<ToggleText>(builder: (context, toggle, _) {
+                  return Column(
+                    children: <Widget>[
+                      nameField(),
+                      emailField(),
+                      birthField(),
+                      inputText(
+                        label: 'Password',
+                        hintText: '*******',
+                        controller: passController,
+                        validation: (val) {
+                          return validatePass(passController.text);
                         },
-                      ),
-                    ),
-                    inputText(
-                      label: 'Confirm Password',
-                      hintText: '*******',
-                      obscureText: toggle.obscureText2,
-                      controller: confirmPassController,
-                      validation: (dynamic val) {
-                        if (val.isEmpty) {
-                          return "This field is required";
-                        }
-                        return confirmPassValidation.validateMatch(
-                            val, passController.text);
-                      },
-                      iconButton: IconButton(
-                        icon: Icon(
-                          toggle.obscureText2
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          toggle.togglePasswordStat2();
-                        },
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: toggle.checkBoxValue,
-                          onChanged: (bool? value) {
-                            toggle.isCheck();
+                        obscureText: toggle.obscureText1,
+                        iconButton: IconButton(
+                          icon: Icon(
+                            toggle.obscureText1
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            toggle.togglePasswordStat1();
                           },
                         ),
-                        //Todo Later on this is will be clickable
-                        RichText(
-                          text: TextSpan(
-                              text: 'I agree to Its',
-                              style: h6,
-                              children: <TextSpan>[
-                                linkText(
-                                    label: ' privacy policy',
-                                    pageName: LoginScreen(),
-                                    context: this.context),
-                                TextSpan(text: ' and', style: h6),
-                                linkText(
-                                    label: ' terms of use',
-                                    pageName: LoginScreen(),
-                                    context: this.context),
-                              ]),
+                      ),
+                      inputText(
+                        label: 'Confirm Password',
+                        hintText: '*******',
+                        obscureText: toggle.obscureText2,
+                        controller: confirmPassController,
+                        validation: (dynamic val) {
+                          if (val.isEmpty) {
+                            return "This field is required";
+                          }
+                          return confirmPassValidation.validateMatch(
+                              val, passController.text);
+                        },
+                        iconButton: IconButton(
+                          icon: Icon(
+                            toggle.obscureText2
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            toggle.togglePasswordStat2();
+                          },
                         ),
-                      ],
-                    )
-                  ],
-                );
-              })),
-          darkBtn(
-            label: 'Create Account',
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                await authService.createUserWithEmailAndPassword(
-                    emailController.text, passController.text, context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
-                );
-              }
-              //FixMe Haneen  Check validation first
-            },
-          ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                richText(
-                  context: this.context,
-                  label_1: 'Already have an account',
-                  label_2: ' Login',
-                  pageName: LoginScreen(),
-                ),
-              ],
+                      ),
+                      // FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen  DONE
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: toggle.checkBoxValue,
+                            onChanged: (bool? value) {
+                              toggle.isCheck();
+                            },
+                          ),
+                          //Todo Later on this is will be clickable
+                          RichText(
+                            text: TextSpan(
+                                text: 'I agree to Its',
+                                style: h6,
+                                children: <TextSpan>[
+                                  linkText(
+                                      label: ' privacy policy',
+                                      pageName: LoginScreen(),
+                                      context: this.context),
+                                  TextSpan(text: ' and', style: h6),
+                                  linkText(
+                                      label: ' terms of use',
+                                      pageName: LoginScreen(),
+                                      context: this.context),
+                                ]),
+                          ),
+                        ],
+                      )
+                    ],
+                  );
+                })),
+            darkBtn(
+              label: 'Create Account',
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  await authService
+                      .createUserWithEmailAndPassword(
+                          emailController.text, passController.text, context)
+                      .then((value) => FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(value?.uid)
+                              .set({
+                            "name": nameController.text,
+                            "email": emailController.text,
+                            "date": dateController.text,
+                          }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                }
+                //FixMe Haneen  Check validation first (Done)
+              },
             ),
-          ),
-        ],
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  richText(
+                    context: this.context,
+                    label_1: 'Already have an account',
+                    label_2: ' Login',
+                    pageName: LoginScreen(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     ));
   }

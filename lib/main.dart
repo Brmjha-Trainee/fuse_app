@@ -4,6 +4,7 @@ import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/views/wrapper.dart';
 import 'package:provider/provider.dart';
 
 //COMMENTS TODO: 1. when to use pushreplacement instead of put || 2. docmentation
@@ -47,7 +48,7 @@ class FuseApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        home: SignOption(),
+        home: Wrapper(),
       ),
     );
   }

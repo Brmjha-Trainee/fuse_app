@@ -1,5 +1,6 @@
 //UI Asmaa, BE Faizah
 import 'package:flutter/material.dart';
+import 'package:fuseapp/views/home.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/sign_up1.dart';
@@ -20,7 +21,13 @@ class SignOption extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: () {
-                    //Todo Haneen after doing the hone page this will navigate to there
+                    //Todo Haneen after doing the hone page this will navigate to there (Done)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
                   },
                   child: Text(
                     'Skip',
