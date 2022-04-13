@@ -2,11 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:fuseapp/views/forget_password1.dart';
 import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/show_hide_pass_provider.dart';
+import '../providers/toggle_text.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,8 +18,6 @@ class LoginScreen extends StatefulWidget {
 
 //Fixme asmaa can't write to textfield error is clear just focus :)
 class _LoginScreenState extends State<LoginScreen> {
-  //FixMe ASMAA use provider to build only the textfield not the whole screen
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
@@ -83,7 +82,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         TextButton(
                             onPressed: () {
-                              //todo rawabi redirect to forget password screen
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResetPasswordPage(),
+                                  ));
                             },
                             child: Text(
                               'Forgot Password?',

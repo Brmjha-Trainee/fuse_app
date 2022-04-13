@@ -1,7 +1,7 @@
 //UI rawabi, BE missing faizah
 import 'package:flutter/material.dart';
-import 'forget_password2.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'forget_password2.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({
@@ -16,14 +16,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          title: Text(
-            'Reset Password',
-          ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-        ),
+        appBar: myAppBar(context, title: 'Reset Password'),
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

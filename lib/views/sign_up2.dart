@@ -1,6 +1,7 @@
 //UI Rawabi, BE Faizah (NOT YET DONE)
 import 'package:flutter/material.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/views/sign_up3.dart';
 import 'dart:async';
 import 'forget_password1.dart';
 
@@ -124,7 +125,7 @@ class _CreateAccountState extends State<CreateAccount> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const ResetPasswordPage()),
+                                    Signup3()),
                           );
                         },
                       ),

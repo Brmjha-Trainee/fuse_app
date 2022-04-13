@@ -1,6 +1,6 @@
 //UI Asmaa, BE Haneen
 import 'package:flutter/material.dart';
-import 'package:fuseapp/providers/show_hide_pass_provider.dart';
+import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
@@ -21,27 +21,6 @@ class _Signup3State extends State<Signup3> {
   TextEditingController dateController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  //FixMe ASMAA use provider
-  //checkBoxes
-  bool value = false;
-  // Initially password is obscure
-  bool _obscureText = true;
-  // Toggles the password show status
-  void _togglePasswordStatus() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
-
-// Initially password is obscure
-  bool _obscureText2 = true;
-  // Toggles the password show status
-  void _togglePasswordStatus2() {
-    setState(() {
-      _obscureText2 = !_obscureText2;
-    });
-  }
-
   @override
   void initState() {
     dateController.text = ""; //set the initial value of text field
@@ -56,174 +35,130 @@ class _Signup3State extends State<Signup3> {
       padding: EdgeInsets.symmetric(horizontal: 20),
       height: MediaQuery.of(context).size.height,
       width: double.infinity,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30.0, top: 80),
-              child: Text(
-                'Create new account',
-                style: h1,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30.0, top: 80),
+            child: Text(
+              'Create new account',
+              style: h1,
             ),
-            Form(
-                key: _formKey,
-                child: Consumer<ToggleText>(builder: (context, toggle, _) {
-                  return Column(
-                    children: <Widget>[
-                      nameField(),
-                      emailField(),
-                      birthField(),
-                      inputText(
-                        label: 'Password',
-                        hintText: '*******',
-                        controller: passController,
-                        validation: (val) {
-                          return validatePass(passController.text);
-                        },
-                        obscureText: toggle.obscureText1,
-                        iconButton: IconButton(
-                          icon: Icon(
-                            toggle.obscureText1
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            toggle.togglePasswordStat1();
-                          },
+          ),
+          Form(
+              key: _formKey,
+              child: Consumer<ToggleText>(builder: (context, toggle, _) {
+                return Column(
+                  children: <Widget>[
+                    nameField(),
+                    emailField(),
+                    birthField(),
+                    inputText(
+                      label: 'Password',
+                      hintText: '*******',
+                      controller: passController,
+                      validation: (val) {
+                        return validatePass(passController.text);
+                      },
+                      obscureText: toggle.obscureText1,
+                      iconButton: IconButton(
+                        icon: Icon(
+                          toggle.obscureText1
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                         ),
-                      ),
-                      inputText(
-                        label: 'Confirm Password',
-                        hintText: '*******',
-                        obscureText: toggle.obscureText2,
-                        controller: confirmPassController,
-                        validation: (dynamic val) {
-                          if (val.isEmpty) {
-                            return "This field is required";
-                          }
-                          return confirmPassValidation.validateMatch(
-                              val, passController.text);
+                        onPressed: () {
+                          toggle.togglePasswordStat1();
                         },
-                        iconButton: IconButton(
-                          icon: Icon(
-                            toggle.obscureText2
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            toggle.togglePasswordStat2();
-                          },
-                        ),
                       ),
-                      // FIXME ASMAA provider instead of setstate + Onclick don't sent to login Write the name of the write screen
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: value,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value = value!;
-                              });
-                            },
-                          ),
-                          //Todo Later on this is will be clickable
-                          RichText(
-                            text: TextSpan(
-                                text: 'I agree to Its',
-                                style: h6,
-                                children: <TextSpan>[
-                                  linkText(
-                                      label: ' privacy policy',
-                                      pageName: LoginScreen(),
-                                      context: this.context),
-                                  TextSpan(text: ' and', style: h6),
-                                  linkText(
-                                      label: ' terms of use',
-                                      pageName: LoginScreen(),
-                                      context: this.context),
-                                ]),
-                          ),
-                        ],
-                      )
-                    ],
-                  );
-                })),
-            darkBtn(
-              label: 'Create Account',
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  await authService.createUserWithEmailAndPassword(
-                      emailController.text, passController.text, context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
                     ),
-                  );
-                }
-                //FixMe Haneen  Check validation first
-              },
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  richText(
-                    context: this.context,
-                    label_1: 'Already have an account',
-                    label_2: ' Login',
-                    pageName: LoginScreen(),
+                    inputText(
+                      label: 'Confirm Password',
+                      hintText: '*******',
+                      obscureText: toggle.obscureText2,
+                      controller: confirmPassController,
+                      validation: (dynamic val) {
+                        if (val.isEmpty) {
+                          return "This field is required";
+                        }
+                        return confirmPassValidation.validateMatch(
+                            val, passController.text);
+                      },
+                      iconButton: IconButton(
+                        icon: Icon(
+                          toggle.obscureText2
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          toggle.togglePasswordStat2();
+                        },
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: toggle.checkBoxValue,
+                          onChanged: (bool? value) {
+                            toggle.isCheck();
+                          },
+                        ),
+                        //Todo Later on this is will be clickable
+                        RichText(
+                          text: TextSpan(
+                              text: 'I agree to Its',
+                              style: h6,
+                              children: <TextSpan>[
+                                linkText(
+                                    label: ' privacy policy',
+                                    pageName: LoginScreen(),
+                                    context: this.context),
+                                TextSpan(text: ' and', style: h6),
+                                linkText(
+                                    label: ' terms of use',
+                                    pageName: LoginScreen(),
+                                    context: this.context),
+                              ]),
+                        ),
+                      ],
+                    )
+                  ],
+                );
+              })),
+          darkBtn(
+            label: 'Create Account',
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                await authService.createUserWithEmailAndPassword(
+                    emailController.text, passController.text, context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(),
                   ),
-                ],
-              ),
+                );
+              }
+              //FixMe Haneen  Check validation first
+            },
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                richText(
+                  context: this.context,
+                  label_1: 'Already have an account',
+                  label_2: ' Login',
+                  pageName: LoginScreen(),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     ));
-  }
-
-  Widget confirmPassField() {
-    return inputText(
-      label: 'Confirm Password',
-      hintText: '*******',
-      obscureText: _obscureText2,
-      controller: confirmPassController,
-      validation: (dynamic val) {
-        if (val.isEmpty) {
-          return "This field is required";
-        }
-        return confirmPassValidation.validateMatch(val, passController.text);
-      },
-      iconButton: IconButton(
-        icon: Icon(
-          _obscureText2 ? Icons.visibility_off : Icons.visibility,
-        ),
-        onPressed: _togglePasswordStatus2,
-      ),
-    );
-  }
-
-  Widget passField() {
-    return inputText(
-      label: 'Password',
-      hintText: '*******',
-      controller: passController,
-      validation: (val) {
-        return validatePass(passController.text);
-      },
-      obscureText: _obscureText,
-      iconButton: IconButton(
-        icon: Icon(
-          _obscureText ? Icons.visibility_off : Icons.visibility,
-        ),
-        onPressed: _togglePasswordStatus,
-      ),
-    );
   }
 
   Widget birthField() {

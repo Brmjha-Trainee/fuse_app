@@ -1,6 +1,8 @@
 //UI rawabi, BE fiazah
 import 'package:flutter/material.dart';
 
+import '../theme/theme_constants.dart';
+
 class ResetPasswordPage2 extends StatefulWidget {
   const ResetPasswordPage2({
     Key? key,
@@ -18,12 +20,7 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Reset Password'),
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-      ),
+      appBar: myAppBar(context, title: 'Reset Password'),
       body: Container(
         padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
         child: Column(

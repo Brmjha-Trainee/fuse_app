@@ -230,7 +230,22 @@ MaterialButton lightBtn({
     ),
   );
 }
-
+// title and back button only
+AppBar myAppBar(
+  context, {
+  String? title,
+}) {
+  return AppBar(
+    title: Text(title!,
+        ),
+    centerTitle: true,
+    leading: IconButton(
+        icon: Icon(Icons.arrow_back_rounded),
+        onPressed: () {
+          Navigator.pop(context);
+        }),
+  );
+}
 ThemeData appTheme = ThemeData(
   primarySwatch: Palette.kToDark,
   scaffoldBackgroundColor: WHITE,
@@ -251,6 +266,8 @@ ThemeData appTheme = ThemeData(
       fontWeight: FontWeight.bold,
       fontSize: 28,
     ),
+    actionsIconTheme: IconThemeData(color: BLACK),
+    iconTheme: IconThemeData(color: BLACK),
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: WHITE,
