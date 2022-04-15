@@ -14,10 +14,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
 Widget build(BuildContext context) {
   return Scaffold(
-      appBar: AppBar(title: Text('Settings'),));
-} 
- Widget build2(BuildContext context) {
-    return  ListView(
+      appBar: AppBar(title: Text('Settings'),),
+      body :ListView(
         children: <Widget>[
           ListTile(
             leading: Icon(Icons.language_outlined,color:COLOR_PRIMARY),
@@ -31,8 +29,8 @@ Widget build(BuildContext context) {
                                      LanguagesScreen()),
                           );} ,
           ),
-          // Divider(color: LIGHT_GREY ,
-          // height:5.0 ,),
+           Divider(color: LIGHT_GREY ,
+          height:1.0 ,),
           ListTile(
             leading: Icon(Icons.notifications_outlined,color:COLOR_PRIMARY),
             title: Text('Notifications'),
@@ -44,8 +42,8 @@ Widget build(BuildContext context) {
                                 builder: (context) => Notification1()),
                           );} 
           ),
-          // Divider(color: LIGHT_GREY ,
-          // height:5.0 ,),
+          Divider(color: LIGHT_GREY ,
+           height:1.0 ,),
           ListTile(
             leading: Icon(Icons.lock_outline,color:COLOR_PRIMARY),
             title: Text('Reset password'),
@@ -57,9 +55,9 @@ Widget build(BuildContext context) {
                                 builder: (context) => ResetPasswordPage()),
                           );} 
           ),
-          // Divider(color: LIGHT_GREY ,
-          // height:5.0 ,),
-          // SizedBox(height:30),
+          Divider(color: LIGHT_GREY ,
+          height:1.0 ,),
+          SizedBox(height:50),
           ListTile(
             leading: Icon(Icons.logout_outlined,color:RED),
             title: Text('Log out'),
@@ -71,6 +69,11 @@ Widget build(BuildContext context) {
                                 builder: (context) => SignOption()),
                           );} 
           ),
+          Divider(color: LIGHT_GREY ,
+           height:1.0 ,),
         ],
-      );
-    }}
+      ));
+    }
+      
+} 
+    
