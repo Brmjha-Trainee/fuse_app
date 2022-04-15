@@ -14,7 +14,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
 Widget build(BuildContext context) {
   return Scaffold(
-      appBar: AppBar(title: Text('Settings'),),
+      appBar: AppBar(title: Text('Setting'),),
       body :ListView(
         children: <Widget>[
           ListTile(
@@ -57,11 +57,10 @@ Widget build(BuildContext context) {
           ),
           Divider(color: LIGHT_GREY ,
           height:1.0 ,),
-          SizedBox(height:50),
+          SizedBox(height:60),
           ListTile(
-            leading: Icon(Icons.logout_outlined,color:RED),
-            title: Text('Log out'),
-            trailing: Icon(Icons.keyboard_arrow_right),
+            leading: Icon(Icons.logout_outlined ,color: COLOR_PRIMARY,),
+            title: Text('Log out',style :TextStyle(color : RED)),
               onTap: () {
                           Navigator.push(
                             context,
