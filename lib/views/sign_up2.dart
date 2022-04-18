@@ -1,14 +1,15 @@
 //UI Rawabi, BE Faizah (NOT YET DONE)
 import 'package:flutter/material.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/views/sign_up3.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'dart:async';
 import 'forget_password1.dart';
 
 class CreateAccount extends StatefulWidget {
-  const CreateAccount({
-    Key? key,
-  }) : super(key: key);
+  late PhoneNumber number ;
+   CreateAccount( PhoneNumber number ) { this.number = number ;}
 
   @override
   _CreateAccountState createState() => _CreateAccountState();
@@ -17,6 +18,7 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   late Timer _timer;
   int _start = 60;
+
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
@@ -64,9 +66,9 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(
                 height: 28,
               ),
-              //Fixme rawabi pass the phone number as argument from sign_up1 and show it here instead of 05xxxx
+            //(done)  //Fixme rawabi pass the phone number as argument from sign_up1 and show it here instead of 05xxxx
               Text(
-                "We send a code to 05XXXXXXXX. Enter the code below",
+                "We send a code to "+widget.number.toString()+"Enter the code below",
                 textAlign: TextAlign.right,
               ),
               SizedBox(
@@ -120,7 +122,7 @@ class _CreateAccountState extends State<CreateAccount> {
                       darkBtn(
                         label: 'Next',
                         onPressed: () {
-                          //Fixme rawabi redirect to signup3
+                          //done -Fixme rawabi redirect to signup3
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -146,7 +148,12 @@ class _CreateAccountState extends State<CreateAccount> {
                       InkWell(
                         splashColor: LIGHT_GREY,
                         onTap: () {
-                          //fixme rawabi redirect to login page
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginScreen()),);
+                          //done-fixme rawabi redirect to login page
                         },
                         child: Text(
                           ' Login',
