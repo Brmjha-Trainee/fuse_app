@@ -1,7 +1,7 @@
 //UI rawabi, BE missing faizah
 import 'package:flutter/material.dart';
-import 'package:fuseapp/theme/theme_constants.dart';
 import 'forget_password2.dart';
+import 'package:fuseapp/theme/theme_constants.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({
@@ -16,7 +16,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: myAppBar(context, title: 'Reset Password'),
+        appBar: AppBar(
+          title: Text(
+            'Reset Password',
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+        ),
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -28,26 +35,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       'Enter your e-mail adress and we’ll send you a link to reset your password ',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    // the sized is for adding spaces
+                    // the size is for adding spaces
                     SizedBox(
                       height: 28,
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Email',
-                        style: Theme.of(context).textTheme.bodyText1,
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-//fixme rawabi please use the text fields, and button in the theme "Take help from asmaa
-                    TextField(
-                      decoration:
-                          InputDecoration(labelText: 'Enter your email'),
-                    ),
+//done -fixme rawabi please use the text fields, and button in the theme "Take help from asmaa 
+                    inputText(
+                      label: 'Email',
+                      hintText: 'Enter your email'),
+                  
                     SizedBox(
                       height: 28,
                     ),
