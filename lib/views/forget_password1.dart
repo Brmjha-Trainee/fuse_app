@@ -47,7 +47,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     SizedBox(
                       height: 28,
                     ),
-                    ElevatedButton(
+                   darkBtn(
                         onPressed: () {
                           //todo faizah check db users the navigate to next page or show validation error
                           Navigator.push(
@@ -57,7 +57,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                     const ResetPasswordPage2()),
                           );
                         },
-                        child: Text('Send')),
+                        label:"Send"),
                   ],
                 ),
               ),
