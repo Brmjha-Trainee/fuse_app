@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
-import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import 'package:provider/provider.dart';

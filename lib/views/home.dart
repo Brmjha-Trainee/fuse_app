@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:fuseapp/views/profile.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +26,12 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(onPressed: () {}, child: Text('data')),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => Profile())));
+                  },
+                  child: Text('Profile')),
               OutlinedButton(
                   onPressed: () async {
                     await authService.signOut();

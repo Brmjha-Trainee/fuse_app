@@ -17,6 +17,24 @@ String? validateName(String value) {
   return null;
 }
 
+String? validateTextArea(String value) {
+  if (value.isEmpty) {
+    return 'This field is required';
+  } else if (value.length < 7) {
+    return 'Message must be at least 7 characters.';
+  }
+  return null;
+}
+
+String? validateSubject(String value) {
+  if (value.isEmpty) {
+    return 'This field is required';
+  } else if (value.length < 5) {
+    return 'Subject be at least 5 characters.';
+  }
+  return null;
+}
+
 String? validatePass(String value) {
   RegExp regex =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');

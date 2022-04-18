@@ -6,6 +6,8 @@ const COLOR_PRIMARY = Color(0xFF9E457E);
 const BLACK = Color(0xFF414141);
 const WHITE = Color(0xFFFFFFFF);
 const DARKER_GREY = Color(0xFF414141);
+const DARK_GREY = Color(0xFF828282);
+const GREY = Color(0xFFBDBDBD);
 const IN_BETWEEN_GREY = Color(0xFFC4C4C4);
 const LIGHT_GREY = Color(0xFFEAEAEA);
 const DARK_BLUISH_GRERY = Color(0xFF8A8A9D);
@@ -53,7 +55,16 @@ const h6 = TextStyle(
   decoration: TextDecoration.none,
 );
 
-const subtitle = TextStyle(color: DARKER_GREY);
+const subtitle = TextStyle(
+  color: GREY,
+  fontWeight: FontWeight.normal,
+  fontSize: 16,
+);
+const h7 = TextStyle(
+  color: DARK_GREY,
+  fontWeight: FontWeight.normal,
+  fontSize: 14,
+);
 // There are 2 body types (bodyText1 and bodyText2).
 // They are smaller than subtitles
 // should typically be used for longer texts, such as description.
@@ -77,6 +88,11 @@ const lightBtnText = TextStyle(
   color: DARKER_GREY,
   fontWeight: FontWeight.w600,
   fontSize: 19,
+);
+const appBarText = TextStyle(
+  color: COLOR_PRIMARY,
+  fontSize: 19,
+  fontWeight: FontWeight.w600,
 );
 const nonUnderlineText = TextStyle(
   decoration: TextDecoration.none,
@@ -137,6 +153,7 @@ Widget inputText({
   IconButton? iconButton,
   validation,
   controller,
+  keyboardType,
   onChanged,
   readOnly = false,
 }) {
@@ -156,19 +173,18 @@ Widget inputText({
         validator: validation,
         onChanged: onChanged,
         obscureText: obscureText,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
-            suffixIcon: iconButton,
-            hintText: hintText,
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: LIGHT_GREY,
-              ),
+          suffixIcon: iconButton,
+          hintText: hintText,
+          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              color: BLUISH_GRERY,
             ),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: LIGHT_GREY,
-            ))),
+          ),
+        ),
       ),
       SizedBox(
         height: 10,
@@ -177,7 +193,47 @@ Widget inputText({
   );
 }
 
-//const darkBtnStyle = ButtonStyle(backgroundColor: COLOR_PRIMARY,);
+// message field
+Widget textAreaInput({
+  label,
+  hintText,
+  validation,
+  controller,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        label,
+        style: h3,
+      ),
+      SizedBox(
+        height: 5,
+      ),
+      TextFormField(
+        maxLines: 8,
+        maxLength: 100,
+        controller: controller,
+        validator: validation,
+        keyboardType: TextInputType.multiline,
+        decoration: InputDecoration(
+          hintText: hintText,
+          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(
+              color: BLUISH_GRERY,
+            ),
+          ),
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      )
+    ],
+  );
+}
+
 MaterialButton darkBtn({
   label,
   Function()? onPressed,
@@ -230,14 +286,17 @@ MaterialButton lightBtn({
     ),
   );
 }
+
 // title and back button only
 AppBar myAppBar(
   context, {
   String? title,
 }) {
   return AppBar(
-    title: Text(title!,
-        ),
+    title: Text(
+      title!,
+      style: appBarText,
+    ),
     centerTitle: true,
     leading: IconButton(
         icon: Icon(Icons.arrow_back_rounded),
@@ -246,6 +305,7 @@ AppBar myAppBar(
         }),
   );
 }
+
 ThemeData appTheme = ThemeData(
   primarySwatch: Palette.kToDark,
   scaffoldBackgroundColor: WHITE,
@@ -292,23 +352,20 @@ ThemeData appTheme = ThemeData(
     ),
   ),
   radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all<Color>(COLOR_PRIMARY)),
+    fillColor: MaterialStateProperty.all<Color>(COLOR_PRIMARY),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
+    style: ElevatedButton.styleFrom(
+      textStyle: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 19,
-      )),
-      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-        EdgeInsets.symmetric(horizontal: 60.0, vertical: 20.0),
       ),
-      shape: MaterialStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
+      padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 20.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
       ),
-      backgroundColor: MaterialStateProperty.all<Color>(COLOR_PRIMARY),
+      primary: COLOR_PRIMARY,
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
