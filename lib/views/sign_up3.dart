@@ -152,12 +152,6 @@ class _Signup3State extends State<Signup3> {
                           "email": _emailController.text.trim(),
                           "date": _dateController.text.trim(),
                         }));
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
-                );
               }
               //FixMe Haneen  Check validation first (Done)
             },

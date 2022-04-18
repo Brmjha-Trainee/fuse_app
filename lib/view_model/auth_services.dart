@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
 import 'package:fuseapp/components/snack_bar.dart';
+import 'package:fuseapp/views/home.dart';
 import '../views/login.dart';
 
 //todo haneen token & refresh token is missing (Done)
@@ -26,10 +27,17 @@ class AuthService {
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
 //todo haneen redirect to home page? (Done)
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
       return _userfirebase(credential.user);
     } on auth.FirebaseAuthException catch (e) {
       Utils.showSnackBar(e.message);
     }
+    return null;
   }
 
   Future<User?> createUserWithEmailAndPassword(
@@ -49,6 +57,7 @@ class AuthService {
       Utils.showSnackBar(e.message);
       //todo haneen handel error (Done)
     }
+    return null;
   }
 
   Future<void> signOut() async {
