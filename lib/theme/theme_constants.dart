@@ -296,6 +296,20 @@ AppBar myAppBar(
   );
 }
 
+// title only
+AppBar myAppBar2(
+  context, {
+  String? title,
+}) {
+  return AppBar(
+    title: Text(
+      title!,
+      style: appBarText,
+    ),
+    centerTitle: true,
+  );
+}
+
 ThemeData appTheme = ThemeData(
   primarySwatch: Palette.kToDark,
   scaffoldBackgroundColor: WHITE,

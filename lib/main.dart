@@ -20,7 +20,15 @@ Future<void> main() async {
         appId: '1:353265714008:android:817d805da029d846ef1b2d',
         apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
         messagingSenderId: '353265714008',
-        projectId: 'fuse-app-f9791'),  
+        projectId: 'fuse-app-f9791'),
+    // name: 'Secondary-app',
+    // options: const FirebaseOptions(
+    //   appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
+    //   apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+    //   iosBundleId: 'com.codegemz.uiControls',
+    //   messagingSenderId: '353265714008',
+    //   projectId: 'fuse-app-f9791',
+    // ),
   );
   runApp(const FuseApp());
 }

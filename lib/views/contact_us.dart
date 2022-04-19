@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../theme/theme_constants.dart';
 import '../utils/forms_validations.dart';
 
@@ -77,6 +76,7 @@ class _ContactUsState extends State<ContactUs> {
   Widget subjectField() {
     return inputText(
       label: 'Subject',
+      hintText: 'Enter your new subject',
       keyboardType: TextInputType.text,
       controller: _subjectController,
       validation: (val) {
@@ -88,6 +88,7 @@ class _ContactUsState extends State<ContactUs> {
   Widget emailField() {
     return inputText(
         label: 'Email',
+        hintText: 'Enter your Email',
         keyboardType: TextInputType.emailAddress,
         controller: _emailController,
         validation: (val) {

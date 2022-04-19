@@ -9,7 +9,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context, title: 'Profile'),
+      appBar: myAppBar2(context, title: 'Profile'),
       body: Column(
         children: [
           profile(context), //Upper profile section
