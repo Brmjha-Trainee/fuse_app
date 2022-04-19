@@ -1,21 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/views/forget_password1.dart';
+import 'package:fuseapp/views/notifications.dart';
+import 'package:fuseapp/views/sign_options.dart';
 
-import '../theme/theme_constants.dart';
-class Settings extends StatefulWidget {
-  const Settings({ Key? key }) : super(key: key);
+import 'languages.dart';
 
+class SettingsScreen extends StatefulWidget {
   @override
-  State<Settings> createState() => _SettingsState();
+  _SettingsScreenState createState() => _SettingsScreenState();
 }
-
-class _SettingsState extends State<Settings> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: myAppBar(context, title: 'Settings'),
-      body: Center(
-        child: Text('tgbe'),
-      ),
-    );
-  }
-}
+class _SettingsScreenState extends State<SettingsScreen> {
+Widget build(BuildContext context) {
+  return Scaffold(
+      appBar: AppBar(title: Text('Setting'),),
+      body :ListView(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.language_outlined,color:COLOR_PRIMARY),
+            title: Text('Languages'),
+             trailing: Icon(Icons.keyboard_arrow_right),
+             onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                     LanguagesScreen()),
+                          );} ,
+          ),
+           Divider(color: LIGHT_GREY ,
+          height:1.0 ,),
+          ListTile(
+            leading: Icon(Icons.notifications_outlined,color:COLOR_PRIMARY),
+            title: Text('Notifications'),
+             trailing: Icon(Icons.keyboard_arrow_right),
+               onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Notification1()),
+                          );} 
+          ),
+          Divider(color: LIGHT_GREY ,
+           height:1.0 ,),
+          ListTile(
+            leading: Icon(Icons.lock_outline,color:COLOR_PRIMARY),
+            title: Text('Reset password'),
+            trailing: Icon(Icons.keyboard_arrow_right),
+              onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResetPasswordPage()),
+                          );} 
+          ),
+          Divider(color: LIGHT_GREY ,
+          height:1.0 ,),
+          SizedBox(height:60),
+          ListTile(
+            leading: Icon(Icons.logout_outlined ,color: COLOR_PRIMARY,),
+            title: Text('Log out',style :TextStyle(color : RED)),
+              onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignOption()),
+                          );} 
+          ),
+          Divider(color: LIGHT_GREY ,
+           height:1.0 ,),
+        ],
+      ));
+    }
+      
+} 
+    

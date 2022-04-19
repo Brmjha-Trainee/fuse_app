@@ -1,7 +1,6 @@
 //UI rawabi, BE fiazah
 import 'package:flutter/material.dart';
-
-import '../theme/theme_constants.dart';
+import 'package:fuseapp/theme/theme_constants.dart';
 
 class ResetPasswordPage2 extends StatefulWidget {
   const ResetPasswordPage2({
@@ -20,7 +19,9 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context, title: 'Reset Password'),
+      appBar: AppBar(
+        title: Text('Reset Password'),
+      ),
       body: Container(
         padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
         child: Column(
@@ -74,7 +75,7 @@ class _ResetPasswordPageState2 extends State<ResetPasswordPage2> {
             SizedBox(
               height: 28,
             ),
-            ElevatedButton(onPressed: () {}, child: Text('Reset password')),
+            darkBtn(onPressed: () {}, label: "Reset password"),
           ],
         ),
       ),
