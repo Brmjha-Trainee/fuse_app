@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, ProfileViewRoute);
+                    Navigator.pushNamed(context, ProfileViewRoute);
                   },
                   child: Text('Profile')),
               OutlinedButton(

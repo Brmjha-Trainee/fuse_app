@@ -38,8 +38,7 @@ class Profile extends StatelessWidget {
                   ),
                   trailing: Icon(Icons.arrow_forward_ios_rounded),
                   onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, profileList[i].screen);
+                    Navigator.pushNamed(context, profileList[i].screen);
                   },
                 ),
                 Divider(),
