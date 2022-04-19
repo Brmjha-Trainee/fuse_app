@@ -5,15 +5,15 @@ import 'package:fuseapp/views/profile.dart';
 import '../views/cart.dart';
 import '../views/home.dart';
 
-class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({Key? key}) : super(key: key);
+class root extends StatefulWidget {
+  const root({Key? key}) : super(key: key);
 
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
 
-class _BottomNavigationState extends State<BottomNavigation> {
-  int currentIndex = 0;
+class _BottomNavigationState extends State<root> {
+    int currentIndex = 0;
   final screens = [
     const HomePage(),
     const Cart(),
@@ -33,6 +33,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
+              activeIcon: Icon(Icons.home_outlined),
               label: "Home",
             ),
             BottomNavigationBarItem(
@@ -42,10 +43,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
+              activeIcon: Icon(Icons.shopping_cart_outlined),
               label: "Cart",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
+              activeIcon: Icon(Icons.favorite_outlined),
               label: "Favorites",
             ),
           ],
