@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-import 'package:fuseapp/views/notifications.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -34,10 +33,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text('Notifications'),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Notification1()),
-                  );
+                  Navigator.pushReplacementNamed(
+                      context, Notification1ViewRoute);
                 }),
             Divider(
               color: LIGHT_GREY,
