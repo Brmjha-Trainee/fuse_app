@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
-import 'package:fuseapp/views/profile.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,8 +28,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Profile())));
+                    Navigator.pushReplacementNamed(context, ProfileViewRoute);
                   },
                   child: Text('Profile')),
               OutlinedButton(

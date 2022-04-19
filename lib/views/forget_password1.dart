@@ -1,6 +1,6 @@
 //UI rawabi, BE missing faizah
 import 'package:flutter/material.dart';
-import 'forget_password2.dart';
+import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -39,25 +39,19 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     SizedBox(
                       height: 28,
                     ),
-//done -fixme rawabi please use the text fields, and button in the theme "Take help from asmaa 
-                    inputText(
-                      label: 'Email',
-                      hintText: 'Enter your email'),
-                  
+//done -fixme rawabi please use the text fields, and button in the theme "Take help from asmaa
+                    inputText(label: 'Email', hintText: 'Enter your email'),
+
                     SizedBox(
                       height: 28,
                     ),
-                   darkBtn(
+                    darkBtn(
                         onPressed: () {
                           //todo faizah check db users the navigate to next page or show validation error
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const ResetPasswordPage2()),
-                          );
+                          Navigator.pushReplacementNamed(
+                              context, ForgetPass2ViewRoute);
                         },
-                        label:"Send"),
+                        label: "Send"),
                   ],
                 ),
               ),

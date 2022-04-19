@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
 import 'package:fuseapp/views/home.dart';
-import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/views/sign_options.dart';
-import 'package:fuseapp/views/sign_up3.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {

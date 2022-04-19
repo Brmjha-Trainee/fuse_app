@@ -82,10 +82,10 @@ class _SignUpPageState extends State<SignUpPage> {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
                                   //todo Faizah create the function to OTP leave it for the next week will work it togather
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => CreateAccount(number),
+                                      builder: (context) => CreateAccount(),
                                     ),
                                   );
                                 }

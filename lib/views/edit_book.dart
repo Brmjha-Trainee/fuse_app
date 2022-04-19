@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../theme/theme_constants.dart';
-class Edit_adressBook extends StatefulWidget {
+class EditAdressBook extends StatefulWidget {
   @override
- _Edit_adressBookState createState() => _Edit_adressBookState();
+ _EditAdressBookState createState() => _EditAdressBookState();
 }
-class _Edit_adressBookState extends State<Edit_adressBook> {
+class _EditAdressBookState extends State<EditAdressBook> {
   @override
   Widget build(BuildContext context) {
     return   Scaffold(

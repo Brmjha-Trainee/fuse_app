@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/views/address_book.dart';
 import 'package:fuseapp/views/contact_us.dart';
 import 'package:fuseapp/views/orders.dart';
@@ -9,39 +10,39 @@ import 'package:fuseapp/views/settings.dart';
 class ProfileList {
   final String label;
   final IconData icon;
-  final Widget screen;
-  ProfileList(this.label, this.icon,this.screen);
+  final String screen;
+  ProfileList(this.label, this.icon, this.screen);
 }
 
 List<ProfileList> profileList = [
   ProfileList(
     'Personal Information',
     Icons.person_outline_rounded,
-    PersonalInformation(),
+    PersonalInfoViewRoute,
   ),
   ProfileList(
     'Shipping Address',
     Icons.location_on_outlined,
-    AddressBook(),
+    AddressBookViewRoute,
   ),
   ProfileList(
     'Payment Method',
     Icons.credit_card_outlined,
-    Payment(),
+    PaymentViewRoute,
   ),
   ProfileList(
     'Orders',
     Icons.inventory_2_outlined,
-    Orders(),
+    OrdersViewRoute,
   ),
   ProfileList(
     'Settings',
     Icons.settings,
-    Settings(),
+    SettingsViewRoute,
   ),
   ProfileList(
     'Contact us',
     Icons.phone_enabled_outlined,
-    ContactUs(),
+    ContactUsViewRoute,
   ),
 ];

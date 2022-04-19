@@ -18,7 +18,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     const HomePage(),
     const Cart(),
     const Profile(),
-    const Favourite(),
+    const Favorite(),
   ];
 //todo rawabi insert icon for the unactive + change class name to root
   @override

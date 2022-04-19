@@ -1,9 +1,8 @@
 //UI Asmaa, BE Faizah
 import 'package:flutter/material.dart';
-import 'package:fuseapp/views/home.dart';
+import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-import 'package:fuseapp/views/sign_up1.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignOption extends StatelessWidget {
@@ -22,12 +21,7 @@ class SignOption extends StatelessWidget {
                 child: TextButton(
                   onPressed: () {
                     //Todo Haneen after doing the hone page this will navigate to there (Done)
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, HomeViewRoute);
                   },
                   child: Text(
                     'Skip',
@@ -63,12 +57,8 @@ class SignOption extends StatelessWidget {
                         darkBtn(
                           label: 'Sign Up with Email ID',
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignUpPage(),
-                              ),
-                            );
+                            Navigator.pushReplacementNamed(
+                                context, SignUp1ViewRoute);
                           },
                         ),
                         SizedBox(

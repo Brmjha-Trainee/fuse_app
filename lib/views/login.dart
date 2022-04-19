@@ -1,8 +1,8 @@
 //UI Asmaa, BE haneen
 import 'package:flutter/material.dart';
+import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/view_model/auth_services.dart';
-import 'package:fuseapp/views/forget_password1.dart';
 import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
@@ -82,11 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ResetPasswordPage(),
-                                  ));
+                              Navigator.pushReplacementNamed(
+                                  context, ForgetPass1ViewRoute);
                             },
                             child: Text(
                               'Forgot Password?',

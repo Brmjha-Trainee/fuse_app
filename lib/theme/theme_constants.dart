@@ -115,12 +115,7 @@ TextSpan linkText({label, required BuildContext context, pageName, fontSize}) {
     ),
     recognizer: TapGestureRecognizer()
       ..onTap = () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => pageName,
-          ),
-        );
+        Navigator.pushReplacementNamed(context, pageName);
       },
   );
 }
@@ -133,12 +128,7 @@ RichText richText({label_1, label_2, required BuildContext context, pageName}) {
         style: nonUnderlineText,
         recognizer: TapGestureRecognizer()
           ..onTap = () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => pageName,
-              ),
-            );
+            Navigator.pushReplacementNamed(context, pageName);
           },
       )
     ]),
