@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/favoriate.dart';
 import 'package:fuseapp/views/home.dart';
 import 'package:fuseapp/views/profile.dart';
 import '../views/cart.dart';
 import '../views/home.dart';
 
-class root extends StatefulWidget {
-  const root({Key? key}) : super(key: key);
+class Root extends StatefulWidget {
+  const Root({Key? key}) : super(key: key);
 
   @override
-  _BottomNavigationState createState() => _BottomNavigationState();
+  _RootState createState() => _RootState();
 }
 
-class _BottomNavigationState extends State<root> {
-    int currentIndex = 0;
+class _RootState extends State<Root> {
+  int currentIndex = 0;
   final screens = [
     const HomePage(),
-    const Cart(),
     const Profile(),
+    const Cart(),
     const Favorite(),
   ];
 //todo rawabi insert icon for the unactive + change class name to root
