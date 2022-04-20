@@ -48,14 +48,7 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text(
-          'Create Account',
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-      ),
+      appBar: myAppBar(context, title: 'Create Account'),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
