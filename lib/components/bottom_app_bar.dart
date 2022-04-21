@@ -50,8 +50,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
             ),
             BottomNavigationBarItem(
                 
-         icon: Icon(Icons.favorite_border_outlined, color: COLOR_PRIMARY,),
-            activeIcon: Icon(Icons.favorite, color: COLOR_PRIMARY,),
+         icon: Icon(Icons.favorite_border_outlined),
+            activeIcon: Icon(Icons.favorite),
               label: "Favorites",
             ),
           ],
