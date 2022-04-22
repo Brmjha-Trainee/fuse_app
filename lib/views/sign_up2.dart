@@ -16,7 +16,7 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   late Timer _timer;
   int _start = 60;
-
+//a timer method
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
@@ -67,6 +67,7 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(
                 height: 28,
               ),
+              //opt section
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(28),
