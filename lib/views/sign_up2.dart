@@ -7,7 +7,7 @@ import 'dart:async';
 
 class CreateAccount extends StatefulWidget {
   late final PhoneNumber number;
-  //  CreateAccount( PhoneNumber number ) { this.number = number ;}
+  CreateAccount( PhoneNumber number ) { this.number = number ;}
 
   @override
   _CreateAccountState createState() => _CreateAccountState();
