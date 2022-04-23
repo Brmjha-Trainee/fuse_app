@@ -14,6 +14,7 @@ class _AddAdressBookState extends State<AddAdressBook> {
       appBar: myAppBar(context, title: 'Shipping Address'),
       body: Container(
         padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+        // the form for the address
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
