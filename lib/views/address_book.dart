@@ -70,7 +70,7 @@ class _AddressBookState extends State<AddressBook> {
                     ),
                   )),
               SizedBox(height: 30),
-              darkBtn(label: 'Add Adress', onPressed: () {})
+              darkBtn(label: ' ⨁ Add Adress', onPressed: () {})
             ])));
   }
 }
