@@ -10,10 +10,8 @@ class _AddressBookState extends State<AddressBook> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //RAWABI Use the appbar in theme_constant.dart
-        appBar: AppBar(
-          title: Text('Shipping Adress'),
-        ),
+        //done-RAWABI Use the appbar in theme_constant.dart
+         appBar: myAppBar(context, title: 'Shipping Address'),
         body: Container(
             padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
             child: ListView(children: <Widget>[
