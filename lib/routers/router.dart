@@ -20,7 +20,8 @@ import 'package:fuseapp/views/sign_up2.dart';
 import 'package:fuseapp/views/sign_up3.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import '../views/forget_password1.dart';
-
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+PhoneNumber number = PhoneNumber();
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case WrapperRoute:
@@ -34,7 +35,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case SignUp1ViewRoute:
       return MaterialPageRoute(builder: (context) => SignUpPage());
     case SignUp2ViewRoute:
-      return MaterialPageRoute(builder: (context) => CreateAccount());
+      return MaterialPageRoute(builder: (context) => CreateAccount(number));
     case SignUp3ViewRoute:
       return MaterialPageRoute(builder: (context) => Signup3());
     case ForgetPass1ViewRoute:
