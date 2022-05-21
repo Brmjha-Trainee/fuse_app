@@ -12,10 +12,11 @@ class _AddressBookState extends State<AddressBook> {
     return Scaffold(
         //done-RAWABI Use the appbar in theme_constant.dart
          appBar: myAppBar(context, title: 'Shipping Address'),
-        body: Container(
-            padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-            child: ListView(children: <Widget>[
-              Card(
+        SizedBox(
+                  height: 90,
+                width:400,
+              child :Card(
+                semanticContainer: true,
                   elevation: 10,
                   shadowColor: Colors.black,
                   child: ListTile(
@@ -41,14 +42,20 @@ class _AddressBookState extends State<AddressBook> {
                             ))
                       ],
                     ),
-                  )),
+                  )),),
+                  SizedBox(
+                    height: 90,
+                width:400,
+                    child: 
               Card(
+                
+                //semanticContainer: true,
                   elevation: 10,
                   shadowColor: Colors.black,
                   child: ListTile(
                     title: Text('Daamm'),
                     leading: Icon(
-                      Icons.location_pin,
+                      Icons.location_pin ,
                       color: COLOR_PRIMARY,
                     ),
                     trailing: Column(
@@ -68,9 +75,9 @@ class _AddressBookState extends State<AddressBook> {
                             ))
                       ],
                     ),
-                  )),
+                  )),),
               SizedBox(height: 30),
-              darkBtn(label: ' ⨁ Add Adress', onPressed: () {})
+              darkBtn(label: ' Add Adress', onPressed: () {})
             ])));
   }
 }
