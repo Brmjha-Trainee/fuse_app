@@ -21,10 +21,9 @@ class _RootState extends State<Root> {
     const Cart(),
     const Favorite(),
   ];
-//done-todo rawabi insert icon for the unactive + change class name to root
+//todo rawabi insert icon for the unactive + change class name to root
   @override
   Widget build(BuildContext context) => Scaffold(
-        Widget build(BuildContext context) => Scaffold(
         body: IndexedStack(
           index: currentIndex,
           children: screens,
