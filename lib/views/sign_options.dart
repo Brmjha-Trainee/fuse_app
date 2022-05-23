@@ -78,7 +78,7 @@ class SignOption extends StatelessWidget {
                       context: context,
                       label_1: 'Already have an account',
                       label_2: ' Login',
-                      pageName: LoginScreen(),
+                      pageName: LoginViewRoute,
                     ),
                   ],
                 ),

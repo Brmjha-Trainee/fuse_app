@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fuseapp/providers/address_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../theme/theme_constants.dart';
 import '../utils/forms_validations.dart';
@@ -9,13 +11,21 @@ class AddAdressBook extends StatefulWidget {
 }
 
 class _AddAdressBookState extends State<AddAdressBook> {
-   TextEditingController _dateController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-   void initState() {
+
+  TextEditingController cityController = TextEditingController();
+  TextEditingController districtController = TextEditingController();
+  TextEditingController streetController = TextEditingController();
+  TextEditingController zipCodeController = TextEditingController();
+  TextEditingController linkController = TextEditingController();
+
+  void initState() {
     _dateController.text = ""; //set the initial value of text field
     super.initState();
   }
- // FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,45 +35,56 @@ class _AddAdressBookState extends State<AddAdressBook> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-             Form(
-              key: _formKey,
-              child: Column(
-                  children: <Widget>[
-                    inputText(
-                label: 'City',
-                controller: _dateController,
-        validation: (val) {
-          return validateRequiredField(_dateController.text);}
-              ),
-            
-           inputText(
-                label: 'District',
-               controller: _dateController,
-        validation: (val) {
-          return validateRequiredField(_dateController.text);}
-              ),
-            inputText(
-                label: 'Street',
-            controller: _dateController,
-        validation: (val) {
-          return validateRequiredField(_dateController.text);}
-              ),
-             inputText(
-                label: 'Zip Code',
-              ),
-            
-            inputText(
-                label: 'Link',
-             controller: _dateController,
-        validation: (val) {
-          return validateRequiredField(_dateController.text);}
-              ),
-                  ])),
-                   Row(
+            Form(
+                key: _formKey,
+                child: Column(children: <Widget>[
+                  inputText(
+                      label: 'City',
+                      controller: cityController,
+                      validation: (val) {
+                        return validateRequiredField(_dateController.text);
+                      }),
+                  inputText(
+                      label: 'District',
+                      controller: districtController,
+                      validation: (val) {
+                        return validateRequiredField(_dateController.text);
+                      }),
+                  inputText(
+                      label: 'Street',
+                      controller: streetController,
+                      validation: (val) {
+                        return validateRequiredField(_dateController.text);
+                      }),
+                  inputText(label: 'Zip Code', controller: zipCodeController),
+                  inputText(
+                      label: 'Link',
+                      controller: linkController,
+                      validation: (val) {
+                        return validateRequiredField(_dateController.text);
+                      }),
+                ])),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(onPressed: () {}, child: Text('Add')),
-                OutlinedButton(onPressed: () {}, child: Text('Cancel')),
+                ElevatedButton(
+                    onPressed: () {
+                      Provider.of<AddressProvider>(context, listen: false)
+                          .addAddress(
+                              context: context,
+                              city: cityController.text,
+                              street: streetController.text,
+                              zipCode: zipCodeController.text,
+                              link: linkController.text,
+                              district: districtController.text);
+                      print(cityController.text);
+                    },
+                    child: Text('Add')),
+                OutlinedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Cancel')),
               ],
             )
           ],
