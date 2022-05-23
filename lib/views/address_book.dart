@@ -12,7 +12,10 @@ class _AddressBookState extends State<AddressBook> {
     return Scaffold(
         //done-RAWABI Use the appbar in theme_constant.dart
          appBar: myAppBar(context, title: 'Shipping Address'),
-        SizedBox(
+        body: Container(
+            padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
+            child: ListView(children: <Widget>[
+              SizedBox(
                   height: 90,
                 width:400,
               child :Card(
