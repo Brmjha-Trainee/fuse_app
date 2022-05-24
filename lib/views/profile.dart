@@ -13,13 +13,13 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<PersonalInfo>(context, listen: false)
         .fetchPersonalInfo(context);
-    OurUser userData =
-        Provider.of<PersonalInfo>(context, listen: false).userData;
+    var obj = Provider.of<PersonalInfo>(context, listen: false);
+
     return Scaffold(
       appBar: myAppBar2(context, title: 'Profile'),
       body: Column(
         children: [
-          profile(context, userData), //Upper profile section
+          profile(context, obj.userData), //Upper profile section
           listTile(context), //profile list tile
         ],
       ),

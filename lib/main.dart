@@ -18,19 +18,19 @@ import 'providers/personal_info.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    // options: const FirebaseOptions(
-    //     appId: '1:353265714008:android:817d805da029d846ef1b2d',
-    //     apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-    //     messagingSenderId: '353265714008',
-    //     projectId: 'fuse-app-f9791'),
-    name: 'Secondary-app',
     options: const FirebaseOptions(
-      appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
-      apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-      iosBundleId: 'com.codegemz.uiControls',
-      messagingSenderId: '353265714008',
-      projectId: 'fuse-app-f9791',
-    ),
+        appId: '1:353265714008:android:817d805da029d846ef1b2d',
+        apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+        messagingSenderId: '353265714008',
+        projectId: 'fuse-app-f9791'),
+    // name: 'Secondary-app',
+    // options: const FirebaseOptions(
+    //   appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
+    //   apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+    //   iosBundleId: 'com.codegemz.uiControls',
+    //   messagingSenderId: '353265714008',
+    //   projectId: 'fuse-app-f9791',
+    // ),
   );
   runApp(const FuseApp());
 }
@@ -40,6 +40,7 @@ class FuseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ;
     return MultiProvider(
       providers: [
         Provider<AuthService>(
@@ -47,7 +48,7 @@ class FuseApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (_) => ToggleText()),
         ChangeNotifierProvider(create: (_) => AddressProvider()),
-        ChangeNotifierProvider(create: (_)=>PersonalInfo()),
+        ChangeNotifierProvider(create: (_) => PersonalInfo()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

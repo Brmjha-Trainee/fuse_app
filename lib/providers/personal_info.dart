@@ -18,10 +18,10 @@ class PersonalInfo with ChangeNotifier {
     try {
       var doc =
           await FirebaseFirestore.instance.collection('Users').doc(uid).get();
-      userData = OurUser(name: doc['name']);
-      notifyListeners();
 
-      Navigator.of(context).pop();
+      userData = OurUser(name: doc['name']);
+
+      notifyListeners();
     } catch (e) {
       SnackBar snackBar = const SnackBar(
           content: Text('Updating your Profile Failed!'),

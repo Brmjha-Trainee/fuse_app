@@ -3,6 +3,8 @@ import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/favoriate.dart';
 import 'package:fuseapp/views/home.dart';
 import 'package:fuseapp/views/profile.dart';
+import 'package:provider/provider.dart';
+import '../providers/personal_info.dart';
 import '../views/cart.dart';
 import '../views/home.dart';
 
@@ -23,39 +25,45 @@ class _RootState extends State<Root> {
   ];
 //todo rawabi insert icon for the unactive + change class name to root
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: IndexedStack(
-          index: currentIndex,
-          children: screens,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 10,
-          currentIndex: currentIndex,
-          onTap: (index) => setState(() => currentIndex = index),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined ),
-                 activeIcon: Icon(Icons.home ),
-           
-              label: "Home",
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: currentIndex,
+        children: screens,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 10,
+        currentIndex: currentIndex,
+        onTap: (index) => setState(() => currentIndex = index),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+            label: "Profile",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
+            activeIcon: Icon(Icons.shopping_cart),
+            label: "Cart",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite_border_outlined,
+              color: COLOR_PRIMARY,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person),
-              label: "Profile",
+            activeIcon: Icon(
+              Icons.favorite,
+              color: COLOR_PRIMARY,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined),
-              activeIcon: Icon(Icons.shopping_cart),
-              label: "Cart",
-            ),
-            BottomNavigationBarItem(
-                
-         icon: Icon(Icons.favorite_border_outlined, color: COLOR_PRIMARY,),
-            activeIcon: Icon(Icons.favorite, color: COLOR_PRIMARY,),
-              label: "Favorites",
-            ),
-          ],
-        ),
-      );
+            label: "Favorites",
+          ),
+        ],
+      ),
+    );
+  }
 }
