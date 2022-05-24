@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/view_model/user_vm.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/personal_info.dart';
 import '../view_model/profile_vm.dart';
 
 class Profile extends StatelessWidget {
@@ -8,11 +11,15 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<PersonalInfo>(context, listen: false)
+        .fetchPersonalInfo(context);
+    OurUser userData =
+        Provider.of<PersonalInfo>(context, listen: false).userData;
     return Scaffold(
       appBar: myAppBar2(context, title: 'Profile'),
       body: Column(
         children: [
-          profile(context), //Upper profile section
+          profile(context, userData), //Upper profile section
           listTile(context), //profile list tile
         ],
       ),
@@ -47,7 +54,7 @@ class Profile extends StatelessWidget {
           },
         ),
       );
-  Widget profile(BuildContext context) => Container(
+  Widget profile(BuildContext context, OurUser user) => Container(
         width: double.infinity,
         child: Column(
           children: <Widget>[
@@ -80,7 +87,7 @@ class Profile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Omar Ahmed",
+                            user.name ?? "",
                             style: h2,
                           ),
                           SizedBox(

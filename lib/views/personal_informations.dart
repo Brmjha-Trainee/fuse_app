@@ -44,7 +44,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context, title: 'Personnal Information'),
+      appBar: myAppBar(context, title: 'Personal Information'),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
@@ -131,7 +131,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   Widget nameField() {
     return inputText(
-      value: _cUser.email,
+      //  value: _cUser.email,
       label: 'Name',
       hintText: _cUser.email,
       keyboardType: TextInputType.name,
