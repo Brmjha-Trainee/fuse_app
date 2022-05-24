@@ -17,6 +17,7 @@ import 'package:fuseapp/views/profile.dart';
 import 'package:fuseapp/views/settings.dart';
 import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/views/sign_up1.dart';
+import 'package:fuseapp/views/sign_up2.dart';
 import 'package:fuseapp/views/sign_up3.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import '../views/forget_password1.dart';
