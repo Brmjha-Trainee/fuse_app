@@ -7,9 +7,7 @@ import 'dart:async';
 
 class CreateAccount extends StatefulWidget {
   late final PhoneNumber number;
-  CreateAccount(PhoneNumber number) {
-    this.number = number;
-  }
+  CreateAccount( PhoneNumber number ) { this.number = number ;}
 
   @override
   _CreateAccountState createState() => _CreateAccountState();
@@ -18,7 +16,7 @@ class CreateAccount extends StatefulWidget {
 class _CreateAccountState extends State<CreateAccount> {
   late Timer _timer;
   int _start = 60;
-
+//a timer method
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
@@ -50,14 +48,7 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text(
-          'Create Account',
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-      ),
+      appBar: myAppBar(context, title: 'Create Account'),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
@@ -76,6 +67,7 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(
                 height: 28,
               ),
+              //opt section
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(28),

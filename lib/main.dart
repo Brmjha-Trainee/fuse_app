@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/providers/address_provider.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
@@ -43,7 +44,8 @@ class FuseApp extends StatelessWidget {
         Provider<AuthService>(
           create: (_) => AuthService(),
         ),
-        ChangeNotifierProvider(create: (_) => ToggleText())
+        ChangeNotifierProvider(create: (_) => ToggleText()),
+        ChangeNotifierProvider(create: (_) => AddressProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

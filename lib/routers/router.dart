@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
 import 'package:fuseapp/views/add_book.dart';
+import 'package:fuseapp/views/address_book.dart';
 import 'package:fuseapp/views/contact_us.dart';
 import 'package:fuseapp/views/edit_book.dart';
 import 'package:fuseapp/views/forget_password2.dart';
@@ -19,7 +20,9 @@ import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/views/sign_up3.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import '../views/forget_password1.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
+PhoneNumber number = PhoneNumber();
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case WrapperRoute:
@@ -32,8 +35,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => LoginScreen());
     case SignUp1ViewRoute:
       return MaterialPageRoute(builder: (context) => SignUpPage());
-    // case SignUp2ViewRoute:
-    //   return MaterialPageRoute(builder: (context) => CreateAccount());
+    case SignUp2ViewRoute:
+      return MaterialPageRoute(builder: (context) => CreateAccount(number));
     case SignUp3ViewRoute:
       return MaterialPageRoute(builder: (context) => Signup3());
     case ForgetPass1ViewRoute:
@@ -45,7 +48,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case AddBookViewRoute:
       return MaterialPageRoute(builder: (context) => AddAdressBook());
     case AddressBookViewRoute:
-      return MaterialPageRoute(builder: (context) => AddAdressBook());
+      return MaterialPageRoute(builder: (context) => AddressBook());
     case EditBookViewRoute:
       return MaterialPageRoute(builder: (context) => EditAdressBook());
     case PaymentViewRoute:
