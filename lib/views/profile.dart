@@ -20,13 +20,13 @@ class Profile extends StatelessWidget {
       body: Column(
         children: [
           profile(context, obj.userData), //Upper profile section
-          listTile(context), //profile list tile
+          listTile(context, obj.userData), //profile list tile
         ],
       ),
     );
   }
 
-  Widget listTile(BuildContext context) => Container(
+  Widget listTile(BuildContext context, OurUser user) => Container(
         width: double.infinity,
         child: ListView.builder(
           shrinkWrap: true,
@@ -45,7 +45,8 @@ class Profile extends StatelessWidget {
                   ),
                   trailing: Icon(Icons.arrow_forward_ios_rounded),
                   onTap: () {
-                    Navigator.pushNamed(context, profileList[i].screen);
+                    Navigator.pushNamed(context, profileList[i].screen,
+                        arguments: user);
                   },
                 ),
                 Divider(),
