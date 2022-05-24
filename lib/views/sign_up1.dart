@@ -14,7 +14,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController phoneController = TextEditingController();
-  PhoneNumber number = PhoneNumber(isoCode: 'SA');
+  PhoneNumber? number = PhoneNumber(isoCode: 'SA');
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +82,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
                                   //todo Faizah create the function to OTP leave it for the next week will work it togather
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CreateAccount(),
-                                    ),
-                                  );
+                                  // Navigator.pushReplacementNamed(
+                                  //     context, SignUp2ViewRoute);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              CreateAccount(number!))));
                                 }
                               },
                             ),
@@ -141,9 +142,6 @@ class _SignUpPageState extends State<SignUpPage> {
           color: LIGHT_GREY,
         ),
       ),
-      onSaved: (PhoneNumber number) {
-        print('On Saved: $number');
-      },
     );
   }
 }

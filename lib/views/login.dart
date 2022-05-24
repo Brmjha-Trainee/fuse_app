@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
-import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:fuseapp/services/auth_services.dart';
 import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';

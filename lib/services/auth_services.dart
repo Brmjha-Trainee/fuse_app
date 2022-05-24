@@ -9,18 +9,18 @@ import 'package:fuseapp/components/snack_bar.dart';
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
 
-  User? _userfirebase(auth.User? user) {
+  OurUser? _userfirebase(auth.User? user) {
     if (user == null) {
       return null;
     }
-    return User(user.uid, user.email);
+    return OurUser();
   }
 
-  Stream<User?>? get user {
+  Stream<OurUser?>? get user {
     return _firebaseAuth.authStateChanges().map(_userfirebase);
   }
 
-  Future<User?> signInWithEmailAndPassword(
+  Future<OurUser?> signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
@@ -35,11 +35,13 @@ class AuthService {
     return null;
   }
 
-  Future<User?> createUserWithEmailAndPassword(
+  Future<OurUser?> createUserWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
       final credential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
+      //_user.uid = credential.user!.uid;
+      // _user.email = credential.user!.email;
       Navigator.pushReplacementNamed(context, LoginViewRoute);
 //fixme haneen write the code to save to DB (Done)
       return _userfirebase(credential.user);

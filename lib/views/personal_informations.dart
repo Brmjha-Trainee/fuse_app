@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
+import '../services/database.dart';
 import '../utils/forms_validations.dart';
+import '../view_model/user_vm.dart';
 
 class PersonalInformation extends StatefulWidget {
   const PersonalInformation({Key? key}) : super(key: key);
@@ -19,6 +22,24 @@ class _PersonalInformationState extends State<PersonalInformation> {
   TextEditingController _dateController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   PhoneNumber number = PhoneNumber(isoCode: 'SA');
+
+  OurUser _currentUser = OurUser();
+  OurUser _cUser = OurUser();
+
+  Future<void> currentUserInfo() async {
+    User? _firebaseUser = FirebaseAuth.instance.currentUser;
+    _currentUser = await OurDatabase().getuserInfo(_firebaseUser!.uid);
+
+    setState(() {
+      _cUser = _currentUser;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    currentUserInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +131,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   Widget nameField() {
     return inputText(
+      value: _cUser.email,
       label: 'Name',
-      hintText: 'Your name',
+      hintText: _cUser.email,
       keyboardType: TextInputType.name,
       controller: _nameController,
       validation: (val) {

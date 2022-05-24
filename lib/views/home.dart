@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
-import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:fuseapp/services/auth_services.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

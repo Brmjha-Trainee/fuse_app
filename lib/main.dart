@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
-import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:fuseapp/services/auth_services.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:fuseapp/routers/router.dart' as router;
@@ -16,19 +16,19 @@ import 'package:fuseapp/routers/router.dart' as router;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-        appId: '1:353265714008:android:817d805da029d846ef1b2d',
-        apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-        messagingSenderId: '353265714008',
-        projectId: 'fuse-app-f9791'),
-    // name: 'Secondary-app',
     // options: const FirebaseOptions(
-    //   appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
-    //   apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-    //   iosBundleId: 'com.codegemz.uiControls',
-    //   messagingSenderId: '353265714008',
-    //   projectId: 'fuse-app-f9791',
-    // ),
+    //     appId: '1:353265714008:android:817d805da029d846ef1b2d',
+    //     apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+    //     messagingSenderId: '353265714008',
+    //     projectId: 'fuse-app-f9791'),
+    name: 'Secondary-app',
+    options: const FirebaseOptions(
+      appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
+      apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+      iosBundleId: 'com.codegemz.uiControls',
+      messagingSenderId: '353265714008',
+      projectId: 'fuse-app-f9791',
+    ),
   );
   runApp(const FuseApp());
 }

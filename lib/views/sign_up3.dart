@@ -1,11 +1,12 @@
 //UI Asmaa, BE Haneen
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/components/snack_bar.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-import 'package:fuseapp/view_model/auth_services.dart';
+import 'package:fuseapp/services/auth_services.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -141,13 +142,14 @@ class _Signup3State extends State<Signup3> {
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                await authService
+                 await authService
                     .createUserWithEmailAndPassword(
                         _emailController.text, _passController.text, context)
                     .then((value) => FirebaseFirestore.instance
                             .collection('Users')
                             .doc(value?.uid)
                             .set({
+
                           "name": _nameController.text,
                           "email": _emailController.text.trim(),
                           "date": _dateController.text.trim(),

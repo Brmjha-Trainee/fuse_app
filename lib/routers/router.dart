@@ -16,7 +16,6 @@ import 'package:fuseapp/views/profile.dart';
 import 'package:fuseapp/views/settings.dart';
 import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/views/sign_up1.dart';
-import 'package:fuseapp/views/sign_up2.dart';
 import 'package:fuseapp/views/sign_up3.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import '../views/forget_password1.dart';
@@ -33,8 +32,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => LoginScreen());
     case SignUp1ViewRoute:
       return MaterialPageRoute(builder: (context) => SignUpPage());
-    case SignUp2ViewRoute:
-      return MaterialPageRoute(builder: (context) => CreateAccount());
+    // case SignUp2ViewRoute:
+    //   return MaterialPageRoute(builder: (context) => CreateAccount());
     case SignUp3ViewRoute:
       return MaterialPageRoute(builder: (context) => Signup3());
     case ForgetPass1ViewRoute:
