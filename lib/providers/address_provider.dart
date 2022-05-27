@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import '../view_model/address_book_vm.dart';
+import 'package:fuseapp/views/address_book.dart';
 class AddressProvider with ChangeNotifier {
   currentUserId() {
     return FirebaseAuth.instance.currentUser?.uid;
   }
 
-  //Update user profile in DB
+Adress1 ? useraddress ;
+  //Add a new user Address in DB
   Future<void> addAddress(
       {required BuildContext context,
       required String city,
@@ -35,7 +37,9 @@ class AddressProvider with ChangeNotifier {
           backgroundColor: Colors.red);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-//Display the user Address in DB
+  }
+  
+  //Display the user Address in DB
   Future<void> fetchAdress(BuildContext context) async {
 
 
@@ -88,5 +92,4 @@ await FirebaseFirestore.instance.collection('User_Address').doc(uid).update({
 }
  
 }
-
 
