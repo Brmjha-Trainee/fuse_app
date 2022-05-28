@@ -11,16 +11,16 @@ class PersonalInfo with ChangeNotifier {
   OurUser userData = OurUser();
   //Update user profile in DB
   Future<void> fetchPersonalInfo(BuildContext context) async {
-    //  SharedPreferences pref = await SharedPreferences.getInstance();
-    // String? uid = pref.getString('uid');
-
     String? uid = currentUserId();
     try {
       var doc =
           await FirebaseFirestore.instance.collection('Users').doc(uid).get();
-
-      userData = OurUser(name: doc['name']);
-
+      userData = OurUser(
+        name: doc['name'],
+        phoneNum: doc['phone_number'],
+        avatarURL: doc['avatar'],
+        email: doc['email'],
+      );
       notifyListeners();
     } catch (e) {
       SnackBar snackBar = const SnackBar(

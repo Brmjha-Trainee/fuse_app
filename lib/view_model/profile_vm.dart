@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
-import 'package:fuseapp/views/address_book.dart';
-import 'package:fuseapp/views/contact_us.dart';
-import 'package:fuseapp/views/orders.dart';
-import 'package:fuseapp/views/payment.dart';
-import 'package:fuseapp/views/personal_informations.dart';
-import 'package:fuseapp/views/settings.dart';
 
 class ProfileList {
   final String label;

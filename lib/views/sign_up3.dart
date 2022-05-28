@@ -1,6 +1,5 @@
 //UI Asmaa, BE Haneen
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/components/snack_bar.dart';
 import 'package:fuseapp/utils/forms_validations.dart';

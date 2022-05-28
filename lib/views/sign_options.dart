@@ -1,7 +1,6 @@
 //UI Asmaa, BE Faizah
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
-import 'package:fuseapp/views/login.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 

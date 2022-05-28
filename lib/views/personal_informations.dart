@@ -1,10 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/providers/personal_info.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
-import '../services/database.dart';
+import 'package:provider/provider.dart';
+import '../services/storage_service.dart';
 import '../utils/forms_validations.dart';
 import '../view_model/user_vm.dart';
 
@@ -22,27 +24,34 @@ class _PersonalInformationState extends State<PersonalInformation> {
   TextEditingController _dateController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   PhoneNumber number = PhoneNumber(isoCode: 'SA');
-
-  OurUser _currentUser = OurUser();
-  OurUser _cUser = OurUser();
-
-  Future<void> currentUserInfo() async {
-    User? _firebaseUser = FirebaseAuth.instance.currentUser;
-    _currentUser = await OurDatabase().getuserInfo(_firebaseUser!.uid);
-
-    setState(() {
-      _cUser = _currentUser;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    currentUserInfo();
-  }
+  final Storage storage = Storage();
 
   @override
   Widget build(BuildContext context) {
+    final profileData = ModalRoute.of(context)!.settings.arguments as Map;
+    print('this is the user data ${profileData['test']}');
+    PersonalInfo info = PersonalInfo();
+    Provider.of<PersonalInfo>(context, listen: false)
+        .fetchPersonalInfo(context);
+    var obj = Provider.of<PersonalInfo>(context, listen: false);
+
+    Future<void> updateUser() {
+      String uid = info.currentUserId();
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('Users');
+      return users
+          .doc(uid)
+          .update({
+            'name': _nameController.text,
+            'email': _emailController.text,
+            'phone_number': _phoneController.text,
+            'date': _dateController.text,
+          })
+          .then((value) => print("Personal information Updated"))
+          .catchError(
+              (error) => print("Failed to update Personal information $error"));
+    }
+
     return Scaffold(
       appBar: myAppBar(context, title: 'Personal Information'),
       body: Container(
@@ -51,30 +60,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
         width: double.infinity,
         child: Column(
           children: [
-            Center(
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/img/avatar.png',
-                    width: 100.0,
-                    height: 100.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.edit,
-                        color: COLOR_PRIMARY,
-                      ),
-                      Text(
-                        'Edit',
-                        style: h4,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            profileImage(obj.userData),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Column(
@@ -83,8 +69,25 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          nameField(),
-                          emailField(),
+                          inputText(
+                            // initialValue: profileData.name,
+                            label: 'Name',
+                            keyboardType: TextInputType.name,
+                            controller: _nameController,
+                            validation: (val) {
+                              return validateName(_nameController.text);
+                            },
+                          ),
+                          inputText(
+                            // initialValue: profileData.email,
+                            label: 'Email',
+                            controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            validation: (val) {
+                              return validateEmail(
+                                  _emailController.text.trim());
+                            },
+                          ),
                           phoneField(),
                           birthField(),
                           Padding(
@@ -93,14 +96,21 @@ class _PersonalInformationState extends State<PersonalInformation> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      updateUser();
+                                    }
+                                  },
                                   child: Text('Save'),
                                 ),
                                 SizedBox(
                                   width: 5,
                                 ),
                                 OutlinedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _formKey.currentState?.reset();
+                                  },
                                   child: Text('Cancel'),
                                 )
                               ],
@@ -129,16 +139,61 @@ class _PersonalInformationState extends State<PersonalInformation> {
     );
   }
 
-  Widget nameField() {
-    return inputText(
-      //  value: _cUser.email,
-      label: 'Name',
-      hintText: _cUser.email,
-      keyboardType: TextInputType.name,
-      controller: _nameController,
-      validation: (val) {
-        return validateName(_nameController.text);
-      },
+  Widget profileImage(OurUser user) {
+    return Center(
+      child: Column(
+        children: [
+          ClipOval(
+            child: SizedBox.fromSize(
+              size: Size.fromRadius(50),
+              child: Image.network(
+                user.avatarURL ?? "",
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(child: CircularProgressIndicator());
+                },
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton.icon(
+                icon: Icon(
+                  Icons.edit,
+                ),
+                label: Text(
+                  'Edit',
+                  style: h4,
+                ),
+                onPressed: () async {
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles(
+                    allowMultiple: false,
+                    type: FileType.custom,
+                    allowedExtensions: ['png', 'jpeg', 'jpg', 'PNG'],
+                  );
+                  if (result != null) {
+                    final path = result.files.single.path!;
+                    final fileName = result.files.single.name;
+                    storage
+                        .uploadFile(path, fileName)
+                        .then((value) => print('done'));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('No file Selected'),
+                      ),
+                    );
+                    return null;
+                  }
+                },
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 

@@ -146,7 +146,7 @@ Widget inputText({
   keyboardType,
   onChanged,
   readOnly = false,
-  value,
+  initialValue,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +159,7 @@ Widget inputText({
         height: 5,
       ),
       TextFormField(
-        initialValue: value,
+        initialValue: initialValue,
         readOnly: readOnly,
         controller: controller,
         validator: validation,
@@ -210,7 +210,7 @@ Widget textAreaInput({
         keyboardType: TextInputType.multiline,
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          contentPadding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide(

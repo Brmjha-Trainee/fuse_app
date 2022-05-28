@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../theme/theme_constants.dart';
 import '../utils/forms_validations.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ContactUs extends StatefulWidget {
   const ContactUs({Key? key}) : super(key: key);
@@ -14,6 +16,43 @@ class _ContactUsState extends State<ContactUs> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
+  Future sendEmail() async {
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    const serviceId = 'service_cbryeek';
+    const templateId = 'template_6txkti4';
+    const userId = 'k_Gqs95QVm42nCC0t';
+    final response = await http.post(url,
+        headers: {
+          'origin': 'http//localhost',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'service_id': serviceId,
+          'template_id': templateId,
+          'user_id': userId,
+          'template_params': {
+            'user_email': _emailController.text,
+            'subject': _subjectController.text,
+            'message': _messageController.text,
+          }
+        }));
+    if (response.body == 'OK') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('email sent successfully!'),
+          backgroundColor: GREEN,
+        ),
+      );
+      return response.statusCode;
+    } else {
+      return ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to send email'),
+          backgroundColor: RED,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +78,7 @@ class _ContactUsState extends State<ContactUs> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState?.save();
+                          sendEmail();
                         }
                       },
                       child: Text('Save'),
@@ -47,7 +87,9 @@ class _ContactUsState extends State<ContactUs> {
                       width: 5,
                     ),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _formKey.currentState?.reset();
+                      },
                       child: Text('Cancel'),
                     )
                   ],

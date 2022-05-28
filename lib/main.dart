@@ -18,11 +18,20 @@ import 'providers/personal_info.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-        appId: '1:353265714008:android:817d805da029d846ef1b2d',
-        apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-        messagingSenderId: '353265714008',
-        projectId: 'fuse-app-f9791'),
+      options: const FirebaseOptions(
+    apiKey: "AIzaSyDscrmz1MqwXrLCNbD4yO4_61P-b16w4bk",
+    authDomain: "fuse-app-f9791.firebaseapp.com",
+    projectId: "fuse-app-f9791",
+    storageBucket: "fuse-app-f9791.appspot.com",
+    messagingSenderId: "353265714008",
+    appId: "1:353265714008:web:f8473d1e94b678adef1b2d",
+
+    // options: const FirebaseOptions(
+    //     appId: '1:353265714008:android:817d805da029d846ef1b2d',
+    //     apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+    //     messagingSenderId: '353265714008',
+    //     projectId: 'fuse-app-f9791'),
+
     // name: 'Secondary-app',
     // options: const FirebaseOptions(
     //   appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
@@ -31,7 +40,7 @@ Future<void> main() async {
     //   messagingSenderId: '353265714008',
     //   projectId: 'fuse-app-f9791',
     // ),
-  );
+  ));
   runApp(const FuseApp());
 }
 
@@ -40,7 +49,6 @@ class FuseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ;
     return MultiProvider(
       providers: [
         Provider<AuthService>(

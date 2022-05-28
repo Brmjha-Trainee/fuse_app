@@ -3,8 +3,6 @@ import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/favoriate.dart';
 import 'package:fuseapp/views/home.dart';
 import 'package:fuseapp/views/profile.dart';
-import 'package:provider/provider.dart';
-import '../providers/personal_info.dart';
 import '../views/cart.dart';
 import '../views/home.dart';
 
