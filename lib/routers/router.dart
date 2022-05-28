@@ -21,8 +21,9 @@ import 'package:fuseapp/views/sign_up2.dart';
 import 'package:fuseapp/views/sign_up3.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import '../views/forget_password1.dart';
+import 'package:fuseapp/view_model/address_book_vm.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
+Adress1 f =Adress1();
 PhoneNumber number = PhoneNumber();
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -51,7 +52,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case AddressBookViewRoute:
       return MaterialPageRoute(builder: (context) => AddressBook());
     case EditBookViewRoute:
-      return MaterialPageRoute(builder: (context) => EditAdressBook());
+      return MaterialPageRoute(builder: (context) => EditAdressBook(f));
     case PaymentViewRoute:
       return MaterialPageRoute(builder: (context) => Payment());
     case OrdersViewRoute:
