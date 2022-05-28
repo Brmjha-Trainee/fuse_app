@@ -87,6 +87,8 @@ await FirebaseFirestore.instance.collection('User_Address').doc(uid).update({
   Future<void> deleteAddress(BuildContext context) async {
     String? uid = currentUserId();
  await FirebaseFirestore.instance.collection('User_Address').doc(uid).delete(); 
+useraddress = null;
+notifyListeners();
  Navigator.of(context).pop();
 
 }
