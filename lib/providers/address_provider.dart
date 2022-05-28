@@ -75,6 +75,7 @@ await FirebaseFirestore.instance.collection('User_Address').doc(uid).update({
         'Zip Code': zipCode,
         'Link': link
       });
+      Navigator.of(context).pop();
     } catch (e) {
       
    SnackBar snackBar = const SnackBar(
