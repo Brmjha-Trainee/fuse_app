@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+
+import '../translations/locale_keys.g.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -10,15 +13,15 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: myAppBar(context, title: 'Settings'),
+        appBar: myAppBar(context, title: LocaleKeys.edit.tr()),
         body: ListView(
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.language_outlined, color: COLOR_PRIMARY),
-              title: Text('Languages'),
+              title: Text(LocaleKeys.languages.tr()),
               trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
-                Navigator.pushReplacementNamed(context, LanguageViewRoute);
+                Navigator.pushNamed(context, LanguageViewRoute);
               },
             ),
             Divider(
@@ -28,11 +31,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
                 leading:
                     Icon(Icons.notifications_outlined, color: COLOR_PRIMARY),
-                title: Text('Notifications'),
+                title: Text(LocaleKeys.notifications.tr()),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
-                  Navigator.pushReplacementNamed(
-                      context, Notification1ViewRoute);
+                  Navigator.pushNamed(context, Notification1ViewRoute);
                 }),
             Divider(
               color: LIGHT_GREY,
@@ -40,10 +42,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             ListTile(
                 leading: Icon(Icons.lock_outline, color: COLOR_PRIMARY),
-                title: Text('Reset password'),
+                title: Text(LocaleKeys.reset_password.tr()),
                 trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, ForgetPass1ViewRoute);
+                  Navigator.pushNamed(context, ForgetPass1ViewRoute);
                 }),
             Divider(
               color: LIGHT_GREY,
@@ -55,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Icons.logout_outlined,
                   color: COLOR_PRIMARY,
                 ),
-                title: Text('Log out', style: TextStyle(color: RED)),
+                title: Text(LocaleKeys.logout.tr(), style: TextStyle(color: RED)),
                 onTap: () {
                   Navigator.pushReplacementNamed(context, SignOptionViewRoute);
                 }),

@@ -78,6 +78,13 @@ String? validateEmail(dynamic value) {
   }
 }
 
+String? validateDropDown(dynamic value) {
+  if (value == null) {
+    return 'Please select language.';
+  }
+  return null;
+}
+
 enum CardType {
   MasterCard,
   Visa,

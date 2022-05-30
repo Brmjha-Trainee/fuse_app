@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/address_provider.dart';
@@ -6,6 +7,7 @@ import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
 import 'package:fuseapp/services/auth_services.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/translations/codegen_loader.g.dart';
 import 'package:provider/provider.dart';
 import 'package:fuseapp/routers/router.dart' as router;
 import 'providers/personal_info.dart';
@@ -17,14 +19,15 @@ import 'providers/personal_info.dart';
 //COMMENTS TODO: Fiazah issue in google sign in and redirect,forget password function, otp" Will postpone this"
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: "AIzaSyDscrmz1MqwXrLCNbD4yO4_61P-b16w4bk",
-    authDomain: "fuse-app-f9791.firebaseapp.com",
-    projectId: "fuse-app-f9791",
-    storageBucket: "fuse-app-f9791.appspot.com",
-    messagingSenderId: "353265714008",
-    appId: "1:353265714008:web:f8473d1e94b678adef1b2d",
+    //   options: const FirebaseOptions(
+    // apiKey: "AIzaSyDscrmz1MqwXrLCNbD4yO4_61P-b16w4bk",
+    // authDomain: "fuse-app-f9791.firebaseapp.com",
+    // projectId: "fuse-app-f9791",
+    // storageBucket: "fuse-app-f9791.appspot.com",
+    // messagingSenderId: "353265714008",
+    // appId: "1:353265714008:web:f8473d1e94b678adef1b2d",
 
     // options: const FirebaseOptions(
     //     appId: '1:353265714008:android:817d805da029d846ef1b2d',
@@ -32,16 +35,27 @@ Future<void> main() async {
     //     messagingSenderId: '353265714008',
     //     projectId: 'fuse-app-f9791'),
 
-    // name: 'Secondary-app',
-    // options: const FirebaseOptions(
-    //   appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
-    //   apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-    //   iosBundleId: 'com.codegemz.uiControls',
-    //   messagingSenderId: '353265714008',
-    //   projectId: 'fuse-app-f9791',
-    // ),
-  ));
-  runApp(const FuseApp());
+    name: 'Secondary-app',
+    options: const FirebaseOptions(
+      appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
+      apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+      iosBundleId: 'com.codegemz.uiControls',
+      messagingSenderId: '353265714008',
+      projectId: 'fuse-app-f9791',
+    ),
+  );
+  runApp(
+    EasyLocalization(
+      path: 'assets/translations',
+      supportedLocales: [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      fallbackLocale: Locale('en'),
+      assetLoader: CodegenLoader(),
+      child: const FuseApp(),
+    ),
+  );
 }
 
 class FuseApp extends StatelessWidget {
@@ -59,6 +73,9 @@ class FuseApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PersonalInfo()),
       ],
       child: MaterialApp(
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
+        locale: context.locale,
         debugShowCheckedModeBanner: false,
         theme: appTheme,
         initialRoute: WrapperRoute,

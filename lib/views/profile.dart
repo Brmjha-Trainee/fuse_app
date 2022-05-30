@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/services/storage_service.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/translations/locale_keys.g.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
 import 'package:provider/provider.dart';
 import '../providers/personal_info.dart';
@@ -17,7 +19,7 @@ class Profile extends StatelessWidget {
     var obj = Provider.of<PersonalInfo>(context, listen: true);
     final Storage storage = Storage();
     return Scaffold(
-      appBar: myAppBar2(context, title: 'Profile'),
+      appBar: myAppBar2(context, title: LocaleKeys.profile.tr()),
       body: Column(
         children: [
           profile(context, obj.userData, storage), //Upper profile section
@@ -94,19 +96,33 @@ class Profile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     GestureDetector(
-                      child: ClipOval(
-                        child: SizedBox.fromSize(
-                          size: Size.fromRadius(50),
-                          child: Image.network(
-                            user.avatarURL ?? "",
-                            fit: BoxFit.cover,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(child: CircularProgressIndicator());
-                            },
-                          ),
-                        ),
-                      ),
+                      child: (user.avatarURL == null)
+                          ? ClipOval(
+                              child: SizedBox.fromSize(
+                                size: Size.fromRadius(50),
+                                child: ClipOval(
+                                  child: SizedBox.fromSize(
+                                    size: Size.fromRadius(50),
+                                    child: Image.asset('assets/img/avatar.png'),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : ClipOval(
+                              child: SizedBox.fromSize(
+                                size: Size.fromRadius(50),
+                                child: Image.network(
+                                  user.avatarURL ?? "",
+                                  fit: BoxFit.cover,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                        child: CircularProgressIndicator());
+                                  },
+                                ),
+                              ),
+                            ),
                       onTap: () async {
                         FilePickerResult? result =
                             await FilePicker.platform.pickFiles(

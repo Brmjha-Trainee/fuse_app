@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/personal_info.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/translations/locale_keys.g.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
@@ -28,8 +30,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   @override
   Widget build(BuildContext context) {
-    final profileData = ModalRoute.of(context)!.settings.arguments as Map;
-    print('this is the user data ${profileData['test']}');
+    // final profileData = ModalRoute.of(context)!.settings.arguments as Map;
+    // print('this is the user data ${profileData['test']}');
     PersonalInfo info = PersonalInfo();
     Provider.of<PersonalInfo>(context, listen: false)
         .fetchPersonalInfo(context);
@@ -53,7 +55,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
     }
 
     return Scaffold(
-      appBar: myAppBar(context, title: 'Personal Information'),
+      appBar: myAppBar(context, title: LocaleKeys.personal_information.tr()),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
@@ -71,7 +73,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                         children: [
                           inputText(
                             // initialValue: profileData.name,
-                            label: 'Name',
+                            label: LocaleKeys.name.tr(),
                             keyboardType: TextInputType.name,
                             controller: _nameController,
                             validation: (val) {
@@ -80,7 +82,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                           ),
                           inputText(
                             // initialValue: profileData.email,
-                            label: 'Email',
+                            label: LocaleKeys.email.tr(),
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
                             validation: (val) {
@@ -102,7 +104,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                                       updateUser();
                                     }
                                   },
-                                  child: Text('Save'),
+                                  child: Text(LocaleKeys.save.tr()),
                                 ),
                                 SizedBox(
                                   width: 5,
@@ -111,7 +113,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                                   onPressed: () {
                                     _formKey.currentState?.reset();
                                   },
-                                  child: Text('Cancel'),
+                                  child: Text(LocaleKeys.cancel.tr()),
                                 )
                               ],
                             ),
@@ -127,35 +129,35 @@ class _PersonalInformationState extends State<PersonalInformation> {
     );
   }
 
-  Widget emailField() {
-    return inputText(
-      label: 'Email',
-      hintText: 'example@gmail.com',
-      controller: _emailController,
-      keyboardType: TextInputType.emailAddress,
-      validation: (val) {
-        return validateEmail(_emailController.text.trim());
-      },
-    );
-  }
-
   Widget profileImage(OurUser user) {
     return Center(
       child: Column(
         children: [
-          ClipOval(
-            child: SizedBox.fromSize(
-              size: Size.fromRadius(50),
-              child: Image.network(
-                user.avatarURL ?? "",
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(child: CircularProgressIndicator());
-                },
-              ),
-            ),
-          ),
+          (user.avatarURL == null)
+              ? ClipOval(
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(50),
+                    child: ClipOval(
+                      child: SizedBox.fromSize(
+                        size: Size.fromRadius(50),
+                        child: Image.asset('assets/img/avatar.png'),
+                      ),
+                    ),
+                  ),
+                )
+              : ClipOval(
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(50),
+                    child: Image.network(
+                      user.avatarURL ?? "",
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    ),
+                  ),
+                ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -164,7 +166,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                   Icons.edit,
                 ),
                 label: Text(
-                  'Edit',
+                  LocaleKeys.edit.tr(),
                   style: h4,
                 ),
                 onPressed: () async {
@@ -202,7 +204,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Phone Number',
+          LocaleKeys.phone_number.tr(),
           style: h3,
         ),
         SizedBox(
@@ -276,7 +278,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   Widget birthField() {
     return inputText(
-        label: 'Date of Birth',
+        label: LocaleKeys.date_of_birth.tr(),
         hintText: '22-04-2010',
         keyboardType: TextInputType.datetime,
         readOnly: true,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
+import 'package:fuseapp/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfileList {
   final String label;
@@ -10,32 +12,32 @@ class ProfileList {
 
 List<ProfileList> profileList = [
   ProfileList(
-    'Personal Information',
+    LocaleKeys.personal_information.tr(),
     Icons.person_outline_rounded,
     PersonalInfoViewRoute,
   ),
   ProfileList(
-    'Shipping Address',
+    LocaleKeys.shipping_address.tr(),
     Icons.location_on_outlined,
     AddressBookViewRoute,
   ),
   ProfileList(
-    'Payment Method',
+    LocaleKeys.payment_method.tr(),
     Icons.credit_card_outlined,
     PaymentViewRoute,
   ),
   ProfileList(
-    'Orders',
+    LocaleKeys.orders.tr(),
     Icons.inventory_2_outlined,
     OrdersViewRoute,
   ),
   ProfileList(
-    'Settings',
+    LocaleKeys.settings.tr(),
     Icons.settings,
     SettingsViewRoute,
   ),
   ProfileList(
-    'Contact us',
+    LocaleKeys.contact_us.tr(),
     Icons.phone_enabled_outlined,
     ContactUsViewRoute,
   ),

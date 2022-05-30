@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../providers/address_provider.dart';
 
 import '../routers/routing_constants.dart';
+import '../translations/locale_keys.g.dart';
 
 class AddressBook extends StatefulWidget {
   @override
@@ -26,7 +28,7 @@ class _AddressBookState extends State<AddressBook> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         //done-RAWABI Use the appbar in theme_constant.dart
-        appBar: myAppBar(context, title: 'Shipping Address'),
+        appBar: myAppBar(context, title: LocaleKeys.shipping_address.tr()),
         body: Container(
             padding: const EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
            child: obj.useraddress != null ? widget1(obj.useraddress ) :widget2()
@@ -86,12 +88,12 @@ class _AddressBookState extends State<AddressBook> {
       height: 50,
     ),
     Text(
-      'No Address',
+      LocaleKeys.no_Address.tr(),
       style: h1,
     ),
     SizedBox(height: 30),
      darkBtn(
-                  label: ' Add Adress',
+                  label: LocaleKeys.add_address.tr(),
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, AddBookViewRoute);
                   })

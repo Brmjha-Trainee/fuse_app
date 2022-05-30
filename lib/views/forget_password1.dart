@@ -1,7 +1,9 @@
 //UI rawabi, BE missing faizah
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:fuseapp/translations/locale_keys.g.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({
@@ -16,7 +18,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: myAppBar(context, title: 'Reset Password'),
+        appBar: myAppBar(context, title: LocaleKeys.reset_password.tr()),
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -25,7 +27,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Enter your e-mail adress and we’ll send you a link to reset your password ',
+                      LocaleKeys.forget_pass_1_paragragh.tr(),
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     // the size is for adding spaces
@@ -33,7 +35,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       height: 28,
                     ),
 //done -fixme rawabi please use the text fields, and button in the theme "Take help from asmaa
-                    inputText(label: 'Email', hintText: 'Enter your email'),
+                    inputText(
+                        label: LocaleKeys.email.tr(),
+                        hintText: LocaleKeys.email_hint_text),
 
                     SizedBox(
                       height: 28,
@@ -44,7 +48,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           Navigator.pushReplacementNamed(
                               context, ForgetPass2ViewRoute);
                         },
-                        label: "Send"),
+                        label: LocaleKeys.send.tr()),
                   ],
                 ),
               ),

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../theme/theme_constants.dart';
+import '../translations/locale_keys.g.dart';
 import '../utils/forms_validations.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -57,7 +59,7 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(context, title: 'Contact Us'),
+      appBar: myAppBar(context, title: LocaleKeys.contact_us.tr()),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
         height: MediaQuery.of(context).size.height,
@@ -81,7 +83,7 @@ class _ContactUsState extends State<ContactUs> {
                           sendEmail();
                         }
                       },
-                      child: Text('Save'),
+                      child: Text(LocaleKeys.save.tr()),
                     ),
                     SizedBox(
                       width: 5,
@@ -90,7 +92,7 @@ class _ContactUsState extends State<ContactUs> {
                       onPressed: () {
                         _formKey.currentState?.reset();
                       },
-                      child: Text('Cancel'),
+                      child: Text(LocaleKeys.cancel.tr()),
                     )
                   ],
                 ),
@@ -129,8 +131,8 @@ class _ContactUsState extends State<ContactUs> {
 
   Widget emailField() {
     return inputText(
-        label: 'Email',
-        hintText: 'Enter your Email',
+        label: LocaleKeys.email.tr(),
+        hintText: LocaleKeys.email_hint_text.tr(),
         keyboardType: TextInputType.emailAddress,
         controller: _emailController,
         validation: (val) {
@@ -170,7 +172,7 @@ class _ContactUsState extends State<ContactUs> {
               )),
         ),
         Text(
-          "OR",
+         LocaleKeys.or.tr(),
           style: h7,
         ),
         Expanded(
