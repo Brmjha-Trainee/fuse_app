@@ -1,6 +1,11 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/theme/pallete.dart';
+
+import '../translations/locale_keys.g.dart';
+import '../utils/forms_validations.dart';
 
 const COLOR_PRIMARY = Color(0xFF9E457E);
 const BLACK = Color(0xFF414141);
@@ -223,6 +228,96 @@ Widget textAreaInput({
         height: 10,
       )
     ],
+  );
+}
+
+Widget dropDowninput({
+  required BuildContext context,
+  value,
+  List<String>? languageItems,
+  formKey,
+}) {
+  return Form(
+    key: formKey,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          LocaleKeys.language.tr(),
+          style: h3,
+        ),
+        SizedBox(height: 5),
+        DropdownButtonFormField2(
+          decoration: InputDecoration(
+            //Add isDense true and zero Padding.
+            //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+            isDense: true,
+            contentPadding: EdgeInsets.zero,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(
+                color: BLUISH_GRERY,
+              ),
+            ),
+            //Add more decoration as you want here
+            //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
+          ),
+          isExpanded: true,
+          value: value,
+          icon: const Icon(
+            Icons.keyboard_arrow_down_outlined,
+            color: Colors.black45,
+          ),
+          iconSize: 30,
+          buttonHeight: 60,
+          buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+          items: languageItems!
+              .map((item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(item, style: h4),
+                  ))
+              .toList(),
+          validator: (value) {
+            validateDropDown(value);
+            return null;
+          },
+          onChanged: (value) {
+            value = value.toString();
+          },
+          onSaved: (value) {
+            value = value.toString();
+          },
+        ),
+        const SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                if (formKey.currentState!.validate()) {
+                  formKey.currentState?.save();
+                  if (value == 'English') {
+                    await context.setLocale(Locale('en'));
+                  } else {
+                    await context.setLocale(Locale('ar'));
+                  }
+                }
+              },
+              child: Text(LocaleKeys.save.tr()),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            OutlinedButton(
+              onPressed: () {
+                formKey.currentState?.reset();
+              },
+              child: Text(LocaleKeys.cancel.tr()),
+            )
+          ],
+        ),
+      ],
+    ),
   );
 }
 
