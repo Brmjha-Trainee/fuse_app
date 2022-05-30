@@ -75,6 +75,7 @@ await FirebaseFirestore.instance.collection('User_Address').doc(uid).update({
         'Zip Code': zipCode,
         'Link': link
       });
+      Navigator.of(context).pop();
     } catch (e) {
       
    SnackBar snackBar = const SnackBar(
@@ -87,6 +88,8 @@ await FirebaseFirestore.instance.collection('User_Address').doc(uid).update({
   Future<void> deleteAddress(BuildContext context) async {
     String? uid = currentUserId();
  await FirebaseFirestore.instance.collection('User_Address').doc(uid).delete(); 
+useraddress = null;
+notifyListeners();
  Navigator.of(context).pop();
 
 }
