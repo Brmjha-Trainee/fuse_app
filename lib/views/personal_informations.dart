@@ -13,7 +13,8 @@ import '../utils/forms_validations.dart';
 import '../view_model/user_vm.dart';
 
 class PersonalInformation extends StatefulWidget {
-  const PersonalInformation({Key? key}) : super(key: key);
+  final OurUser? argument;
+  const PersonalInformation({Key? key, this.argument}) : super(key: key);
 
   @override
   State<PersonalInformation> createState() => _PersonalInformationState();
@@ -30,29 +31,16 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   @override
   Widget build(BuildContext context) {
-    // final profileData = ModalRoute.of(context)!.settings.arguments as Map;
+
+    print('DATA ${widget.argument?.email}');
+
+
     // print('this is the user data ${profileData['test']}');
     PersonalInfo info = PersonalInfo();
     Provider.of<PersonalInfo>(context, listen: false)
         .fetchPersonalInfo(context);
     var obj = Provider.of<PersonalInfo>(context, listen: false);
 
-    Future<void> updateUser() {
-      String uid = info.currentUserId();
-      CollectionReference users =
-          FirebaseFirestore.instance.collection('Users');
-      return users
-          .doc(uid)
-          .update({
-            'name': _nameController.text,
-            'email': _emailController.text,
-            'phone_number': _phoneController.text,
-            'date': _dateController.text,
-          })
-          .then((value) => print("Personal information Updated"))
-          .catchError(
-              (error) => print("Failed to update Personal information $error"));
-    }
 
     return Scaffold(
       appBar: myAppBar(context, title: LocaleKeys.personal_information.tr()),
@@ -101,7 +89,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       _formKey.currentState!.save();
-                                      updateUser();
+                                      // updateUser();
                                     }
                                   },
                                   child: Text(LocaleKeys.save.tr()),

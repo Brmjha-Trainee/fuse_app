@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
+import 'package:fuseapp/view_model/user_vm.dart';
 import 'package:fuseapp/views/add_book.dart';
 import 'package:fuseapp/views/address_book.dart';
 import 'package:fuseapp/views/contact_us.dart';
@@ -58,7 +59,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case OrdersViewRoute:
       return MaterialPageRoute(builder: (context) => Orders());
     case PersonalInfoViewRoute:
-      return MaterialPageRoute(builder: (context) => PersonalInformation());
+      var argumentPassed = settings.arguments as OurUser;
+      return MaterialPageRoute(builder: (context) => PersonalInformation(argument: argumentPassed));
     case SettingsViewRoute:
       return MaterialPageRoute(builder: (context) => SettingsScreen());
     case Notification1ViewRoute:
