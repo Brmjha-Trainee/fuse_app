@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/address_provider.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
@@ -19,31 +22,25 @@ import 'providers/personal_info.dart';
 //COMMENTS TODO: Fiazah issue in google sign in and redirect,forget password function, otp" Will postpone this"
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
-    //   options: const FirebaseOptions(
-    // apiKey: "AIzaSyDscrmz1MqwXrLCNbD4yO4_61P-b16w4bk",
-    // authDomain: "fuse-app-f9791.firebaseapp.com",
-    // projectId: "fuse-app-f9791",
-    // storageBucket: "fuse-app-f9791.appspot.com",
-    // messagingSenderId: "353265714008",
-    // appId: "1:353265714008:web:f8473d1e94b678adef1b2d",
-
-    // options: const FirebaseOptions(
-    //     appId: '1:353265714008:android:817d805da029d846ef1b2d',
-    //     apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-    //     messagingSenderId: '353265714008',
-    //     projectId: 'fuse-app-f9791'),
-
-    name: 'Secondary-app',
-    options: const FirebaseOptions(
+    options: kIsWeb || Platform.isAndroid?const FirebaseOptions(
+        appId: '1:353265714008:android:817d805da029d846ef1b2d',
+        apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
+        messagingSenderId: '353265714008',
+        projectId: 'fuse-app-f9791',
+    storageBucket: 'fuse-app-f9791.appspot.com'):
+   const FirebaseOptions(
       appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
       apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
       iosBundleId: 'com.codegemz.uiControls',
       messagingSenderId: '353265714008',
       projectId: 'fuse-app-f9791',
     ),
+
+
+
   );
+  await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
       path: 'assets/translations',

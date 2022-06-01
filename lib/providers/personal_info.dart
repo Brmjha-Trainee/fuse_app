@@ -18,9 +18,11 @@ class PersonalInfo with ChangeNotifier {
       userData = OurUser(
         name: doc['name'],
         phoneNum: doc['phone_number'],
-        avatarURL: doc['avatar'],
+        // // avatarURL: doc['avatar'],
         email: doc['email'],
+        // birth: doc.data()!['date']
       );
+
       notifyListeners();
     } catch (e) {
       SnackBar snackBar = const SnackBar(
