@@ -59,16 +59,20 @@ const h6 = TextStyle(
   fontSize: 13,
   decoration: TextDecoration.none,
 );
-
+const h7 = TextStyle(
+  color: DARK_GREY,
+  fontWeight: FontWeight.normal,
+  fontSize: 14,
+);
 const subtitle = TextStyle(
   color: GREY,
   fontWeight: FontWeight.normal,
   fontSize: 16,
 );
-const h7 = TextStyle(
-  color: DARK_GREY,
+const subtitle2 = TextStyle(
+  color: BLACK,
   fontWeight: FontWeight.normal,
-  fontSize: 14,
+  fontSize: 24,
 );
 // There are 2 body types (bodyText1 and bodyText2).
 // They are smaller than subtitles
@@ -403,6 +407,25 @@ AppBar myAppBar2(
       title!,
       style: appBarText,
     ),
+    centerTitle: true,
+  );
+}
+
+AppBar myAppBar3(
+  context,
+) {
+  return AppBar(
+    automaticallyImplyLeading: false,
+    actions: [
+      IconButton(
+          icon: Icon(
+            Icons.close_rounded,
+            color: IN_BETWEEN_GREY,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
+    ],
     centerTitle: true,
   );
 }

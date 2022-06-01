@@ -19,11 +19,14 @@ import 'package:fuseapp/views/sign_options.dart';
 import 'package:fuseapp/views/sign_up1.dart';
 import 'package:fuseapp/views/sign_up2.dart';
 import 'package:fuseapp/views/sign_up3.dart';
+import 'package:fuseapp/views/survey_1.dart';
+import 'package:fuseapp/views/survey_2.dart';
 import 'package:fuseapp/views/wrapper.dart';
 import '../views/forget_password1.dart';
 import 'package:fuseapp/view_model/address_book_vm.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-Adress1 f =Adress1();
+
+Adress1 f = Adress1();
 PhoneNumber number = PhoneNumber();
 Route<dynamic>? generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -67,6 +70,10 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => LanguagesScreen());
     case ContactUsViewRoute:
       return MaterialPageRoute(builder: (context) => ContactUs());
+    case Survey1ViewRoute:
+      return MaterialPageRoute(builder: ((context) => Survey1()));
+    case Survey2ViewRoute:
+      return MaterialPageRoute(builder: ((context) => Survey2()));
     default:
       return MaterialPageRoute(
           builder: (context) => UndefinedView(name: settings.name));

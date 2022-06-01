@@ -19,3 +19,5 @@ const String SettingsViewRoute = 'settings';
 const String Notification1ViewRoute = 'notification1';
 const String LanguageViewRoute = 'language';
 const String ContactUsViewRoute = 'contactUs';
+const String Survey1ViewRoute = 'survey_1';
+const String Survey2ViewRoute = 'survey_2';
