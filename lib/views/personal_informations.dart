@@ -1,13 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:fuseapp/providers/personal_info.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/translations/locale_keys.g.dart';
-import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
+import '../providers/personal_info.dart';
 import '../services/storage_service.dart';
 import '../utils/forms_validations.dart';
 import '../view_model/user_vm.dart';
@@ -22,25 +22,37 @@ class PersonalInformation extends StatefulWidget {
 
 class _PersonalInformationState extends State<PersonalInformation> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
   PhoneNumber number = PhoneNumber(isoCode: 'SA');
   final Storage storage = Storage();
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _nameController =
+        TextEditingController(text: widget.argument?.name);
+    final TextEditingController _emailController =
+        TextEditingController(text: widget.argument?.email);
+    TextEditingController _phoneController =
+        TextEditingController(text: widget.argument?.phoneNum);
+    TextEditingController _dateController =
+        TextEditingController(text: widget.argument?.birth);
+    var info = Provider.of<PersonalInfo>(context, listen: false);
 
-    print('DATA ${widget.argument?.email}');
-
-
-    // print('this is the user data ${profileData['test']}');
-    PersonalInfo info = PersonalInfo();
-    Provider.of<PersonalInfo>(context, listen: false)
-        .fetchPersonalInfo(context);
-    var obj = Provider.of<PersonalInfo>(context, listen: false);
-
+    Future<void> updateUser() {
+      String uid = info.currentUserId();
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('Users');
+      return users
+          .doc(uid)
+          .update({
+            'name': _nameController.text,
+            'email': _emailController.text,
+            'phone_number': _phoneController.text,
+            'date': _dateController.text,
+          })
+          .then((value) => print("Personal information Updated"))
+          .catchError(
+              (error) => print("Failed to update Personal information $error"));
+    }
 
     return Scaffold(
       appBar: myAppBar(context, title: LocaleKeys.personal_information.tr()),
@@ -50,7 +62,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
         width: double.infinity,
         child: Column(
           children: [
-            profileImage(obj.userData),
+            profileImage(),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Column(
@@ -59,27 +71,10 @@ class _PersonalInformationState extends State<PersonalInformation> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          inputText(
-                            // initialValue: profileData.name,
-                            label: LocaleKeys.name.tr(),
-                            keyboardType: TextInputType.name,
-                            controller: _nameController,
-                            validation: (val) {
-                              return validateName(_nameController.text);
-                            },
-                          ),
-                          inputText(
-                            // initialValue: profileData.email,
-                            label: LocaleKeys.email.tr(),
-                            controller: _emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            validation: (val) {
-                              return validateEmail(
-                                  _emailController.text.trim());
-                            },
-                          ),
-                          phoneField(),
-                          birthField(),
+                          nameField(_nameController),
+                          emailField(_emailController),
+                          phoneField(_phoneController),
+                          birthField(_dateController, context),
                           Padding(
                             padding: const EdgeInsets.only(top: 30.0),
                             child: Row(
@@ -89,7 +84,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       _formKey.currentState!.save();
-                                      // updateUser();
+                                      updateUser();
+                                      Navigator.pop(context);
                                     }
                                   },
                                   child: Text(LocaleKeys.save.tr()),
@@ -117,11 +113,11 @@ class _PersonalInformationState extends State<PersonalInformation> {
     );
   }
 
-  Widget profileImage(OurUser user) {
+  Widget profileImage() {
     return Center(
       child: Column(
         children: [
-          (user.avatarURL == null)
+          (widget.argument?.avatarURL == null)
               ? ClipOval(
                   child: SizedBox.fromSize(
                     size: Size.fromRadius(50),
@@ -136,13 +132,13 @@ class _PersonalInformationState extends State<PersonalInformation> {
               : ClipOval(
                   child: SizedBox.fromSize(
                     size: Size.fromRadius(50),
-                    child: Image.network(
-                      user.avatarURL ?? "",
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(child: CircularProgressIndicator());
-                      },
+                    child: CachedNetworkImage(
+                      imageUrl: widget.argument?.avatarURL ?? '',
+                      fit: BoxFit.contain,
+                      placeholder: (context, url) =>
+                          new CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          new Icon(Icons.error),
                     ),
                   ),
                 ),
@@ -187,84 +183,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
     );
   }
 
-  Widget phoneField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          LocaleKeys.phone_number.tr(),
-          style: h3,
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          decoration: BoxDecoration(
-            color: WHITE,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: BLUISH_GRERY),
-          ),
-          child: Stack(
-            children: [
-              phoneNumberField(),
-              Positioned(
-                left: 90,
-                top: 8,
-                bottom: 8,
-                child: Container(
-                  height: 40,
-                  width: 1,
-                  color: COLOR_PRIMARY,
-                ),
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        )
-      ],
-    );
-  }
-
-  Widget phoneNumberField() {
-    return InternationalPhoneNumberInput(
-      onInputChanged: (PhoneNumber number) {
-        print(number.phoneNumber);
-      },
-      validator: (val) {
-        return validatePhone(_phoneController.text);
-      },
-      selectorConfig: SelectorConfig(
-        selectorType: PhoneInputSelectorType.DIALOG,
-      ),
-      ignoreBlank: false,
-      autoValidateMode: AutovalidateMode.disabled,
-      initialValue: number,
-      textFieldController: _phoneController,
-      formatInput: false,
-      maxLength: 9,
-      keyboardType:
-          TextInputType.numberWithOptions(signed: true, decimal: true),
-      inputDecoration: InputDecoration(
-        contentPadding: EdgeInsets.only(bottom: 15, left: 0),
-        border: InputBorder.none,
-        hintText: '5xxxxxxx',
-        hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
-      ),
-      inputBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: BLUISH_GRERY,
-        ),
-      ),
-      onSaved: (PhoneNumber number) {
-        print('On Saved: $number');
-      },
-    );
-  }
-
-  Widget birthField() {
+  Widget birthField(
+      TextEditingController _dateController, BuildContext context) {
     return inputText(
         label: LocaleKeys.date_of_birth.tr(),
         hintText: '22-04-2010',
@@ -298,5 +218,105 @@ class _PersonalInformationState extends State<PersonalInformation> {
             color: COLOR_PRIMARY,
           ),
         ));
+  }
+
+  Widget nameField(TextEditingController _nameController) {
+    return inputText(
+      label: LocaleKeys.name.tr(),
+      keyboardType: TextInputType.name,
+      controller: _nameController,
+      validation: (val) {
+        return validateName(_nameController.text);
+      },
+    );
+  }
+
+  Widget emailField(TextEditingController _emailController) {
+    return inputText(
+      label: LocaleKeys.email.tr(),
+      controller: _emailController,
+      keyboardType: TextInputType.emailAddress,
+      validation: (val) {
+        return validateEmail(_emailController.text.trim());
+      },
+    );
+  }
+
+  Column phoneField(TextEditingController _phoneController) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          LocaleKeys.phone_number.tr(),
+          style: h3,
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          decoration: BoxDecoration(
+            color: WHITE,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: BLUISH_GRERY),
+          ),
+          child: Stack(
+            children: [
+              phoneInput(_phoneController),
+              Positioned(
+                left: 90,
+                top: 8,
+                bottom: 8,
+                child: Container(
+                  height: 40,
+                  width: 1,
+                  color: COLOR_PRIMARY,
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        )
+      ],
+    );
+  }
+
+  InternationalPhoneNumberInput phoneInput(
+      TextEditingController _phoneController) {
+    return InternationalPhoneNumberInput(
+      onInputChanged: (PhoneNumber number) {
+        print(number.phoneNumber);
+      },
+      validator: (val) {
+        return validatePhone(_phoneController.text);
+      },
+      selectorConfig: SelectorConfig(
+        selectorType: PhoneInputSelectorType.DIALOG,
+      ),
+      ignoreBlank: false,
+      autoValidateMode: AutovalidateMode.disabled,
+      initialValue: number,
+      textFieldController: _phoneController,
+      formatInput: false,
+      maxLength: 9,
+      keyboardType:
+          TextInputType.numberWithOptions(signed: true, decimal: true),
+      inputDecoration: InputDecoration(
+        contentPadding: EdgeInsets.only(bottom: 15, left: 0),
+        border: InputBorder.none,
+        hintText: '5xxxxxxx',
+        hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+      ),
+      inputBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: BLUISH_GRERY,
+        ),
+      ),
+      onSaved: (PhoneNumber number) {
+        print('On Saved: $number');
+      },
+    );
   }
 }

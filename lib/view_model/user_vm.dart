@@ -4,7 +4,7 @@ class OurUser {
   String? name;
   String? phoneNum;
   String? avatarURL;
-  int? birth;
+  String? birth;
 
   OurUser({
     this.uid,

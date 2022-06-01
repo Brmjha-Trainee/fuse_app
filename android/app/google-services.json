@@ -29,6 +29,13 @@
             {
               "client_id": "353265714008-cipcgmqhev8ta2jfrle9r5a5biinkbpa.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "353265714008-3fal1shurdoh233580qcsa8pqvvbokni.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.codegemz.uiControls"
+              }
             }
           ]
         }

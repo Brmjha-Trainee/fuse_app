@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/address_provider.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
@@ -13,6 +10,7 @@ import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/translations/codegen_loader.g.dart';
 import 'package:provider/provider.dart';
 import 'package:fuseapp/routers/router.dart' as router;
+import 'firebase_options.dart';
 import 'providers/personal_info.dart';
 
 //COMMENTS TODO: 1. when to use pushreplacement instead of put (DONE)|| 2. docmentation
@@ -23,22 +21,7 @@ import 'providers/personal_info.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: kIsWeb || Platform.isAndroid?const FirebaseOptions(
-        appId: '1:353265714008:android:817d805da029d846ef1b2d',
-        apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-        messagingSenderId: '353265714008',
-        projectId: 'fuse-app-f9791',
-    storageBucket: 'fuse-app-f9791.appspot.com'):
-   const FirebaseOptions(
-      appId: '1:353265714008:ios:7d220b7384b71cd6ef1b2d',
-      apiKey: 'AIzaSyAMIgI09G28MY9itFTZz81ltPoJCzFySug',
-      iosBundleId: 'com.codegemz.uiControls',
-      messagingSenderId: '353265714008',
-      projectId: 'fuse-app-f9791',
-    ),
-
-
-
+     options: DefaultFirebaseOptions.currentPlatform,
   );
   await EasyLocalization.ensureInitialized();
   runApp(
