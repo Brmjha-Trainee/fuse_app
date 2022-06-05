@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:provider/provider.dart';
 import '../providers/personal_info.dart';
+import '../providers/toggle_text.dart';
 import '../theme/theme_constants.dart';
 import '../translations/locale_keys.g.dart';
 
@@ -16,8 +17,6 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  double rating = 0;
-
   @override
   void initState() {
     super.initState();
@@ -35,19 +34,21 @@ class _OrdersState extends State<Orders> {
     );
   }
 
-  Widget buildRating() => RatingBar.builder(
-        minRating: 1,
-        unratedColor: BLUISH_GRERY,
-        updateOnDrag: true,
-        itemBuilder: (context, _) => Icon(
-          Icons.star_rate_rounded,
-          color: COLOR_PRIMARY,
-        ),
-        onRatingUpdate: (rating) => setState(() {
-          this.rating = rating;
-        }),
-      );
+  Widget buildRating() => Consumer<ToggleText>(builder: (context, val, _) {
+        return RatingBar.builder(
+          minRating: 1,
+          unratedColor: BLUISH_GRERY,
+          updateOnDrag: true,
+          itemBuilder: (context, _) => Icon(
+            Icons.star_rate_rounded,
+            color: COLOR_PRIMARY,
+          ),
+          onRatingUpdate: (rate) => val.setRating(rate),
+        );
+      });
   Future showRating() {
+    var obj = Provider.of<ToggleText>(context, listen: false);
+
     // Create a CollectionReference called users that references the firestore collection
     CollectionReference rate = FirebaseFirestore.instance.collection('survey');
     var uid = Provider.of<PersonalInfo>(context, listen: false);
@@ -55,8 +56,8 @@ class _OrdersState extends State<Orders> {
       // Call the survey's CollectionReference to add a new review
       return rate
           .doc(uid.currentUserId())
-          .set({
-            'rating': rating.toString(),
+          .update({
+            'rating': obj.rating,
           })
           .then((value) => print("rating Added"))
           .catchError((error) => print("Failed to add rating: $error"));
@@ -87,7 +88,8 @@ class _OrdersState extends State<Orders> {
           TextButton(
             child: Text('Rate us'),
             onPressed: () {
-              Navigator.pushNamed(context, Survey1ViewRoute);
+              Navigator.pushReplacementNamed(context, Survey1ViewRoute,
+                  arguments: obj);
               addReview();
             },
           )

@@ -4,9 +4,10 @@ class ToggleText with ChangeNotifier {
   bool _obscureText = true;
   bool _obscureText1 = true;
   bool _obscureText2 = true;
-  bool  _obscureText3 =true;
-  bool  _obscureText4 = true;
+  bool _obscureText3 = true;
+  bool _obscureText4 = true;
   bool _checkBoxValue = false;
+  double _rating = 0;
 
   bool get obscureText => _obscureText;
   bool get obscureText1 => _obscureText1;
@@ -14,6 +15,12 @@ class ToggleText with ChangeNotifier {
   bool get obscureText3 => _obscureText3;
   bool get obscureText4 => _obscureText4;
   bool get checkBoxValue => _checkBoxValue;
+  double get rating => _rating;
+
+  void setRating(double rate) {
+    _rating = rate;
+    notifyListeners();
+  }
 
   void togglePasswordStat() {
     _obscureText = !_obscureText;
@@ -29,7 +36,8 @@ class ToggleText with ChangeNotifier {
     _obscureText2 = !_obscureText2;
     notifyListeners();
   }
-void togglePasswordStat3() {
+
+  void togglePasswordStat3() {
     _obscureText3 = !_obscureText3;
     notifyListeners();
   }

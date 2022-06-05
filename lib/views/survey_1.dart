@@ -1,15 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/utils/forms_validations.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/personal_info.dart';
+import '../providers/toggle_text.dart';
 
 class Survey1 extends StatefulWidget {
-  const Survey1({Key? key}) : super(key: key);
-
+  const Survey1({Key? key, required this.arguments}) : super(key: key);
+  final ToggleText arguments;
   @override
   State<Survey1> createState() => _Survey1State();
 }
@@ -43,8 +45,11 @@ class _Survey1State extends State<Survey1> {
           key: _formKey,
           child: Column(
             children: [
+              buildRating(),
+              SizedBox(height: 15),
               Text(
-                'Tell us a bit more about why you chose ',
+                'Tell us a bit more about why you chose ' +
+                    '${widget.arguments.rating.ceil()}',
                 style: subtitle2,
                 textAlign: TextAlign.center,
               ),
@@ -76,4 +81,19 @@ class _Survey1State extends State<Survey1> {
       ),
     );
   }
+
+  Widget buildRating() => Consumer<ToggleText>(builder: (context, val, _) {
+        return RatingBar.builder(
+          minRating: 1,
+          initialRating: widget.arguments.rating,
+          // itemSize: 50,
+          unratedColor: BLUISH_GRERY,
+          updateOnDrag: true,
+          itemBuilder: (context, _) => Icon(
+            Icons.star_rate_rounded,
+            color: COLOR_PRIMARY,
+          ),
+          onRatingUpdate: (rate) => null,
+        );
+      });
 }

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/address_provider.dart';
+import 'package:fuseapp/providers/survey_provider.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
@@ -21,7 +22,7 @@ import 'providers/personal_info.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-     options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   await EasyLocalization.ensureInitialized();
   runApp(
@@ -51,6 +52,7 @@ class FuseApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ToggleText()),
         ChangeNotifierProvider(create: (_) => AddressProvider()),
         ChangeNotifierProvider(create: (_) => PersonalInfo()),
+        ChangeNotifierProvider(create: (_) => SurveyInfo()),
       ],
       child: MaterialApp(
         supportedLocales: context.supportedLocales,
