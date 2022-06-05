@@ -124,7 +124,10 @@ class _Survey2State extends State<Survey2> {
       } else {
         selectedItem.add(choice);
       }
-      // print(selectedItem.contains(choice));
+      setState(() {
+        print(choice.choiceText);
+      });
+      //
     } else {
       //Other logic
     }

@@ -1,6 +1,6 @@
 class SurveyChoices {
   final String? choiceText;
-   bool isSelected;
+  bool isSelected;
   SurveyChoices(this.choiceText, {this.isSelected = false});
 
   @override
