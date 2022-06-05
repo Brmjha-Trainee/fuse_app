@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/address_provider.dart';
+import 'package:fuseapp/providers/ordersprovider.dart';
 import 'package:fuseapp/providers/survey_provider.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
@@ -9,6 +10,7 @@ import 'package:fuseapp/routers/undefined_view_router.dart';
 import 'package:fuseapp/services/auth_services.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/translations/codegen_loader.g.dart';
+import 'package:fuseapp/view_model/survey_vm.dart';
 import 'package:provider/provider.dart';
 import 'package:fuseapp/routers/router.dart' as router;
 import 'firebase_options.dart';
@@ -53,6 +55,7 @@ class FuseApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AddressProvider()),
         ChangeNotifierProvider(create: (_) => PersonalInfo()),
         ChangeNotifierProvider(create: (_) => SurveyInfo()),
+         ChangeNotifierProvider(create: (_) => FeedBackProvider()),
       ],
       child: MaterialApp(
         supportedLocales: context.supportedLocales,
