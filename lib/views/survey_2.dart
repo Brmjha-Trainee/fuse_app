@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/ordersprovider.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
+import '../providers/feedback_provider.dart';
 import '../translations/locale_keys.g.dart';
 import '../view_model/survey_vm.dart';
 
@@ -23,6 +24,7 @@ class _Survey2State extends State<Survey2> {
     SurveyChoices('Easier return process'),
     SurveyChoices('More brands options'),
   ];
+  SurveyChoices? choice;
   HashSet<SurveyChoices> selectedItem = HashSet();
   bool isMultiSelectionEnabled = false;
   @override
@@ -79,8 +81,7 @@ class _Survey2State extends State<Survey2> {
                   SizedBox(width: 5),
                   ElevatedButton(
                     onPressed: () {
-                      Provider.of<FeedBackProvider>(context, listen: false)
-                          .sendSelectedChoicesToDB(context, choices);
+                      doMultiselection(choice!);
                     },
                     child: Text(LocaleKeys.send.tr()),
                   ),
@@ -126,6 +127,8 @@ class _Survey2State extends State<Survey2> {
       }
       setState(() {
         print(choice.choiceText);
+        Provider.of<FeedBackProvider>(context, listen: false)
+            .sendSelectedChoicesToDB(context, choice);
       });
       //
     } else {

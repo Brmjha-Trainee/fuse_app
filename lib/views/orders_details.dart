@@ -4,7 +4,7 @@ import 'package:fuseapp/providers/ordersprovider.dart';
 import '../theme/theme_constants.dart';
 
 class OrderDetatils extends StatefulWidget {
-  OrderProvider obj;
+  final OrderProvider obj;
   int index;
   OrderDetatils(this.obj, this.index);
 
