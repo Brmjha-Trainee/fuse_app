@@ -327,7 +327,7 @@ Widget languageDropDowninput({
 
 MaterialButton darkBtn({
   label,
-  Function()? onPressed,
+  Function()? onPressed, bool isIcon=false
 }) {
   return MaterialButton(
     color: COLOR_PRIMARY,
@@ -337,10 +337,18 @@ MaterialButton darkBtn({
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(50),
     ),
-    child: Text(
-      label,
-      style: darkBtnText,
-    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if(isIcon)
+        Icon(Icons.add_circle_outline, color: Colors.white),
+      SizedBox(width: 5,),
+      Text(
+        label,
+        style: darkBtnText,
+      ),
+    ],)
+
   );
 }
 

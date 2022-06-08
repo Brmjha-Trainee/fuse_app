@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/ordersprovider.dart';
 
 import '../theme/theme_constants.dart';
+import '../view_model/orders_vm.dart';
 
 class OrderDetatils extends StatefulWidget {
-  final OrderProvider obj;
+  final OrdersInfo obj;
   int index;
   OrderDetatils(this.obj, this.index);
 
@@ -15,25 +16,27 @@ class OrderDetatils extends StatefulWidget {
 class _OrderDetatilsState extends State<OrderDetatils> {
   @override
   Widget build(BuildContext context) {
+    print('test ${widget.obj.tax}');
     return Scaffold(
         appBar: myAppBar(context, title: 'Order Detatils '),
         body: new Container(
             alignment: Alignment.center,
             child: Column(children: [
-              // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              //   discription("Order No.", widget.obj.orderno![index], h7, h7),
-              // ]),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     discription("Date", widget.obj.date![index], h7, h7),
-              //   ],
-              // ),
-              // Container(
-              //   height: 420,
-              //   child: _orderslistView(widget.obj, index),
-              // ),
-              // Container(child: ordersTotal(widget.obj, index))
+
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                discription("Order No.", widget.obj.orderno??'', h7, h7),
+              ]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  discription("Date",  widget.obj.date??'', h7, h7),
+                ],
+              ),
+              Container(
+                height: 420,
+                child: _orderslistView(widget.obj),
+              ),
+              Container(child: ordersTotal(widget.obj))
             ])));
   }
 }
@@ -54,11 +57,11 @@ Row discription2(String label, String orderdet, TextStyle y, TextStyle h) {
   ]);
 }
 
-Widget _orderslistView(OrderProvider obj, int index) {
+Widget _orderslistView(OrdersInfo obj) {
   return ListView.builder(
     scrollDirection: Axis.vertical,
     padding: new EdgeInsets.only(left: 0.0, bottom: 8.0, right: 16.0),
-    itemCount: obj.item_name!.length,
+    itemCount: obj.items!.length,
     itemBuilder: (BuildContext context, int index) {
       return Material(
         color: Colors.transparent,
@@ -68,18 +71,18 @@ Widget _orderslistView(OrderProvider obj, int index) {
           children: <Widget>[
             new Padding(
               padding: new EdgeInsets.all(7.0),
-              child: discription("Item Name", obj.item_name![index], h5, h7),
+              child: discription("Item Name", obj.items![index].item_name??'', h5, h7),
             ),
             new Padding(
               padding: new EdgeInsets.all(7.0),
-              child: discription("Item No.", obj.item_no![index], h5, h7),
+              child: discription("Item No.", obj.items![index].item_no??'', h5, h7),
             ),
             new Padding(
                 padding: new EdgeInsets.all(7.0),
-                child: discription("Quantity", obj.quantity![index], h5, h7)),
+                child: discription("Quantity", obj.items![index].quantity??'', h5, h7)),
             new Padding(
                 padding: new EdgeInsets.all(7.0),
-                child: discription("Price", obj.price![index], h5, h7)),
+                child: discription("Price", obj.items![index].price??'', h5, h7)),
             Divider(
               color: GREY,
               height: 10.0,
@@ -91,7 +94,7 @@ Widget _orderslistView(OrderProvider obj, int index) {
   );
 }
 
-Material ordersTotal(OrderProvider obj, int index) {
+Material ordersTotal(OrdersInfo obj) {
   return Material(
     color: Colors.transparent,
     child: new Column(
@@ -100,7 +103,7 @@ Material ordersTotal(OrderProvider obj, int index) {
           padding: new EdgeInsets.all(7.0),
           child: discription2(
               "Total",
-              (obj.amount![index] - (obj.shipping![index] + obj.tax![index]))
+              (obj.amount??0 - (obj.shipping??0 + obj.tax!))
                   .toString(),
               h7,
               h7),
@@ -108,16 +111,16 @@ Material ordersTotal(OrderProvider obj, int index) {
         new Padding(
           padding: new EdgeInsets.all(7.0),
           child:
-              discription2("Shipping", obj.shipping![index].toString(), h7, h7),
+              discription2("Shipping", obj.shipping.toString(), h7, h7),
         ),
         new Padding(
           padding: new EdgeInsets.all(7.0),
-          child: discription2("Tax", obj.tax![index].toString(), h7, h7),
+          child: discription2("Tax", obj.tax.toString(), h7, h7),
         ),
         new Padding(
           padding: new EdgeInsets.all(7.0),
           child: discription2(
-              "Total Amount", obj.amount![index].toString(), h4, h4),
+              "Total Amount", obj.amount.toString(), h4, h4),
         ),
       ],
     ),

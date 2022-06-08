@@ -41,39 +41,53 @@ class _AddressBookState extends State<AddressBook> {
         SizedBox(
                  height:90,
                  width: 400 ,
-                child: Card(          
+                child: Card(
+
                     elevation: 10,
-                    shadowColor: Colors.black,   
-                      child: ListTile(
-                        title: Text(A!.street.toString()+" - "+A.district.toString()+" - "+A.city.toString()+ " - "+A.zipCode.toString()),
-                        leading: Icon(
-                          Icons. location_on_outlined,
-                          color: COLOR_PRIMARY,
-                        ),
-                        trailing:
-                                 Column(
-                                    
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                    //  Navigator.pushReplacementNamed(context, EditBookViewRoute ,arguments:EditAdressBook(A.city.toString()) ); 
-                                     Navigator.push( context,MaterialPageRoute(builder: (context) =>  EditAdressBook(A)),);
-                                },
-                                icon: Icon(
-                                  Icons.edit,
-                                  color: COLOR_PRIMARY,
-                                )),
-                            IconButton(
-                                onPressed: () {
-                    Provider.of<AddressProvider>(context, listen: false).deleteAddress(context);   
-                                },
-                                icon: Icon(
-                                  Icons.delete_outlined,
-                                  color: COLOR_PRIMARY,
-                                ))
-                          ],
-                        ),
-                      ),
+                    shadowColor: Colors.black,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(children: [
+                              Icon(
+                                Icons. location_on_outlined,
+                                color: COLOR_PRIMARY,
+                              ),
+                              SizedBox(width: 10,),
+
+                              Text(A!.street.toString()+" - "+A.district.toString()+" - "+A.city.toString()+ " - "+A.zipCode.toString()),
+
+                            ],),
+                          ),
+
+                       Column(
+
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            //  Navigator.pushReplacementNamed(context, EditBookViewRoute ,arguments:EditAdressBook(A.city.toString()) );
+                            Navigator.push( context,MaterialPageRoute(builder: (context) =>  EditAdressBook(A)),);
+                          },
+                          icon: Icon(
+                            Icons.edit,
+                            color: COLOR_PRIMARY,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            Provider.of<AddressProvider>(context, listen: false).deleteAddress(context);
+                          },
+                          icon: Icon(
+                            Icons.delete_outlined,
+                            color: COLOR_PRIMARY,
+                          ))
+                    ],
+                  ),
+
+
+                        ],
+                      )
                     ))]),
    
 
@@ -92,11 +106,12 @@ class _AddressBookState extends State<AddressBook> {
       style: h1,
     ),
     SizedBox(height: 30),
+
      darkBtn(
                   label: LocaleKeys.add_address.tr(),
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, AddBookViewRoute);
-                  })
+                  }, isIcon: true)
           
 
   ],
