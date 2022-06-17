@@ -77,6 +77,17 @@ Widget _orderslistView(OrdersInfo obj) {
               padding: new EdgeInsets.all(7.0),
               child: discription("Item No.", obj.items![index].item_no??'', h5, h7),
             ),
+                  Row (
+              mainAxisAlignment: MainAxisAlignment.end,
+              children : [  
+                new Padding(
+              padding: new EdgeInsets.all(0.0),
+              child: 
+ Image.network(obj.items![index].img??"", height:200,
+    width: 200,),
+             
+            ),]
+            ),
             new Padding(
                 padding: new EdgeInsets.all(7.0),
                 child: discription("Quantity", obj.items![index].quantity??'', h5, h7)),
