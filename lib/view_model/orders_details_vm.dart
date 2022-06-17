@@ -6,6 +6,7 @@ class OrderItems {
   String? item_no;
   String? price;
   String? quantity;
+  String ? img;
 
 
 
@@ -15,11 +16,12 @@ class OrderItems {
     this.item_no,
     this.price,
     this.quantity,
+    this.img,
 
 
 
   });
-  factory OrderItems.fromJson(DocumentSnapshot<Map<String, dynamic>> order2)=> OrderItems(item_name:order2['item_name'],item_no:order2['item_no'],price:order2['price'],quantity:order2['quantity']);
+  factory OrderItems.fromJson(DocumentSnapshot<Map<String, dynamic>> order2)=> OrderItems(item_name:order2['item_name'],item_no:order2['item_no'],price:order2['price'],quantity:order2['quantity'],img:order2['img']);
 
 
 
