@@ -81,6 +81,7 @@ class _ContactUsState extends State<ContactUs> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState?.save();
                           sendEmail();
+                          Navigator.pop(context);
                         }
                       },
                       child: Text(LocaleKeys.save.tr()),
@@ -91,6 +92,7 @@ class _ContactUsState extends State<ContactUs> {
                     OutlinedButton(
                       onPressed: () {
                         _formKey.currentState?.reset();
+                         Navigator.pop(context);
                       },
                       child: Text(LocaleKeys.cancel.tr()),
                     )
@@ -172,7 +174,7 @@ class _ContactUsState extends State<ContactUs> {
               )),
         ),
         Text(
-         LocaleKeys.or.tr(),
+          LocaleKeys.or.tr(),
           style: h7,
         ),
         Expanded(

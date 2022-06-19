@@ -156,6 +156,7 @@ Widget inputText({
   onChanged,
   readOnly = false,
   initialValue,
+  onSaved
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,6 +174,7 @@ Widget inputText({
         controller: controller,
         validator: validation,
         onChanged: onChanged,
+        onSaved: onSaved,
         obscureText: obscureText,
         keyboardType: keyboardType,
         decoration: InputDecoration(

@@ -1,8 +1,5 @@
-import 'dart:collection';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fuseapp/providers/ordersprovider.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 import '../providers/feedback_provider.dart';
@@ -17,15 +14,15 @@ class Survey2 extends StatefulWidget {
 }
 
 class _Survey2State extends State<Survey2> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  SurveyChoices? choice;
   List<SurveyChoices> choices = [
     SurveyChoices('Wider product selection'),
     SurveyChoices('Better shipping options'),
     SurveyChoices('Easier return process'),
     SurveyChoices('More brands options'),
   ];
-  SurveyChoices? choice;
-  HashSet<SurveyChoices> selectedItem = HashSet();
+
+  List<SurveyChoices> selectedItem = [];
   bool isMultiSelectionEnabled = false;
   @override
   void initState() {
@@ -53,7 +50,6 @@ class _Survey2State extends State<Survey2> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20),
-          //choices(),
           ListView(
             shrinkWrap: true,
             children: choices.map((SurveyChoices choice) {
@@ -81,7 +77,8 @@ class _Survey2State extends State<Survey2> {
                   SizedBox(width: 5),
                   ElevatedButton(
                     onPressed: () {
-                      doMultiselection(choice!);
+                      Provider.of<FeedBackProvider>(context, listen: false)
+                          .sendSelectedChoicesToDB(context, selectedItem);
                     },
                     child: Text(LocaleKeys.send.tr()),
                   ),
@@ -125,14 +122,9 @@ class _Survey2State extends State<Survey2> {
       } else {
         selectedItem.add(choice);
       }
-      setState(() {
-        print(choice.choiceText);
-        Provider.of<FeedBackProvider>(context, listen: false)
-            .sendSelectedChoicesToDB(context, choice);
-      });
+
       //
-    } else {
-      //Other logic
     }
+    setState(() {});
   }
 }

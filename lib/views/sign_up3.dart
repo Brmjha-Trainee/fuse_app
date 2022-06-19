@@ -23,7 +23,6 @@ class _Signup3State extends State<Signup3> {
   final TextEditingController _confirmPassController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   //FixMe ASMAA use provider DONE
 

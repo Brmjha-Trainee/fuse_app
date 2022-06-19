@@ -11,12 +11,10 @@ import 'package:fuseapp/routers/undefined_view_router.dart';
 import 'package:fuseapp/services/auth_services.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/translations/codegen_loader.g.dart';
-import 'package:fuseapp/view_model/survey_vm.dart';
 import 'package:provider/provider.dart';
 import 'package:fuseapp/routers/router.dart' as router;
 import 'firebase_options.dart';
 import 'providers/personal_info.dart';
-
 //COMMENTS TODO: 1. when to use pushreplacement instead of put (DONE)|| 2. docmentation
 //COMMENTS TODO: Asmaa todo3 tasks done, some issues need to be solved (DONE)
 //COMMENTS TODO: Rawabi didn't see the bottom nav bar, some issues need to be solved
@@ -44,21 +42,17 @@ Future<void> main() async {
 
 class FuseApp extends StatelessWidget {
   const FuseApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<AuthService>(
-          create: (_) => AuthService(),
-        ),
+        Provider<AuthService>(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => ToggleText()),
         ChangeNotifierProvider(create: (_) => AddressProvider()),
         ChangeNotifierProvider(create: (_) => PersonalInfo()),
         ChangeNotifierProvider(create: (_) => SurveyInfo()),
         ChangeNotifierProvider(create: (_) => FeedBackProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
-
       ],
       child: MaterialApp(
         supportedLocales: context.supportedLocales,

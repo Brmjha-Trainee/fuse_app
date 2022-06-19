@@ -113,6 +113,7 @@ Row discription(String label, String orderdet, TextStyle h) {
 
 Widget buildRating() => Consumer<ToggleText>(builder: (context, val, _) {
       return RatingBar.builder(
+        initialRating: 1,
         minRating: 1,
         unratedColor: BLUISH_GRERY,
         updateOnDrag: true,
@@ -133,7 +134,7 @@ Future showRating(BuildContext context) {
     // Call the survey's CollectionReference to add a new review
     return rate
         .doc(uid.currentUserId())
-        .update({
+        .set({
           'rating': obj.rating,
         })
         .then((value) => print("rating Added"))

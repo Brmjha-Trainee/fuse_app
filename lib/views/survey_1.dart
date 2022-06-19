@@ -86,7 +86,6 @@ class _Survey1State extends State<Survey1> {
         return RatingBar.builder(
           minRating: 1,
           initialRating: widget.arguments.rating,
-          // itemSize: 50,
           unratedColor: BLUISH_GRERY,
           updateOnDrag: true,
           itemBuilder: (context, _) => Icon(

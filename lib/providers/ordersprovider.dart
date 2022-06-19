@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fuseapp/view_model/orders_vm.dart';
-import '../view_model/address_book_vm.dart';
-import 'package:fuseapp/views/address_book.dart';
 class OrderProvider with ChangeNotifier {
   currentUserId() {
     return FirebaseAuth.instance.currentUser?.uid;

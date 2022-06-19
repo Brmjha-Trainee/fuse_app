@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
-import 'package:fuseapp/view_model/survey_popup_vm.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
 import 'package:fuseapp/views/add_book.dart';
 import 'package:fuseapp/views/address_book.dart';

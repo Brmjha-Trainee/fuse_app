@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/view_model/address_book_vm.dart';
-import 'package:fuseapp/views/address_book.dart';
 import 'package:provider/provider.dart';
 import '../providers/address_provider.dart';
 import '../theme/theme_constants.dart';
-import '../utils/forms_validations.dart';
 
 class EditAdressBook extends StatefulWidget {
-  Adress1 A;
+  final Adress1 A;
   EditAdressBook(this.A );
   @override
   _EditAdressBookState createState() => _EditAdressBookState();

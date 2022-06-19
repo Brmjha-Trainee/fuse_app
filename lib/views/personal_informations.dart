@@ -49,7 +49,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
             'phone_number': _phoneController.text,
             'date': _dateController.text,
           })
-          .then((value) => print("Personal information Updated"))
+          .then((value) => print(uid))
           .catchError(
               (error) => print("Failed to update Personal information $error"));
     }
@@ -74,7 +74,42 @@ class _PersonalInformationState extends State<PersonalInformation> {
                           nameField(_nameController),
                           emailField(_emailController),
                           phoneField(_phoneController),
-                          birthField(_dateController, context),
+                          (inputText(
+                              label: LocaleKeys.date_of_birth.tr(),
+                              keyboardType: TextInputType.datetime,
+                              readOnly: true,
+                              controller: _dateController,
+                              validation: (val) {
+                                return validateRequiredField(
+                                    _dateController.text);
+                              },
+                              onSaved: (val) {},
+                              onChanged: (val) {},
+                              iconButton: IconButton(
+                                onPressed: () async {
+                                  DateTime? pickedDate = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime
+                                        .now(), //DateTime.now() - not to allow to choose before today.
+                                    firstDate: DateTime(1990),
+                                    lastDate: DateTime(2101),
+                                  );
+                                  if (pickedDate != null) {
+                                    String formattedDate =
+                                        DateFormat('dd-MM-yyyy')
+                                            .format(pickedDate);
+                                    setState(() {
+                                      _dateController.text =
+                                          formattedDate; //set output date to TextField value.
+                                    });
+                                    print(_dateController.text);
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.date_range,
+                                  color: COLOR_PRIMARY,
+                                ),
+                              ))),
                           Padding(
                             padding: const EdgeInsets.only(top: 30.0),
                             child: Row(
@@ -187,23 +222,23 @@ class _PersonalInformationState extends State<PersonalInformation> {
       TextEditingController _dateController, BuildContext context) {
     return inputText(
         label: LocaleKeys.date_of_birth.tr(),
-        hintText: '22-04-2010',
         keyboardType: TextInputType.datetime,
         readOnly: true,
         controller: _dateController,
         validation: (val) {
           return validateRequiredField(_dateController.text);
         },
+        onSaved: (val) {},
+        onChanged: (val) {},
         iconButton: IconButton(
           onPressed: () async {
             DateTime? pickedDate = await showDatePicker(
               context: context,
-              //DateTime.now() - not to allow to choose before today.
-              initialDate: DateTime.now(),
+              initialDate: DateTime
+                  .now(), //DateTime.now() - not to allow to choose before today.
               firstDate: DateTime(1990),
               lastDate: DateTime(2101),
             );
-
             if (pickedDate != null) {
               String formattedDate =
                   DateFormat('dd-MM-yyyy').format(pickedDate);
@@ -211,6 +246,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 _dateController.text =
                     formattedDate; //set output date to TextField value.
               });
+              print(_dateController.text);
             }
           },
           icon: Icon(
