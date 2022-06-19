@@ -39,6 +39,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   cached_network_image: ^3.2.1
   multi_select_flutter: ^4.1.2
+  firebase_messaging: ^11.4.2
+  flutter_local_notifications: ^9.6.1
 
 flutter_native_splash:
   color: "#ffffff"

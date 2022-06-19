@@ -1,11 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:fuseapp/theme/theme_constants.dart';
-import '../translations/locale_keys.g.dart';
-import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_core/firebase_core.dart';
 import '../services/local_notifications.dart';
 
 class Notification1 extends StatefulWidget {
@@ -22,14 +16,14 @@ class Notification1 extends StatefulWidget {
 //   }
 // }
 
-class Notification1 extends StatefulWidget {
+class Notification extends StatefulWidget {
   @override
   _NotificationState createState() => _NotificationState();
 }
 
 class _NotificationState extends State<Notification1> {
   @override
-  String notificationMsg ="Waiting for notification";
+  String notificationMsg = "Waiting for notification";
   void initState() {
     super.initState();
 
