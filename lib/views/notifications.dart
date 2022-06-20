@@ -1,5 +1,3 @@
-import 'dart:html';
-
 
 import '../theme/theme_constants.dart';
 import 'package:flutter/material.dart';
@@ -54,17 +52,17 @@ class _NotificationState extends State<Notification1> {
       appBar: myAppBar(context, title: 'Notifications'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-       
+
           children :
         [ Padding(  padding: const EdgeInsets.all(7.0),
-        
+
           child :Text("Notifications" ,style: h2, ),),
         SizedBox(height: 20,),
         Text("Nerver miss a message , click the link below to easily enable notifications from us " ,style: h7, ),
                 SizedBox(height: 20,),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row( 
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children :[
              Container(
@@ -73,16 +71,16 @@ height: 50 ,
 width: 450 ,
     decoration: BoxDecoration(
     border: Border.all(
-      color :GREY, //                  
+      color :GREY, //
       width: 0.5,
     ) ,
    borderRadius: BorderRadius.all(
         Radius.circular(5.0) //
-    ),), 
+    ),),
     child: new InkWell(
           onTap: () {
             //  Navigator.push( context,MaterialPageRoute(builder: (context) => Orders()));
-     FirebaseMessaging.instance.subscribeToTopic ('news');   
+     FirebaseMessaging.instance.subscribeToTopic ('news');
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 10 ,top: 7.0),
@@ -91,10 +89,10 @@ width: 450 ,
           ),
         ),]),
                 ),
- 
+
       ]
         ),
-      
+
     );
   }
 }
