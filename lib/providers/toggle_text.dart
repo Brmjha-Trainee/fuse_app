@@ -18,20 +18,22 @@ class ToggleText with ChangeNotifier {
   bool get checkBoxValue => _checkBoxValue;
   double get rating => _rating;
 
+  late TextEditingController dateController;
+
   void setRating(double rate) {
     _rating = rate;
     notifyListeners();
   }
 
-  void setBirthField(String dateController, DateTime? pickedDate) {
+  void setBirthField(DateTime? pickedDate) {
     //print(pickedDate);
     if (pickedDate != null) {
       String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
       print('formattedDate: ' + formattedDate);
 
-      dateController = formattedDate;
+      dateController.text = formattedDate;
       notifyListeners();
-      print('dateController: ' + dateController);
+      print('dateController: ' + dateController.text);
     }
   }
 

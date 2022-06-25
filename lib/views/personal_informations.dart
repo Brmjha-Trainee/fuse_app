@@ -34,9 +34,12 @@ class _PersonalInformationState extends State<PersonalInformation> {
         TextEditingController(text: widget.argument?.email);
     TextEditingController _phoneController =
         TextEditingController(text: widget.argument?.phoneNum);
-    TextEditingController dateController =
-        TextEditingController(text: widget.argument?.birth);
+
+
+    var obj=    Provider.of<ToggleText>(context, listen: false);
     var info = Provider.of<PersonalInfo>(context, listen: false);
+    obj.dateController =
+        TextEditingController(text: widget.argument?.birth);
 
     Future<void> updateUser() {
       String uid = info.currentUserId();
@@ -48,7 +51,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
             'name': _nameController.text,
             'email': _emailController.text,
             'phone_number': _phoneController.text,
-            'date': dateController.text,
+            'date': obj.dateController.text,
           })
           .then((value) => print(uid))
           .catchError(
@@ -75,7 +78,11 @@ class _PersonalInformationState extends State<PersonalInformation> {
                           nameField(_nameController),
                           emailField(_emailController),
                           phoneField(_phoneController),
-                          birthField(dateController, context),
+                          Consumer<ToggleText>(
+                            builder: (_, val ,__) {
+                              return birthField(val.dateController, context);
+                            }
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 30.0),
                             child: Row(
@@ -198,27 +205,15 @@ class _PersonalInformationState extends State<PersonalInformation> {
         onChanged: (val) {},
         iconButton: IconButton(
           onPressed: () async {
-            DateTime? pickedDate;
-            pickedDate = await showDatePicker(
+            DateTime? pickedDate = await showDatePicker(
               context: context,
               initialDate: DateTime
                   .now(), //DateTime.now() - not to allow to choose before today.
               firstDate: DateTime(1990),
               lastDate: DateTime(2101),
             );
-            // if (pickedDate != null) {
-            //   String formattedDate =
-            //       DateFormat('dd-MM-yyyy').format(pickedDate);
-            //   setState(() {
-            //     dateController.text =
-            //         formattedDate; //set output date to TextField value.
-            //   });
-            // }
-
             Provider.of<ToggleText>(context, listen: false)
-                .setBirthField(dateController.text, pickedDate);
-            //   val.setBirthField(_dateController.text, pickedDate);
-            // print(dateController.text);
+                .setBirthField(pickedDate);
           },
           icon: Icon(
             Icons.date_range,

@@ -24,6 +24,8 @@ import 'package:fuseapp/views/sign_up3.dart';
 import 'package:fuseapp/views/survey_1.dart';
 import 'package:fuseapp/views/survey_2.dart';
 import 'package:fuseapp/views/wrapper.dart';
+import '../providers/personal_info.dart';
+import '../view_model/user_vm.dart';
 import '../views/forget_password1.dart';
 import 'package:fuseapp/view_model/address_book_vm.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -63,7 +65,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case OrdersViewRoute:
       return MaterialPageRoute(builder: (context) => Orders());
     case PersonalInfoViewRoute:
-      var argumentPassed = settings.arguments as OurUser;
+      var argumentPassed = PersonalInfo.userData;
       return MaterialPageRoute(
           builder: (context) => PersonalInformation(argument: argumentPassed));
     case SettingsViewRoute:
