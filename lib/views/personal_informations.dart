@@ -97,6 +97,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                                 OutlinedButton(
                                   onPressed: () {
                                     _formKey.currentState?.reset();
+                                     Navigator.pop(context);
                                   },
                                   child: Text(LocaleKeys.cancel.tr()),
                                 )
