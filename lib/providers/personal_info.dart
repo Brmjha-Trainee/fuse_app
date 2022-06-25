@@ -8,7 +8,7 @@ class PersonalInfo with ChangeNotifier {
     return FirebaseAuth.instance.currentUser?.uid;
   }
 
-  OurUser userData = OurUser();
+ static OurUser userData = OurUser();
   //Update user profile in DB
   Future<void> fetchPersonalInfo(BuildContext context) async {
     String? uid = currentUserId();
@@ -23,12 +23,13 @@ class PersonalInfo with ChangeNotifier {
         birth: doc['date'],
       );
 
-      notifyListeners();
     } catch (e) {
       SnackBar snackBar = const SnackBar(
           content: Text('Updating your Profile Failed!'),
           backgroundColor: Colors.red);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+    print('DATE ${userData.birth}');
+    notifyListeners();
   }
 }
