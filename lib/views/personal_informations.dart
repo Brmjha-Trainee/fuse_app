@@ -35,11 +35,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
     TextEditingController _phoneController =
         TextEditingController(text: widget.argument?.phoneNum);
 
-
-    var obj=    Provider.of<ToggleText>(context, listen: false);
+    var obj = Provider.of<ToggleText>(context, listen: false);
     var info = Provider.of<PersonalInfo>(context, listen: false);
-    obj.dateController =
-        TextEditingController(text: widget.argument?.birth);
+    obj.dateController = TextEditingController(text: widget.argument?.birth);
 
     Future<void> updateUser() {
       String uid = info.currentUserId();
@@ -78,11 +76,9 @@ class _PersonalInformationState extends State<PersonalInformation> {
                           nameField(_nameController),
                           emailField(_emailController),
                           phoneField(_phoneController),
-                          Consumer<ToggleText>(
-                            builder: (_, val ,__) {
-                              return birthField(val.dateController, context);
-                            }
-                          ),
+                          Consumer<ToggleText>(builder: (_, val, __) {
+                            return birthField(val.dateController, context);
+                          }),
                           Padding(
                             padding: const EdgeInsets.only(top: 30.0),
                             child: Row(
@@ -104,7 +100,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                                 OutlinedButton(
                                   onPressed: () {
                                     _formKey.currentState?.reset();
-                                     Navigator.pop(context);
+                                    Navigator.pop(context);
                                   },
                                   child: Text(LocaleKeys.cancel.tr()),
                                 )

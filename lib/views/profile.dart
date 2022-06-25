@@ -17,8 +17,8 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<PersonalInfo>(context, listen: false)
         .fetchPersonalInfo(context);
-    var obj = Provider.of<PersonalInfo>(context, listen: false);
-print('Fetch');
+    var obj = Provider.of<PersonalInfo>(context, listen: true);
+//print('Fetch');
     final Storage storage = Storage();
     return Scaffold(
       appBar: myAppBar2(context, title: LocaleKeys.profile.tr()),
