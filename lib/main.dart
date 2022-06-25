@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:fuseapp/routers/router.dart' as router;
 import 'firebase_options.dart';
 import 'providers/personal_info.dart';
+import 'package:fuseapp/services/local_notifications.dart';
 //COMMENTS TODO: 1. when to use pushreplacement instead of put (DONE)|| 2. docmentation
 //COMMENTS TODO: Asmaa todo3 tasks done, some issues need to be solved (DONE)
 //COMMENTS TODO: Rawabi didn't see the bottom nav bar, some issues need to be solved
@@ -25,6 +26,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  LocalNotificationService.initilize();
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(

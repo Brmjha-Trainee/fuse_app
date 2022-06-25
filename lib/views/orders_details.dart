@@ -114,8 +114,7 @@ Material ordersTotal(OrdersInfo obj) {
           padding: new EdgeInsets.all(7.0),
           child: discription2(
               "Total",
-              (obj.amount??0 - (obj.shipping??0 + obj.tax!))
-                  .toString(),
+                  ((obj.amount??0) - ((obj.shipping??0) + obj.tax!).toString(),
               h7,
               h7),
         ),
