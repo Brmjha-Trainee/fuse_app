@@ -8,6 +8,7 @@ import 'package:fuseapp/translations/locale_keys.g.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 import '../providers/personal_info.dart';
+import '../providers/toggle_text.dart';
 import '../services/storage_service.dart';
 import '../utils/forms_validations.dart';
 import '../view_model/user_vm.dart';
@@ -33,7 +34,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
         TextEditingController(text: widget.argument?.email);
     TextEditingController _phoneController =
         TextEditingController(text: widget.argument?.phoneNum);
-    TextEditingController _dateController =
+    TextEditingController dateController =
         TextEditingController(text: widget.argument?.birth);
     var info = Provider.of<PersonalInfo>(context, listen: false);
 
@@ -47,7 +48,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
             'name': _nameController.text,
             'email': _emailController.text,
             'phone_number': _phoneController.text,
-            'date': _dateController.text,
+            'date': dateController.text,
           })
           .then((value) => print(uid))
           .catchError(
@@ -74,42 +75,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                           nameField(_nameController),
                           emailField(_emailController),
                           phoneField(_phoneController),
-                          (inputText(
-                              label: LocaleKeys.date_of_birth.tr(),
-                              keyboardType: TextInputType.datetime,
-                              readOnly: true,
-                              controller: _dateController,
-                              validation: (val) {
-                                return validateRequiredField(
-                                    _dateController.text);
-                              },
-                              onSaved: (val) {},
-                              onChanged: (val) {},
-                              iconButton: IconButton(
-                                onPressed: () async {
-                                  DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime
-                                        .now(), //DateTime.now() - not to allow to choose before today.
-                                    firstDate: DateTime(1990),
-                                    lastDate: DateTime(2101),
-                                  );
-                                  if (pickedDate != null) {
-                                    String formattedDate =
-                                        DateFormat('dd-MM-yyyy')
-                                            .format(pickedDate);
-                                    setState(() {
-                                      _dateController.text =
-                                          formattedDate; //set output date to TextField value.
-                                    });
-                                    print(_dateController.text);
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.date_range,
-                                  color: COLOR_PRIMARY,
-                                ),
-                              ))),
+                          birthField(dateController, context),
                           Padding(
                             padding: const EdgeInsets.only(top: 30.0),
                             child: Row(
@@ -219,35 +185,40 @@ class _PersonalInformationState extends State<PersonalInformation> {
   }
 
   Widget birthField(
-      TextEditingController _dateController, BuildContext context) {
+      TextEditingController dateController, BuildContext context) {
     return inputText(
         label: LocaleKeys.date_of_birth.tr(),
         keyboardType: TextInputType.datetime,
         readOnly: true,
-        controller: _dateController,
+        controller: dateController,
         validation: (val) {
-          return validateRequiredField(_dateController.text);
+          return validateRequiredField(dateController.text);
         },
         onSaved: (val) {},
         onChanged: (val) {},
         iconButton: IconButton(
           onPressed: () async {
-            DateTime? pickedDate = await showDatePicker(
+            DateTime? pickedDate;
+            pickedDate = await showDatePicker(
               context: context,
               initialDate: DateTime
                   .now(), //DateTime.now() - not to allow to choose before today.
               firstDate: DateTime(1990),
               lastDate: DateTime(2101),
             );
-            if (pickedDate != null) {
-              String formattedDate =
-                  DateFormat('dd-MM-yyyy').format(pickedDate);
-              setState(() {
-                _dateController.text =
-                    formattedDate; //set output date to TextField value.
-              });
-              print(_dateController.text);
-            }
+            // if (pickedDate != null) {
+            //   String formattedDate =
+            //       DateFormat('dd-MM-yyyy').format(pickedDate);
+            //   setState(() {
+            //     dateController.text =
+            //         formattedDate; //set output date to TextField value.
+            //   });
+            // }
+
+            Provider.of<ToggleText>(context, listen: false)
+                .setBirthField(dateController.text, pickedDate);
+            //   val.setBirthField(_dateController.text, pickedDate);
+            // print(dateController.text);
           },
           icon: Icon(
             Icons.date_range,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ToggleText with ChangeNotifier {
@@ -20,6 +21,18 @@ class ToggleText with ChangeNotifier {
   void setRating(double rate) {
     _rating = rate;
     notifyListeners();
+  }
+
+  void setBirthField(String dateController, DateTime? pickedDate) {
+    //print(pickedDate);
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
+      print('formattedDate: ' + formattedDate);
+
+      dateController = formattedDate;
+      notifyListeners();
+      print('dateController: ' + dateController);
+    }
   }
 
   void togglePasswordStat() {
