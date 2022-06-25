@@ -17,15 +17,16 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<PersonalInfo>(context, listen: false)
         .fetchPersonalInfo(context);
-    var obj = Provider.of<PersonalInfo>(context, listen: true);
-//print('Fetch');
+
+    print('Fetch');
     final Storage storage = Storage();
     return Scaffold(
       appBar: myAppBar2(context, title: LocaleKeys.profile.tr()),
       body: Column(
         children: [
           profile(context, storage), //Upper profile section
-          listTile(context, obj.userData), //profile list tile
+          listTile(context,
+              Provider.of<PersonalInfo>(context).userData), //profile list tile
         ],
       ),
     );

@@ -65,7 +65,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case OrdersViewRoute:
       return MaterialPageRoute(builder: (context) => Orders());
     case PersonalInfoViewRoute:
-      var argumentPassed = PersonalInfo.userData;
+      var argumentPassed = settings.arguments as OurUser;
       return MaterialPageRoute(
           builder: (context) => PersonalInformation(argument: argumentPassed));
     case SettingsViewRoute:
