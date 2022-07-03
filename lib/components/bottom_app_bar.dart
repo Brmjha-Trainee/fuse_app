@@ -19,12 +19,12 @@ class _RootState extends State<Root> {
     const HomePage(),
     const Profile(),
     const Cart(),
-    const Favorite(),
+    const Favoriate(),
   ];
 //done-todo rawabi insert icon for the unactive + change class name to root
   @override
   Widget build(BuildContext context) => Scaffold(
-        Widget build(BuildContext context) => Scaffold(
+        // Widget build(BuildContext context) => Scaffold(
         body: IndexedStack(
           index: currentIndex,
           children: screens,
@@ -35,9 +35,8 @@ class _RootState extends State<Root> {
           onTap: (index) => setState(() => currentIndex = index),
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined ),
-                 activeIcon: Icon(Icons.home ),
-           
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
               label: "Home",
             ),
             BottomNavigationBarItem(
@@ -51,9 +50,14 @@ class _RootState extends State<Root> {
               label: "Cart",
             ),
             BottomNavigationBarItem(
-                
-         icon: Icon(Icons.favorite_border_outlined, color: COLOR_PRIMARY,),
-            activeIcon: Icon(Icons.favorite, color: COLOR_PRIMARY,),
+              icon: Icon(
+                Icons.favorite_border_outlined,
+                color: COLOR_PRIMARY,
+              ),
+              activeIcon: Icon(
+                Icons.favorite,
+                color: COLOR_PRIMARY,
+              ),
               label: "Favorites",
             ),
           ],

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:provider/provider.dart';
+
+import '../view_model/auth_services.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -9,8 +12,10 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     return Scaffold(
-       appBar: myAppBar(context, title: 'Settings'),
+        appBar: myAppBar(context, title: 'Settings'),
         body: ListView(
           children: <Widget>[
             ListTile(
@@ -56,8 +61,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: COLOR_PRIMARY,
                 ),
                 title: Text('Log out', style: TextStyle(color: RED)),
-                onTap: () {
-                  Navigator.pushReplacementNamed(context, SignOptionViewRoute);
+                onTap: () async {
+                  await authService.signOut();
                 }),
             Divider(
               color: LIGHT_GREY,
