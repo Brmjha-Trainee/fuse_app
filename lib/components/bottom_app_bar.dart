@@ -19,9 +19,9 @@ class _RootState extends State<Root> {
     const HomePage(),
     const Profile(),
     const Cart(),
-    const Favorite(),
+    const Favoriate(),
   ];
-//todo rawabi insert icon for the unactive + change class name to root
+//done-todo rawabi insert icon for the unactive + change class name to root
   @override
   Widget build(BuildContext context) {
     return Scaffold(

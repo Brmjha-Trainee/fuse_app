@@ -5,6 +5,7 @@ import 'package:fuseapp/providers/address_provider.dart';
 import 'package:fuseapp/providers/feedback_provider.dart';
 import 'package:fuseapp/providers/ordersprovider.dart';
 import 'package:fuseapp/providers/survey_provider.dart';
+import 'package:fuseapp/providers/home_provider.dart';
 import 'package:fuseapp/providers/toggle_text.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/routers/undefined_view_router.dart';
@@ -44,6 +45,7 @@ Future<void> main() async {
 
 class FuseApp extends StatelessWidget {
   const FuseApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -55,6 +57,7 @@ class FuseApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SurveyInfo()),
         ChangeNotifierProvider(create: (_) => FeedBackProvider()),
         ChangeNotifierProvider(create: (_) => OrderProvider()),
+        ChangeNotifierProvider(create: (_) => HomeProvider())
       ],
       child: MaterialApp(
         supportedLocales: context.supportedLocales,
@@ -62,7 +65,7 @@ class FuseApp extends StatelessWidget {
         locale: context.locale,
         debugShowCheckedModeBanner: false,
         theme: appTheme,
-        initialRoute: WrapperRoute,
+        initialRoute: HomeViewRoute,
         onUnknownRoute: (settings) => MaterialPageRoute(
           builder: (context) => UndefinedView(
             name: settings.name,

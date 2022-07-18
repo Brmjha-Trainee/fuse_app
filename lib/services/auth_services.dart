@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/view_model/user_vm.dart';
 import 'package:fuseapp/components/snack_bar.dart';
+import 'package:fuseapp/views/product.dart';
 
 //todo haneen token & refresh token is missing (Done)
 class AuthService {
