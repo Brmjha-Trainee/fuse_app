@@ -6,8 +6,6 @@ import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:fuseapp/views/item.dart';
 import 'package:provider/provider.dart';
 
-import '../services//auth_services.dart';
-
 class Favoriate extends StatefulWidget {
   const Favoriate({Key? key}) : super(key: key);
 
@@ -26,7 +24,6 @@ class _FavoriateState extends State<Favoriate> {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
     Provider.of<HomeProvider>(context).fetchfavorite();
     final productData = Provider.of<HomeProvider>(context);
     final productList = productData.favorite;
