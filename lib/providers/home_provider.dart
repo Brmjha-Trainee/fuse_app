@@ -79,6 +79,7 @@ class HomeProvider with ChangeNotifier {
 
     print("results of favorite${productList[0].title} ");
     products = productList;
+    print(products[0].title);
     notifyListeners();
   }
 

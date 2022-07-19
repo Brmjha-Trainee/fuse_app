@@ -114,6 +114,7 @@ class _HomePageState extends State<HomePage> {
                 right: 10,
               ),
               scrollDirection: Axis.horizontal,
+              itemCount:  Provider.of<HomeProvider>(context, listen: false).classification.length,
               itemBuilder: (context, index) => Container(
                 margin: EdgeInsets.only(
                   right: 5,
@@ -301,7 +302,9 @@ class _HomePageState extends State<HomePage> {
             );
           }),
         ],
-      )),
+      )
+      ),
+
     );
   }
 }
