@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> {
   Color _iconColor = Colors.grey;
   List _products = [];
   final TextEditingController searchTextController = TextEditingController();
-  List<Product> _searchList = [];
   final List<Map> classification = <Map>[
     {"title": "Microcontroller", "is pressed": false},
     {"title": "Motors", "is pressed": false},

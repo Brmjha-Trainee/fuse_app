@@ -33,7 +33,6 @@ class ToggleText with ChangeNotifier {
 
       dateController.text = formattedDate;
       notifyListeners();
-      print('dateController: ' + dateController.text);
     }
   }
 
