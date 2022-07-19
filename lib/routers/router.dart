@@ -7,6 +7,7 @@ import 'package:fuseapp/views/add_book.dart';
 import 'package:fuseapp/views/address_book.dart';
 import 'package:fuseapp/views/contact_us.dart';
 import 'package:fuseapp/views/edit_book.dart';
+import 'package:fuseapp/views/favoriate.dart';
 import 'package:fuseapp/views/forget_password2.dart';
 import 'package:fuseapp/views/home.dart';
 import 'package:fuseapp/views/languages.dart';
@@ -82,6 +83,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
           builder: ((context) => Survey1(arguments: ratingPassed,)));
     case Survey2ViewRoute:
       return MaterialPageRoute(builder: ((context) => Survey2()));
+       case FavoriteViewRoute:
+      return MaterialPageRoute(builder: ((context) => Favoriate()));
     default:
       return MaterialPageRoute(
           builder: (context) => UndefinedView(name: settings.name));

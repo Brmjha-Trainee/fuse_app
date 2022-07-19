@@ -21,3 +21,4 @@ const String LanguageViewRoute = 'language';
 const String ContactUsViewRoute = 'contactUs';
 const String Survey1ViewRoute = 'survey_1';
 const String Survey2ViewRoute = 'survey_2';
+const String FavoriteViewRoute = 'favorite';

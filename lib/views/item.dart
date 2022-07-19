@@ -38,6 +38,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: myAppBar(context, title: ''),
         body: Stack(children: <Widget>[
           SizedBox(
             height: 20,
