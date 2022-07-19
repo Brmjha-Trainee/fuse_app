@@ -36,7 +36,7 @@ class HomeProvider with ChangeNotifier {
       productList.add(Product.fromJson(i));
     }
 
-    print("results of favorite${productList[0].title} ");
+    print("results of Product${productList[0].title} ");
     products = productList;
     notifyListeners();
   }
@@ -64,12 +64,13 @@ class HomeProvider with ChangeNotifier {
 
 // get favorite data from firestore
   fetchfavorite() async {
+
     String? uid = currentUserId();
 
     var qn = await _firestore
         .collection('Favourite')
         .doc(uid)
-        .collection('user_orders')
+        .collection('favorite')
         .get();
     List<Product> productList = [];
 
@@ -78,8 +79,8 @@ class HomeProvider with ChangeNotifier {
     }
 
     print("results of favorite${productList[0].title} ");
-    products = productList;
-    print(products[0].title);
+    favorite = productList;
+    print('TEST ${products[0].title}');
     notifyListeners();
   }
 

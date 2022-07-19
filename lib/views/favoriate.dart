@@ -24,7 +24,7 @@ class _FavoriateState extends State<Favoriate> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<HomeProvider>(context).fetchfavorite();
+    Provider.of<HomeProvider>(context,listen: false).fetchfavorite();
     final productData = Provider.of<HomeProvider>(context);
     final productList = productData.favorite;
     return Container(
