@@ -145,19 +145,18 @@ RichText richText({label_1, label_2, required BuildContext context, pageName}) {
 }
 
 // we will be creating a widget for text field
-Widget inputText({
-  label,
-  obscureText = false,
-  hintText,
-  IconButton? iconButton,
-  validation,
-  controller,
-  keyboardType,
-  onChanged,
-  readOnly = false,
-  initialValue,
-  onSaved
-}) {
+Widget inputText(
+    {label,
+    obscureText = false,
+    hintText,
+    IconButton? iconButton,
+    validation,
+    controller,
+    keyboardType,
+    onChanged,
+    readOnly = false,
+    initialValue,
+    onSaved}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -239,9 +238,10 @@ Widget textAreaInput({
 
 Widget languageDropDowninput({
   required BuildContext context,
-  value,
+  selectedValue,
   List<String>? languageItems,
   formKey,
+  void Function()? onPressed,
 }) {
   return Form(
     key: formKey,
@@ -269,7 +269,7 @@ Widget languageDropDowninput({
             //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
           ),
           isExpanded: true,
-          value: value,
+          value: selectedValue,
           icon: const Icon(
             Icons.keyboard_arrow_down_outlined,
             color: Colors.black45,
@@ -287,71 +287,75 @@ Widget languageDropDowninput({
             validateDropDown(value);
             return null;
           },
-          onChanged: (value) {
-            value = value.toString();
+          onChanged: (value) async {
+            selectedValue = value;
+            if (value == 'English') {
+              await context.setLocale(Locale('en'));
+              print(selectedValue);
+            } else {
+              await context.setLocale(Locale('ar'));
+              print(selectedValue);
+            }
           },
           onSaved: (value) {
-            value = value.toString();
+            selectedValue = value.toString();
           },
         ),
         const SizedBox(height: 30),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState?.save();
-                  if (value == 'English') {
-                    await context.setLocale(Locale('en'));
-                  } else {
-                    await context.setLocale(Locale('ar'));
-                  }
-                }
-              },
-              child: Text(LocaleKeys.save.tr()),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            OutlinedButton(
-              onPressed: () {
-                formKey.currentState?.reset();
-              },
-              child: Text(LocaleKeys.cancel.tr()),
-            )
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   children: [
+        //     ElevatedButton(
+        //       onPressed: () async {
+        //         if (selectedValue == 'English') {
+        //           await context.setLocale(Locale('en'));
+        //           print(selectedValue);
+        //         } else {
+        //           await context.setLocale(Locale('ar'));
+        //           print(selectedValue);
+        //         }
+        //       },
+        //       child: Text(LocaleKeys.save.tr()),
+        //     ),
+        //     SizedBox(
+        //       width: 5,
+        //     ),
+        //     OutlinedButton(
+        //       onPressed: () {
+        //         formKey.currentState?.reset();
+        //         Navigator.pop(context);
+        //       },
+        //       child: Text(LocaleKeys.cancel.tr()),
+        //     )
+        //   ],
+        // ),
       ],
     ),
   );
 }
 
-MaterialButton darkBtn({
-  label,
-  Function()? onPressed, bool isIcon=false
-}) {
+MaterialButton darkBtn({label, Function()? onPressed, bool isIcon = false}) {
   return MaterialButton(
-    color: COLOR_PRIMARY,
-    onPressed: onPressed,
-    minWidth: double.infinity,
-    height: 60,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(50),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if(isIcon)
-        Icon(Icons.add_circle_outline, color: Colors.white),
-      SizedBox(width: 5,),
-      Text(
-        label,
-        style: darkBtnText,
+      color: COLOR_PRIMARY,
+      onPressed: onPressed,
+      minWidth: double.infinity,
+      height: 60,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
       ),
-    ],)
-
-  );
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (isIcon) Icon(Icons.add_circle_outline, color: Colors.white),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            label,
+            style: darkBtnText,
+          ),
+        ],
+      ));
 }
 
 MaterialButton lightBtn({

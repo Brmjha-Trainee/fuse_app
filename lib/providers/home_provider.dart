@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/views/product.dart';
-import 'package:fuseapp/views/home.dart';
 
 class HomeProvider with ChangeNotifier {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -36,7 +35,6 @@ class HomeProvider with ChangeNotifier {
       productList.add(Product.fromJson(i));
     }
 
-    print("results of Product${productList[0].title} ");
     products = productList;
     notifyListeners();
   }
@@ -64,7 +62,6 @@ class HomeProvider with ChangeNotifier {
 
 // get favorite data from firestore
   fetchfavorite() async {
-
     String? uid = currentUserId();
 
     var qn = await _firestore
@@ -78,9 +75,7 @@ class HomeProvider with ChangeNotifier {
       productList.add(Product.fromJson(i));
     }
 
-    print("results of favorite${productList[0].title} ");
     favorite = productList;
-    print('TEST ${products[0].title}');
     notifyListeners();
   }
 
@@ -88,7 +83,7 @@ class HomeProvider with ChangeNotifier {
   Future addPro(Product Prod) async {
     String? uid = currentUserId();
 
-    var favoraite = await FirebaseFirestore.instance
+    var favoraite = FirebaseFirestore.instance
         .collection('Favourite')
         .doc(uid)
         .collection("favorite");

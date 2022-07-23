@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
 import 'package:provider/provider.dart';
 import '../providers/feedback_provider.dart';
@@ -79,6 +80,7 @@ class _Survey2State extends State<Survey2> {
                     onPressed: () {
                       Provider.of<FeedBackProvider>(context, listen: false)
                           .sendSelectedChoicesToDB(context, selectedItem);
+                      Navigator.popAndPushNamed(context, ProfileViewRoute);
                     },
                     child: Text(LocaleKeys.send.tr()),
                   ),

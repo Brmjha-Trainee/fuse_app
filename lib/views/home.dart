@@ -1,16 +1,10 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fuseapp/routers/routing_constants.dart';
-import 'package:fuseapp/services/auth_services.dart';
 import 'package:fuseapp/providers/home_provider.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
-import 'package:fuseapp/views/favoriate.dart';
 import 'package:fuseapp/views/item.dart';
 import 'package:provider/provider.dart';
 import '../views/product.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,10 +48,6 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
           body: Column(
         children: [
-          Text(
-            "Home",
-            style: h1,
-          ),
           SizedBox(
             height: 30,
           ),
@@ -78,7 +68,6 @@ class _HomePageState extends State<HomePage> {
                 controller: searchTextController,
                 onChanged: (covariant) {
                   data.searchText(covariant);
-                  print(covariant);
                 },
                 decoration: InputDecoration(
                   hintText: ("Search what you are looking for"),
@@ -113,7 +102,9 @@ class _HomePageState extends State<HomePage> {
                 right: 10,
               ),
               scrollDirection: Axis.horizontal,
-              itemCount:  Provider.of<HomeProvider>(context, listen: false).classification.length,
+              itemCount: Provider.of<HomeProvider>(context, listen: false)
+                  .classification
+                  .length,
               itemBuilder: (context, index) => Container(
                 margin: EdgeInsets.only(
                   right: 5,
@@ -122,7 +113,6 @@ class _HomePageState extends State<HomePage> {
                   return ElevatedButton(
                       onPressed: () {
                         data.CategoryP(index);
-                        print(index);
                       },
                       child: Text(
                         data.classification[index]["title"],
@@ -155,7 +145,6 @@ class _HomePageState extends State<HomePage> {
                     .toLowerCase()
                     .contains(data.text.toLowerCase()))
                 .toList();
-            print(text);
 
             // search on the search list by category for filter featsure
             List<Product> searchCtegoryList = searchList
@@ -301,9 +290,7 @@ class _HomePageState extends State<HomePage> {
             );
           }),
         ],
-      )
-      ),
-
+      )),
     );
   }
 }

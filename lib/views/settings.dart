@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fuseapp/routers/routing_constants.dart';
 import 'package:fuseapp/theme/theme_constants.dart';
+import 'package:provider/provider.dart';
 
+import '../services/auth_services.dart';
 import '../translations/locale_keys.g.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -12,7 +14,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
-    // final authService = Provider.of<AuthService>(context);
+    final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
         appBar: myAppBar(context, title: LocaleKeys.edit.tr()),
@@ -62,7 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title:
                     Text(LocaleKeys.logout.tr(), style: TextStyle(color: RED)),
                 onTap: () async {
-                  // await authService.signOut();
+                  await authService.signOut();
                 }),
             Divider(
               color: LIGHT_GREY,

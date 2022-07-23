@@ -28,7 +28,6 @@ class PersonalInfo with ChangeNotifier {
           backgroundColor: Colors.red);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-    print('DATE ${userData.birth}');
     notifyListeners();
   }
 }

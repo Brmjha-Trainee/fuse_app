@@ -76,6 +76,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                           nameField(_nameController),
                           emailField(_emailController),
                           phoneField(_phoneController),
+                          inputText(label: 'Gender'),
                           Consumer<ToggleText>(builder: (_, val, __) {
                             return birthField(val.dateController, context);
                           }),
